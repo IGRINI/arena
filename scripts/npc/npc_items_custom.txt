@@ -1576,4 +1576,104 @@
       "01"                          "item_orb_of_venom;item_blight_stone;item_wind_lace"
     }
   }
+
+  ---------------------------------OtherItems------------------------------
+
+  "item_recipe_lso"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                "3000"           
+    "Model"             "models/props_gameplay/recipe.mdl"
+    "BaseClass"                     "item_datadriven"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            "120" 
+    "ItemShopTags"          ""
+    
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_lso"
+    "ItemRequirements"
+    {
+      "01"            "item_wraith_band;item_bracer;item_null_talisman"
+    }
+  }
+
+  "item_lso"
+  {
+    "ID"    "3001"
+    "BaseClass"           "item_lua"
+    "ScriptFile"          "items/item_lso.lua"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "Model"                         "models/props_gameplay/red_box.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"            "lso"
+    "ItemQuality"                   "rare"    // consumable component rare epic artifact secretshop
+    
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "stats"   "12"
+      }
+      "02"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "level_attribute" "1.2"
+      }
+    }
+  }
+
+  "item_recipe_zombie_mask"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"              "3002"           
+    "Model"             "models/props_gameplay/recipe.mdl"
+    "BaseClass"                     "item_datadriven"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            "350" 
+    "ItemShopTags"          ""
+    
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_zombie_mask"
+    "ItemRequirements"
+    {
+      "01"            "item_lso;item_mask_of_madness"
+    }
+  }
+
+  "item_zombie_mask"
+  {
+    "ID"    "3003"           "item_lua"
+    "ScriptFile"          "items/item_zombie_mask.lua"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "Model"                         "models/props_gameplay/red_box.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityCooldown"       "15"
+    "AbilityTextureName"            "zombie_mask"
+    "ItemQuality"                   "epic"    // consumable component rare epic artifact secretshop
+    
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "lifesteal" "12"
+      }
+      "02"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "stats"   "15"
+      }
+    }
+  }
 }
