@@ -1431,7 +1431,7 @@
     }
     "Modifiers"
     {
-      "modifier_item_orb_of_legacy_datadriven"
+      "modifier_item_orb_of_legacy"
       {
         "Passive"       "1"
         "IsHidden"        "1"
@@ -1447,12 +1447,12 @@
           "RunScript"
           {
             "ScriptFile"      "items/item_orb_of_legacy.lua"
-            "Function"        "modifier_item_orb_of_venom_datadriven_on_orb_impact"
+            "Function"        "modifier_item_orb_of_legacy_on_orb_impact"
           }
           "RunScript"
           {
             "ScriptFile"      "items/item_orb_of_legacy.lua"
-            "Function"        "modifier_item_lifesteal_datadriven_on_orb_impact"
+            "Function"        "modifier_item_orb_of_legacy_lifesteal_on_orb_impact"
           }
         }
         "Properties"
@@ -1464,7 +1464,7 @@
           "ApplyModifier"
           {
             "Target"          "TARGET"
-            "ModifierName"    "modifier_item_desolator_datadriven_corruption"
+            "ModifierName"    "modifier_item_orb_of_legacy_corruption"
           }
           "FireSound"
           {
@@ -1473,7 +1473,7 @@
           }
         }
       }
-      "modifier_item_orb_of_venom_datadriven_poison_attack_melee"
+      "modifier_item_orb_of_legacy_melee"
       {
         "Duration"        "%poison_duration"
         "Passive"         "0"
@@ -1497,13 +1497,13 @@
           "RunScript"
           {
             "ScriptFile"          "items/item_orb_of_legacy.lua"
-            "Function"            "modifier_item_orb_of_venom_datadriven_poison_attack_on_interval_think"
+            "Function"            "modifier_item_orb_of_legacy_on_interval_think"
             "PoisonDamagePerSecond"     "%poison_damage_per_second"
             "PoisonDamageInterval"      "%poison_damage_interval"
           }
         }
       }
-      "modifier_item_orb_of_venom_datadriven_poison_attack_ranged"
+      "modifier_item_orb_of_legacy_ranged"
       {
         "Duration"        "%poison_duration"
         "Passive"         "0"
@@ -1527,13 +1527,13 @@
           "RunScript"
           {
             "ScriptFile"          "items/item_orb_of_legacy.lua"
-            "Function"            "modifier_item_orb_of_venom_datadriven_poison_attack_on_interval_think"
+            "Function"            "modifier_item_orb_of_legacy_on_interval_think"
             "PoisonDamagePerSecond"     "%poison_damage_per_second"
             "PoisonDamageInterval"      "%poison_damage_interval"
           }
         }
       }
-      "modifier_item_lifesteal_datadriven_lifesteal"
+      "modifier_item_orb_of_legacy_lifesteal"
       {
         "Passive"     "0"
         "IsHidden"      "1"
@@ -1547,7 +1547,7 @@
           }
         }
       }
-      "modifier_item_desolator_datadriven_corruption"
+      "modifier_item_orb_of_legacy_corruption"
       {
         "Duration"        "%armourdur"
         "Passive"         "0"
