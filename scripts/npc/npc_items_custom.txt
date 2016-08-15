@@ -1,0 +1,1579 @@
+"DOTAAbilities"
+{
+  "item_containers_lua_pack"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "ID"              "1835"
+    "BaseClass"         "item_lua"
+    "AbilityTextureName"        "item_present"
+    "ScriptFile"          "libraries/abilities/item_containers_lua_pack.lua"
+    "MaxLevel"            "1"
+
+    "ItemCost"            "0"
+    "ItemPurchasable"          "0"
+    "ItemKillable"             "0"
+    "ItemDroppable"            "0"
+    "ItemSellable"             "0"
+    "ItemCanChangeContainer"   "0"
+    
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "0"
+
+    // Time   
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"       "0"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0 0 0 0"
+  }
+
+  //Shield
+  "item_example_item"
+  {
+    "ID"              "1836"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
+    "BaseClass"           "item_datadriven"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    "AbilityTextureName"      "item_example_item"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "900"
+    "AbilityCastPoint"        "0.2"
+    "AbilityCooldown"       "13.0"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "100"
+    "ItemCost"            "750"
+    "ItemInitialCharges"      "0"
+    "ItemDroppable"         "1"
+    "ItemSellable"          "1"
+    "ItemRequiresCharges"     "0"
+    "ItemShareability"        "ITEM_NOT_SHAREABLE"
+    "ItemDeclarations"        "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+    
+    "MaxUpgradeLevel"       "1"
+    "ItemBaseLevel"         "1"
+    
+    "precache"
+    {
+      "particle"              "particles/frostivus_herofx/queen_shadow_strike_linear_parent.vpcf"
+      "particle_folder"       "particles/test_particle"
+      "soundfile"             "soundevents/game_sounds_heroes/game_sounds_abaddon.vsndevts"
+    }
+    "OnSpellStart"
+    {
+      "LinearProjectile"
+      {
+        "EffectName"      "particles/frostivus_herofx/queen_shadow_strike_linear_parent.vpcf"
+        "MoveSpeed"       "%speed"
+        //"StartPosition"   "attach_attack1"
+        "FixedDistance"   "%distance"
+        "StartRadius"     "%radius"
+        "EndRadius"       "%radius"
+        "TargetTeams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "TargetTypes"     "DOTA_UNIT_TARGET_HERO"
+        "TargetFlags"     "DOTA_UNIT_TARGET_FLAG_NONE"
+        "HasFrontalCone"    "0"
+        "ProvidesVision"    "0"
+        "VisionRadius"      "0"
+      }
+      "FireSound"
+      {
+        "EffectName"    "Hero_Abaddon.AphoticShield.Cast"
+        "Target"        "CASTER"
+      }
+      "ApplyModifier"
+      {
+        "Target"      "CASTER"
+        "ModifierName"  "modifier_item_shield"
+      }
+    }
+    
+    "OnProjectileHitUnit"
+    {     
+      "DeleteOnHit" "0"
+      "Damage"
+      {
+        "Target"      "TARGET"
+        "Type"    "DAMAGE_TYPE_PURE"
+        "Damage"  "%damage"
+      }
+    }
+    
+    "Modifiers"
+    {
+      "modifier_item_shield"
+      {
+        "EffectName"    "particles/test_particle/damage_immunity.vpcf"
+        "EffectAttachType"  "follow_origin"
+        "Target"      "CASTER"
+        
+        "Duration" "%duration"
+        "TextureName" "abaddon_aphotic_shield"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"    "%damage_reduction"
+        }
+      }
+
+      "modifier_item_ex"
+      {
+        "Passive" "1"
+        "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"    "33"
+        }
+      }
+
+      "modifier_item_ex2"
+      {
+        "Passive" "1"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"    "3"
+        }
+      }
+    }
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "duration"        "4.0"
+      }
+      
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "damage_reduction"    "-50"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "radius"          "150"
+      }
+      "04"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "speed"           "1800"
+      }
+      "05"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "distance"        "900"
+      }
+      "06"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "damage"          "125"
+      }
+    }
+  }
+  "item_gainer"
+  { 
+    "ID"                              "1250" 
+    "BaseClass"                       "item_datadriven" 
+    "AbilityTextureName"              "gainer"
+    "ItemQuality"                     "artifact" 
+    "AbilityBehavior"                 "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "ItemCost"                        "0"
+    "ItemKillable"                    "1" 
+    "ItemSellable"                    "1"
+    "ItemPurchasable"                 "1"
+    "ItemDroppable"                   "1"
+    "ItemShareability"                "ITEM_PARTIALLY_SHAREABLE"
+    "ItemStackable"                   "0"
+    "ItemPermanent"                   "1"
+    "ItemAlertable"                   "0" 
+    "ItemDisassembleRule"             "DOTA_ITEM_DISASSEMBLE_ALWAYS"
+    "ItemDeclarations"                "DECLARE_PURCHASES_TO_TEAMMATES"
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "Range"           "900"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "damage"          "7"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "armor"           "2"
+      }
+    }
+    "Modifiers"
+    {
+      "exp"
+      {
+        "IsHidden"              "1"
+        "Passive"               "1"
+        "ThinkInterval"         "3"
+        "OnIntervalThink"
+        {
+          "GrantXPGold"
+          {
+            "Target"        "CASTER"
+            "XPAmount"      "9"
+            "SplitEvenly"   "0"
+            "GoldAmount"    "0"
+            "ReliableGold"  "0"
+            }
+          }
+        }
+        "auramana"
+        {
+          "Passive"       "1"
+          "IsHidden"      "1"
+          "Aura"          "manaarmor"
+          "Aura_Radius"   "%Range"
+          "Aura_Teams"    "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+          "Aura_Types"    "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+        }
+ 
+        "manaarmor"
+        {
+          "IsDebuff"      "0"
+          "IsPurgable"    "0"
+          "TextureName"   "item_gainer"
+          "Properties"
+          {
+            "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"       "0.65"
+            "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"      "%armor"
+        }
+      }
+      "attackmodifier"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"    "%damage" 
+        }
+      }
+    }
+  }
+  "item_recipe_gainer"
+  {
+    "BaseClass"                     "item_datadriven"
+    "ID"                            "1251"
+    "Model"                         "models/props_gameplay/recipe.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf" 
+    "ItemCost"                      "1500"   
+    "ItemShopTags"                  ""
+    "ItemRecipe"                    "1"
+    "ItemResult"                    "item_gainer"
+    "ItemRequirements"
+    {
+      "01"                        "item_ring_of_basilius"
+    }
+  }
+  "item_dummy_armlet"
+  {
+    "ID"                            "1252"
+    "BaseClass"                     "item_datadriven"
+    "ItemBaseLevel"                 "1"
+    "ItemPurchasable"               "0"
+  }
+  "item_armlet_of_azrael"
+  {
+    "BaseClass"                   "item_datadriven"
+    "AbilityTextureName"          "armlet_of_azrael"
+    "ID"                          "1253"
+    "AbilityBehavior"             "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "Model"                       "models/props_gameplay/red_box.vmdl" 
+    "Effect"                      "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityCastPoint"            "0.0"
+    "AbilityCooldown"             "0"
+    "AbilityManaCost"             "50"
+    "ItemCost"                    "0"
+    "ItemShopTags"                "int;damage;attack_speed;mana_pool;regen_mana;hard_to_tag"
+    "ItemQuality"                 "epic"
+    "ItemAliases"                 "armlet of azrael"
+    "PingOverrideText"            "DOTA_Chat_azrael"
+    "ItemShareability"            "ITEM_NOT_SHAREABLE"
+    "ItemDeclarations"            "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDisassembleRule"   "DOTA_ITEM_DISASSEMBLE_NEVER"
+    
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "bonus_mana"                  "300"
+      }
+      "02"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "bonus_health_regen"          "0"
+      }
+      "03"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "cast_range_bonus"            "200"
+      }
+      "04"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "spell_amp"                   "1.5"
+      }
+      "05"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "cd_red"                      "5"
+      }
+      "06"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "bonus_mana_regen"            "200"
+      }
+      "07"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "unholy_bonus_mana"           "400"
+      }
+      "08"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "unholy_cd_red"               "10"
+      }
+      "09"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "unholy_bonus_int"            "25"
+      }
+      "10"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "unholy_mana_drain"           "100"
+      }
+      "11"
+      {
+        "var_type"                    "FIELD_FLOAT"
+        "toggle_cooldown"             "0.5"
+      }
+      "12"
+      {
+        "var_type"                    "FIELD_FLOAT"
+        "unholy_bonus_spell_damage"   "5.0"
+      }
+    }
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "items/item_armlet_of_azrael.lua"
+        "Function"        "on_spell_start"
+      }
+      
+      "FireSound"
+      {
+        "EffectName"        "DOTA_Item.Armlet.Activate"
+        "Target"            "CASTER"
+      }
+    }
+    
+    "Modifiers"
+    {
+      "modifier_item_armletofazrael"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
+        
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MANA_REGEN_PERCENTAGE"               "%bonus_mana_regen"
+          "MODIFIER_PROPERTY_MANA_BONUS"                          "%bonus_mana"
+        }
+      }
+    }
+    "OnEquip"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items/item_armlet_of_azrael.lua"
+        "Function"    "createmodifier"
+      }
+    }
+    "OnUnequip"
+    {
+      "RemoveModifier"
+      {
+        "ModifierName"  "modifier_item_armlet_of_azrael"
+        "Target"        "CASTER"
+      }
+      "RemoveModifier"
+      {
+        "ModifierName"              "modifier_item_unholy_armlet_of_azrael"
+        "Target"                    "CASTER"
+      }
+      "RemoveModifier"
+      {
+        "ModifierName"  "modifier_item_aether_lens"
+        "Target"        "TARGET"
+      }
+    }
+  }
+  "item_recipe_armlet_of_azrael"
+  {
+    "BaseClass"                     "item_datadriven"
+    "ID"                            "1254"
+    "Model"                         "models/props_gameplay/recipe.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf" 
+    "ItemCost"                      "1000"   
+    "ItemShopTags"                  ""
+    "ItemRecipe"                    "1"
+    "ItemResult"                    "item_armlet_of_azrael"
+    "ItemRequirements"
+    {
+      "01"                          "item_devotit_core;item_helm_of_int"
+    }
+  }
+  "item_armlet_of_azrael_active"
+  {
+    "BaseClass"             "item_datadriven"
+    "ID"                    "1255"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "Model"                 "models/props_gameplay/red_box.vmdl" 
+    "Effect"                "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"    "armlet_of_azrael_active"
+    "AbilityCastPoint"      "0.0"
+    "AbilityCooldown"       "0"
+    "AbilityManaCost"       "0"
+    "ItemCost"              "0"
+    "ItemPurchasable"       "0"
+    "ItemShareability"      "ITEM_NOT_SHAREABLE"
+    "ItemShopTags"          "int;damage;attack_speed;mana_pool;regen_mana;hard_to_tag"
+    "ItemQuality"           "epic"
+    "ItemAliases"           "armlet of azrael"
+    "ItemDeclarations"      "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    
+    "ItemPurchasable"       "0"
+    "ItemSellable"          "0"
+    "ItemDisassembleRule"   "DOTA_ITEM_DISASSEMBLE_NEVER"
+      
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"                        "FIELD_FLOAT"
+        "bonus_spell_damage"              "1.5"
+      }
+      "02"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "cd_red"                          "10"
+      }
+      "03"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "bonus_mana"                      "300"
+      }
+      "04"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "bonus_mana_regen"                "200"
+      }
+      "05"
+      {
+        "var_type"                        "FIELD_FLOAT"
+        "unholy_bonus_spell_damage"       "5.0"
+      }
+      "06"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "unholy_cd_red"                   "20"
+      }
+      "07"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "unholy_bonus_int"                "100"
+      }
+      "08"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "unholy_mana_drain"               "100"
+      }
+      "09"
+      {
+        "var_type"                        "FIELD_FLOAT"
+        "unholy_mana_drain_interval"      "0.1"
+      }
+      "10"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "unholy_ticks_to_full_effect"     "7"
+      }
+      "11"
+      {
+        "var_type"                        "FIELD_FLOAT"
+        "unholy_tick_interval"            "0.1"
+      }
+      "12"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "unholy_hp_drain"                 "25"
+      }
+    }
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "items/item_armlet_of_azrael.lua"
+        "Function"        "active_on_spell_start"
+      }
+      "FireSound"
+      {
+        "EffectName"      "DOTA_Item.Armlet.DeActivate"
+        "Target"          "CASTER"
+      }
+      "RemoveModifier"
+      {
+        "ModifierName"              "modifier_item_unholy_armlet_of_azrael"
+        "Target"                    "CASTER"
+      }
+    }
+    "OnUnequip"
+    {   
+      "RunScript"
+      {
+        "ScriptFile"                "items/item_armlet_of_azrael.lua"
+        "Function"                  "on_unequip"
+        "UnholyTicksToFullEffect"   "%unholy_ticks_to_full_effect"
+        "UnholyBonusInt"            "%unholy_bonus_int"
+      }
+      "RemoveModifier"
+      {
+        "ModifierName"              "modifier_item_armlet_of_azrael"
+        "Target"                    "CASTER"
+      }
+      "RemoveModifier"
+      {
+        "ModifierName"              "modifier_item_unholy_armlet_of_azrael"
+        "Target"                    "CASTER"
+      }
+    }
+    "Modifiers"
+    {
+      "modifier_item_armlet_of_azrael_active_datadriven"
+      {
+        "Passive"             "1"
+        "IsHidden"            "1"
+        "Attributes"          "MODIFIER_ATTRIBUTE_MULTIPLE"
+        
+        "EffectName"          "particles/items/item_armlet_of_azrael.vpcf"
+        "EffectAttachType"    "follow_origin"
+        
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MANA_REGEN_PERCENTAGE"               "%bonus_mana_regen"
+          "MODIFIER_PROPERTY_MANA_BONUS"                          "%bonus_mana"
+        }
+        
+        "ThinkInterval"                   "%unholy_mana_drain_interval"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"                  "items/item_armlet_of_azrael.lua"
+            "Function"                    "on_interval_think_mana"
+            "UnholyManaDrainPerSecond"    "%unholy_mana_drain"
+            "UnholyManaDrainInterval"     "%unholy_mana_drain_interval"
+            "UnholyHpDrainPerSecond"      "%unholy_hp_drain"
+          }
+        }
+      }
+      "modifier_item_armlet_active_datadriven_apply_tick_int"
+      {
+        "Passive"           "1"
+        "IsHidden"          "1"
+        "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+        
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_INCOMING_SPELL_DAMAGE_CONSTANT"      "%unholy_bonus_spell_damage"
+          "MODIFIER_PROPERTY_COOLDOWN_REDUCTION_CONSTANT"         "%unholy_cd_red"
+        }
+        
+        "ThinkInterval"                                   "%unholy_tick_interval"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"                "items/item_armlet_of_azrael.lua"
+            "Function"                  "apply_tick_int_on_interval_think"
+            "UnholyTicksToFullEffect"   "%unholy_ticks_to_full_effect"
+            "UnholyBonusInt"            "%unholy_bonus_int"
+          }
+        }
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"                "items/item_armlet_of_azrael.lua"
+            "Function"                  "createactivemodifier"
+          }
+        }
+      }
+      "modifier_item_armlet_of_azrael_active_tick"
+      {
+        "Passive"             "0"
+        "IsHidden"            "1"
+        "Attributes"          "MODIFIER_ATTRIBUTE_MULTIPLE"
+        
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"    "14.29"
+        }
+      }
+    }
+    "OnEquip"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items/item_armlet_of_azrael.lua"
+        "Function"    "createmodifier"
+      }
+    }
+  }
+  "item_helm_of_int"
+  {
+    "ID"                  "1256"
+    "BaseClass"           "item_datadriven"
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "ItemCost"            "1900"
+    "AbilityTextureName"  "helm_of_int"
+    "ItemShopTags"        "mana_pool;regen_mana"
+    "ItemQuality"         "component"
+    "ItemAliases"         "helm of intellect"
+    "SideShop"            "1"
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"              "FIELD_INTEGER"
+        "bonus_mana"            "300"
+      }
+      "02"
+      {
+        "var_type"              "FIELD_INTEGER"
+        "bonus_mana_regen"      "200"
+      }
+    }
+    "Modifiers"
+    {
+      "modifier_name"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+    
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MANA_REGEN_PERCENTAGE"               "%bonus_mana_regen"
+          "MODIFIER_PROPERTY_MANA_BONUS"                          "%bonus_mana"
+        }
+      }
+    }
+  }
+  "item_devotit_core"
+  {
+    "ID"                  "1257"
+    "BaseClass"           "item_datadriven"
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityTextureName"  "devotit_core"
+    "ItemCost"            "1100"
+    "ItemShopTags"        "mb"
+    "ItemQuality"         "component"
+    "ItemAliases"         "Devotit core"
+    "SideShop"            "1"
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"              "FIELD_INTEGER"
+        "cd_red"                "5"
+      }
+    }
+    "OnEquip"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items/item_devotit_core.lua"
+        "Function"    "OnEquip"
+      }
+    }
+    "OnUnequip"
+    {
+      "RemoveModifier"
+      {
+        "ModifierName"  "modifier_item_devotit_core"
+        "Target"        "CASTER"
+      }
+    }
+  }
+  "item_armlet_of_devian"
+  {
+    "BaseClass"                   "item_datadriven"
+    "AbilityTextureName"          "armlet_of_devian"
+    "ID"                          "1258"
+    "AbilityBehavior"             "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "Model"                       "models/props_gameplay/red_box.vmdl" 
+    "Effect"                      "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityCastPoint"            "0.0"
+    "AbilityCooldown"             "0"
+    "AbilityManaCost"             "0"
+    "ItemCost"                    "0"
+    "ItemShopTags"                "agi;damage;attack_speed;mana_pool;regen_mana;hard_to_tag"
+    "ItemQuality"                 "epic"
+    "ItemAliases"                 "armlet of devian"
+    "ItemShareability"            "ITEM_NOT_SHAREABLE"
+    "PingOverrideText"            "DOTA_Chat_devian" 
+    "ItemDeclarations"            "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+
+    "ItemDisassembleRule"         "DOTA_ITEM_DISASSEMBLE_NEVER"
+    
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "bonus_damage"                "9"
+      }
+      "02"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "hppercent"                   "15"
+      }
+      "03"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "bonusattackspeed"            "35"
+      }
+      "04"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "bonus_hp_regen"              "5"
+      }
+      "05"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "unholy_attackspeed"          "50"
+      }
+      "06"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "unholy_minus_hp_percent"     "25"
+      }
+      "07"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "unholy_bonus_agi"            "100"
+      }
+      "08"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "unholy_armour_drain"         "1"
+      }
+      "09"
+      {
+        "var_type"                    "FIELD_FLOAT"
+        "toggle_cooldown"             "0.5"
+      }
+    }
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "items/item_armlet_of_devian.lua"
+        "Function"        "on_spell_start"
+      }
+      
+      "FireSound"
+      {
+        "EffectName"        "DOTA_Item.Armlet.Activate"
+        "Target"            "CASTER"
+      }
+    }
+    
+    "Modifiers"
+    {
+      "modifier_item_armletofdevian"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
+        
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"              "%bonus_damage"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"          "%bonusattackspeed"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"               "%bonus_hp_regen"
+        }
+      }
+      "modifier_delete-arm"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "ThinkInterval"  "0.5"
+        "OnIntervalThink"
+        {
+          "RemoveModifier"
+          {
+            "ModifierName"          "modifier_item_arm_armlet_of_devian"
+            "Target"                "CASTER"
+          }
+        }
+      }
+    }
+    "OnEquip"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items/item_armlet_of_devian.lua"
+        "Function"    "createmodifier"
+      }
+    }
+    "OnUnequip"
+    {
+      "RemoveModifier"
+      {
+        "ModifierName"              "modifier_item_armlet_of_devian"
+        "Target"                    "CASTER"
+      }
+      "RemoveModifier"
+      {
+        "ModifierName"              "modifier_item_unholy_armlet_of_devian"
+        "Target"                    "CASTER"
+      }
+    }
+  }
+  "item_recipe_armlet_of_devian"
+  {
+    "BaseClass"                     "item_datadriven"
+    "ID"                            "1259"
+    "Model"                         "models/props_gameplay/recipe.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf" 
+    "ItemCost"                      "1400"   
+    "ItemShopTags"                  ""
+    "ItemRecipe"                    "1"
+    "ItemResult"                    "item_armlet_of_devian"
+    "ItemRequirements"
+    {
+      "01"                          "item_gloves_of_attack;item_helm_of_iron_will"
+    }
+  }
+  "item_armlet_of_devian_active"
+  {
+    "BaseClass"             "item_datadriven"
+    "ID"                    "1260"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "Model"                 "models/props_gameplay/red_box.vmdl" 
+    "Effect"                "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"    "armlet_of_devian_active"
+    "AbilityCastPoint"      "0.0"
+    "AbilityCooldown"       "0"
+    "AbilityManaCost"       "0"
+    "ItemCost"              "0"
+    "ItemPurchasable"       "0"
+    "ItemShareability"      "ITEM_NOT_SHAREABLE"
+    "ItemShopTags"          "agi;damage;attack_speed;mana_pool;regen_mana;hard_to_tag"
+    "ItemQuality"           "epic"
+    "ItemAliases"           "armlet of devian"
+    "ItemDeclarations"      "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    
+    "ItemPurchasable"       "0"
+    "ItemSellable"          "0"
+    "ItemDisassembleRule"   "DOTA_ITEM_DISASSEMBLE_NEVER"
+      
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"                        "FIELD_FLOAT"
+        "bonus_damage"                    "9"
+      }
+      "02"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "hppercent"                       "15"
+      }
+      "03"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "bonusattackspeed"                "35"
+      }
+      "04"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "bonus_hp_regen"                  "5"
+      }
+      "05"
+      {
+        "var_type"                        "FIELD_FLOAT"
+        "unholy_attackspeed"              "50"
+      }
+      "06"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "unholy_minus_hp_percent"         "25"
+      }
+      "07"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "unholy_bonus_agi"                "100"
+      }
+      "08"
+      {
+        "var_type"                        "FIELD_FLOAT"
+        "unholy_arm_drain_interval"       "1.0"
+      }
+      "09"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "unholy_ticks_to_full_effect"     "7"
+      }
+      "10"
+      {
+        "var_type"                        "FIELD_FLOAT"
+        "unholy_tick_interval"            "0.1"
+      }
+      "11"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "unholy_armour_drain"             "1"
+      }
+      "12"
+      {
+        "var_type"                        "FIELD_INTEGER"
+        "unholy_hp_drain"                 "100"
+      }
+    }
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "items/item_armlet_of_devian.lua"
+        "Function"        "active_on_spell_start"
+      }
+      "FireSound"
+      {
+        "EffectName"      "DOTA_Item.Armlet.DeActivate"
+        "Target"          "CASTER"
+      }
+      "RemoveModifier"
+      {
+        "ModifierName"              "modifier_item_unholy_armlet_of_devian"
+        "Target"                    "CASTER"
+      }
+    }
+    "OnUnequip"
+    {   
+      "RunScript"
+      {
+        "ScriptFile"                "items/item_armlet_of_devian.lua"
+        "Function"                  "on_unequip"
+        "UnholyTicksToFullEffect"   "%unholy_ticks_to_full_effect"
+        "UnholyBonusAgi"            "%unholy_bonus_agi"
+      }
+      "RemoveModifier"
+      {
+        "ModifierName"              "modifier_item_armlet_of_devian"
+        "Target"                    "CASTER"
+      }
+      "RemoveModifier"
+      {
+        "ModifierName"              "modifier_item_unholy_armlet_of_devian"
+        "Target"                    "CASTER"
+      }
+    }
+    "Modifiers"
+    {
+      "modifier_item_armlet_of_devian_active_datadriven"
+      {
+        "Passive"             "1"
+        "IsHidden"            "1"
+        "Attributes"          "MODIFIER_ATTRIBUTE_MULTIPLE"
+        
+        "EffectName"          "particles/items/item_armlet_of_devian.vpcf"
+        "EffectAttachType"    "follow_origin"
+        
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"              "%bonus_damage"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"          "%bonusattackspeed"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"               "%bonus_hp_regen"
+        }
+        
+        "ThinkInterval"                   "%unholy_arm_drain_interval"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"                  "items/item_armlet_of_devian.lua"
+            "Function"                    "on_interval_think_arm"
+          }
+        }
+      }
+      "modifier_item_armlet_active_datadriven_apply_tick_agi"
+      {
+        "Passive"           "1"
+        "IsHidden"          "1"
+        "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+        
+        "Properties"
+        {
+        }
+        
+        "ThinkInterval"                                   "%unholy_tick_interval"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"                "items/item_armlet_of_devian.lua"
+            "Function"                  "apply_tick_agi_on_interval_think"
+            "UnholyTicksToFullEffect"   "%unholy_ticks_to_full_effect"
+            "UnholyBonusAgi"            "%unholy_bonus_agi"
+          }
+        }
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"                "items/item_armlet_of_devian.lua"
+            "Function"                  "createactivemodifier"
+          }
+        }
+      }
+      "modifier_item_armlet_of_devian_active_tick"
+      {
+        "Passive"             "0"
+        "IsHidden"            "1"
+        "Attributes"          "MODIFIER_ATTRIBUTE_MULTIPLE"
+        
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"    "14.29"
+        }
+      }
+    }
+    "OnEquip"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items/item_armlet_of_devian.lua"
+        "Function"    "createmodifier"
+      }
+    }
+  }
+  "item_gloves_of_attack"
+  {
+    "ID"                  "1261"
+    "BaseClass"           "item_datadriven"
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityTextureName"  "gloves_of_attack"
+    "ItemCost"            "950"
+    "ItemShopTags"        "mb"
+    "ItemQuality"         "component"
+    "ItemShareability"    ""
+    "ItemAliases"         "Gloves of Attack"
+    "SideShop"            "1"
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"              "FIELD_INTEGER"
+        "damage"                "9"
+      }
+      "02"
+      {
+        "var_type"              "FIELD_INTEGER"
+        "attspeed"              "25"
+      }
+    }
+    "Modifiers"
+    {
+      "modifier_name"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+    
+        "Properties"
+        {
+            "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"      "%damage"
+            "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%attspeed" 
+        }
+      }
+    }
+  }
+  "item_recipe_armlet_new"
+  {
+    "BaseClass"           "item_datadriven"
+    "ID"                  "1262"
+    "Model"               "models/props_gameplay/recipe.vmdl"
+    "ItemCost"            "500" 
+    "ItemShopTags"        ""
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_armlet"
+    "ItemRequirements"
+    {
+      "01"                "item_helm_of_iron_will;item_gloves_of_attack"
+    }
+  }
+  "item_recipe_gloves_of_attack"
+  {
+    "BaseClass"           "item_datadriven"
+    "ID"                  "1263"
+    "Model"               "models/props_gameplay/recipe.vmdl"
+    "ItemCost"            "0" 
+    "ItemShopTags"        ""
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_gloves_of_attack"
+    "ItemRequirements"
+    {
+      "01"                "item_gloves;item_blades_of_attack"
+    }
+  }
+  "item_astral_boots"
+  {
+    "BaseClass"                   "item_datadriven"
+    "AbilityTextureName"          "astral_boots"
+    "ID"                          "1264"
+    "AbilityBehavior"             "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "Model"                       "models/props_gameplay/red_box.vmdl" 
+    "Effect"                      "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityCastPoint"            "0.0"
+    "AbilityCooldown"             "0"
+    "AbilityManaCost"             "50"
+    "ItemCost"                    "0"
+    "ItemShopTags"                "agi;damage;attack_speed;mana_pool;regen_mana;hard_to_tag"
+    "ItemQuality"                 "epic"
+    "ItemAliases"                 "astral boots"
+    "ItemShareability"            "ITEM_NOT_SHAREABLE"
+    "PingOverrideText"            "DOTA_Chat_astral_boots" 
+    "ItemDeclarations"            "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+
+    "ItemDisassembleRule"         "DOTA_ITEM_DISASSEMBLE_NEVER"
+    
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "bonus_damage"                "30"
+      }
+      "02"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "bonusallstats"               "10"
+      }
+      "03"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "bonusms"                     "70"
+      }
+    }
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "items/item_astral_boots.lua"
+        "Function"        "on_spell_start"
+      }
+      "FireSound"
+      {
+        "EffectName"        "DOTA_Item.GhostScepter.Activate"
+        "Target"            "CASTER"
+      }
+    }
+    
+    "Modifiers"
+    {
+      "modifier_item_armletofdevian"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
+        
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"              "%bonus_damage"
+          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"               "%bonusallstats"
+          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"                "%bonusallstats"
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"                 "%bonusallstats"
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"              "%bonusms"
+        }
+      }
+    }
+    "OnUnequip"
+    {
+      "RemoveModifier"
+      {
+        "ModifierName"              "modifier_item_astral_boots"
+        "Target"                    "CASTER"
+      }
+    }
+  }
+  "item_recipe_astral_boots"
+  {
+    "BaseClass"                     "item_datadriven"
+    "ID"                            "1265"
+    "Model"                         "models/props_gameplay/recipe.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf" 
+    "ItemCost"                      "1650"   
+    "ItemShopTags"                  ""
+    "ItemRecipe"                    "1"
+    "ItemResult"                    "item_astral_boots"
+    "ItemRequirements"
+    {
+      "01"                          "item_phase_boots;item_ghost"
+    }
+  }
+  "item_astral_boots_active"
+  {
+    "BaseClass"             "item_datadriven"
+    "ID"                    "1266"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "Model"                 "models/props_gameplay/red_box.vmdl" 
+    "Effect"                "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"    "astral_boots_active"
+    "AbilityCastPoint"      "0.0"
+    "AbilityCooldown"       "0"
+    "AbilityManaCost"       "50"
+    "ItemCost"              "0"
+    "ItemPurchasable"       "0"
+    "ItemShareability"      "ITEM_NOT_SHAREABLE"
+    "ItemShopTags"          "agi;damage;attack_speed;mana_pool;regen_mana;hard_to_tag"
+    "ItemQuality"           "epic"
+    "ItemAliases"           "astral boots"
+    "ItemDeclarations"      "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    
+    "ItemPurchasable"       "0"
+    "ItemSellable"          "0"
+    "ItemDisassembleRule"   "DOTA_ITEM_DISASSEMBLE_NEVER"
+
+    "precache"
+    {
+      "particle"  "particles/status_fx/status_effect_ghost.vpcf"
+    }
+      
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "bonus_damage"                "30"
+      }
+      "02"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "bonusallstats"               "10"
+      }
+      "03"
+      {
+        "var_type"                    "FIELD_INTEGER"
+        "bonusms"                     "70"
+      }
+    }
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "items/item_astral_boots.lua"
+        "Function"        "active_on_spell_start"
+      }
+      "FireSound"
+      {
+        "EffectName"      "DOTA_Item.GhostScepter.Activate"
+        "Target"          "CASTER"
+      }
+      "RemoveModifier"
+      {
+        "ModifierName"              "modifier_item_astral_boots"
+        "Target"                    "CASTER"
+      }
+    }
+    "OnUnequip"
+    {
+      "RemoveModifier"
+      {
+        "ModifierName"              "modifier_item_astral_boots"
+        "Target"                    "CASTER"
+      }
+    }
+    "Modifiers"
+    {
+      "modifier_item_astral_bootsactive"
+      {
+        "Passive"             "1"
+        "IsHidden"            "1"
+        "Attributes"          "MODIFIER_ATTRIBUTE_MULTIPLE"
+        
+        "EffectName"          "particles/items/ghost_boots.vpcf"
+        "EffectAttachType"    "follow_origin"
+
+        "StatusEffectName"     "particles/items/status_effect_ghost_boots.vpcf"
+        "StatusEffectPriority" "10"
+        
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"              "%bonus_damage"
+          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"               "%bonusallstats"
+          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"                "%bonusallstats"
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"                 "%bonusallstats"
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"              "%bonusms"
+        }
+      }
+      "modifier_item_astral_boots_active_ghost"
+      {
+        "Passive"           "1"
+        "IsHidden"          "1"
+        "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"                "items/item_astral_boots.lua"
+            "Function"                  "createactivemodifier"
+          }
+        }
+      }
+    }
+  }
+  "item_orb_of_legacy"
+  {
+    "BaseClass"             "item_datadriven"
+    "ID"                    "1267"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE "
+    "Model"                 "models/props_gameplay/red_box.vmdl" 
+    "Effect"                "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"    "orb_of_legacy"
+    "AbilityCastPoint"      "0.0"
+    "AbilityCooldown"       "0"
+    "AbilityManaCost"       "0"
+    "ItemCost"              "0"
+    "ItemPurchasable"       "1"
+    "ItemShopTags"          "damage"
+    "ItemQuality"           "rare"
+    "ItemAliases"           "orb of legacy"
+    "ItemDeclarations"      "DECLARE_PURCHASES_TO_SPECTATORS"
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "armour"        "-4"
+      }
+      "02"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "ms"            "36"
+      }
+      "03"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "vamp"          "5"
+      }
+      "04"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "damage"        "5"
+      }
+      "05"
+      {
+        "var_type"              "FIELD_INTEGER"
+        "poison_movement_speed_melee"   "-20"
+      }
+      "06"
+      {
+        "var_type"              "FIELD_INTEGER"
+        "poison_movement_speed_ranged"    "-8"
+      }
+      "07"
+      {
+        "var_type"              "FIELD_FLOAT"
+        "poison_duration"         "4.0"
+      }
+      "08"
+      {
+        "var_type"              "FIELD_FLOAT"
+        "poison_damage_per_second"      "15.0"
+      }
+      "09"
+      {
+        "var_type"              "FIELD_FLOAT"
+        "poison_damage_interval"      "1.0"
+      }
+      "10"
+      {
+        "var_type"              "FIELD_FLOAT"
+        "armourdur"             "10.0"
+      }
+    }
+    "Modifiers"
+    {
+      "modifier_item_orb_of_legacy_datadriven"
+      {
+        "Passive"       "1"
+        "IsHidden"        "1"
+        "Attributes"      "MODIFIER_ATTRIBUTE_MULTIPLE"
+      
+        "Orb"
+        {
+          "Priority"        "DOTA_ORB_PRIORITY_ITEM"
+        }
+
+        "OnOrbImpact"
+        {
+          "RunScript"
+          {
+            "ScriptFile"      "items/item_orb_of_legacy.lua"
+            "Function"        "modifier_item_orb_of_venom_datadriven_on_orb_impact"
+          }
+          "RunScript"
+          {
+            "ScriptFile"      "items/item_orb_of_legacy.lua"
+            "Function"        "modifier_item_lifesteal_datadriven_on_orb_impact"
+          }
+        }
+        "Properties"
+        {
+            "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"      "%ms" 
+        }
+        "OnOrbFire"
+        {
+          "ApplyModifier"
+          {
+            "Target"          "TARGET"
+            "ModifierName"    "modifier_item_desolator_datadriven_corruption"
+          }
+          "FireSound"
+          {
+            "EffectName"    "Item_Desolator.Target"
+            "Target"        "TARGET"
+          }
+        }
+      }
+      "modifier_item_orb_of_venom_datadriven_poison_attack_melee"
+      {
+        "Duration"        "%poison_duration"
+        "Passive"         "0"
+        "IsHidden"        "0"
+        "IsBuff"          "0"
+        "IsDebuff"        "1"
+        "IsPurgable"      "1"
+        "TextureName"     "item_orb_of_legacy"
+      
+        "EffectName"      "particles/items2_fx/orb_of_venom.vpcf"
+        "EffectAttachType"    "follow_origin"
+      
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"    "%poison_movement_speed_melee"
+        }
+      
+        "ThinkInterval"     "%poison_damage_interval"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"          "items/item_orb_of_legacy.lua"
+            "Function"            "modifier_item_orb_of_venom_datadriven_poison_attack_on_interval_think"
+            "PoisonDamagePerSecond"     "%poison_damage_per_second"
+            "PoisonDamageInterval"      "%poison_damage_interval"
+          }
+        }
+      }
+      "modifier_item_orb_of_venom_datadriven_poison_attack_ranged"
+      {
+        "Duration"        "%poison_duration"
+        "Passive"         "0"
+        "IsHidden"        "0"
+        "IsBuff"          "0"
+        "IsDebuff"        "1"
+        "IsPurgable"      "1"
+        "TextureName"     "item_orb_of_legacy"
+      
+        "EffectName"      "particles/items2_fx/orb_of_venom.vpcf"
+        "EffectAttachType"    "follow_origin"
+      
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"    "%poison_movement_speed_ranged"
+        }
+      
+        "ThinkInterval"     "%poison_damage_interval"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"          "items/item_orb_of_legacy.lua"
+            "Function"            "modifier_item_orb_of_venom_datadriven_poison_attack_on_interval_think"
+            "PoisonDamagePerSecond"     "%poison_damage_per_second"
+            "PoisonDamageInterval"      "%poison_damage_interval"
+          }
+        }
+      }
+      "modifier_item_lifesteal_datadriven_lifesteal"
+      {
+        "Passive"     "0"
+        "IsHidden"      "1"
+      
+        "OnDealDamage"
+        {
+          "Lifesteal"
+          {
+            "Target"            "ATTACKER"
+            "LifestealPercent"  "%vamp"
+          }
+        }
+      }
+      "modifier_item_desolator_datadriven_corruption"
+      {
+        "Duration"        "%armourdur"
+        "Passive"         "0"
+        "IsHidden"        "0"
+        "IsDebuff"        "1"
+        "TextureName"     "item_orb_of_legacy"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"    "%armour"
+        }
+      }
+    }
+  }
+  "item_recipe_orb_of_legacy"
+  {
+    "BaseClass"                     "item_datadriven"
+    "ID"                            "1268"
+    "Model"                         "models/props_gameplay/recipe.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf" 
+    "ItemCost"                      "650"   
+    "ItemShopTags"                  ""
+    "ItemRecipe"                    "1"
+    "ItemResult"                    "item_orb_of_legacy"
+    "ItemRequirements"
+    {
+      "01"                          "item_orb_of_venom;item_blight_stone;item_wind_lace"
+    }
+  }
+}

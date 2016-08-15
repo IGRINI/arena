@@ -1,0 +1,46 @@
+"DOTAHeroes"
+{
+
+    "npc_dota_hero_bounty_hunter"
+    {
+        "override_hero"             "npc_dota_hero_bounty_hunter"            // Hero to override
+        "Ability1"                  "bh_mark"
+        "Ability2"                  "bh_crush"
+        "Ability3"                  "bh_jump"
+        "Ability4"                  "bh_bloodrage"
+        "ArmorPhysical"             "-3"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        "AttackDamageMin"           "24"
+        "AttackDamageMax"           "38"
+        "AttackRate"                "2.500000"
+        "AttackAnimationPoint"      "0.590000"
+        "AttackAcquisitionRange"    "600"
+        "AttackRange"               "150"
+        "AttributePrimary"          "DOTA_ATTRIBUTE_AGILITY"
+        "AttributeBaseStrength"     "12"
+        "AttributeStrengthGain"     "1.800000"
+        "AttributeBaseAgility"      "21"
+        "AttributeAgilityGain"      "3.000000"
+        "AttributeBaseIntelligence" "8"
+        "AttributeIntelligenceGain" "1.200000"
+        "MovementSpeed"             "280"
+        "MovementTurnRate"          "0.600000"
+        "StatusHealthRegen"         "0.400000"
+        "VisionDaytimeRange"        "1200"
+        "VisionNighttimeRange"      "800"
+    }
+    "npc_dota_hero_storm_spirit"
+    {
+        "override_hero"             "npc_dota_hero_storm_spirit"            // Hero to override
+        "Ability1"                  "ss_manaburn"
+        "Ability2"                  "ss_equality"
+        "Ability3"                  "ss_mana_illusion"
+        "Ability4"                  "ss_mana_attack"
+        "AttackRange"               "425"
+    }
+    "npc_dota_hero_omniknight"
+    {
+        "override_hero"             "npc_dota_hero_omniknight"            // Hero to override
+        "Ability3"                  "ok_defence_aura"
+    }
+}
