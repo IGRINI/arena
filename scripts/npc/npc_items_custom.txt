@@ -1653,7 +1653,8 @@
 
   "item_zombie_mask"
   {
-    "ID"    "3003"           "item_lua"
+    "ID"    "3003"           
+    "BaseClass"           "item_lua"
     "ScriptFile"          "items/item_zombie_mask.lua"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "Model"                         "models/props_gameplay/red_box.vmdl" 
