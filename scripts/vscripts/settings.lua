@@ -72,7 +72,7 @@ XP_PER_LEVEL_TABLE = {
     25200,-- 22
     27500,-- 23
     29900,-- 24
-    32400, -- 25
+    32400,-- 25
     35000,-- 26
     37700,-- 27
     40500,-- 28
@@ -162,7 +162,7 @@ FIXED_RESPAWN_TIME = -1                 -- What time should we use for a fixed r
 FOUNTAIN_CONSTANT_MANA_REGEN = -1       -- What should we use for the constant fountain mana regen?  Use -1 to keep the default dota behavior.
 FOUNTAIN_PERCENTAGE_MANA_REGEN = -1     -- What should we use for the percentage fountain mana regen?  Use -1 to keep the default dota behavior.
 FOUNTAIN_PERCENTAGE_HEALTH_REGEN = -1   -- What should we use for the percentage fountain health regen?  Use -1 to keep the default dota behavior.
-MAXIMUM_ATTACK_SPEED = 5000             -- What should we use for the maximum attack speed?
+MAXIMUM_ATTACK_SPEED = 10000            -- What should we use for the maximum attack speed?
 MINIMUM_ATTACK_SPEED = 1               	-- What should we use for the minimum attack speed?
 
 GAME_END_DELAY = -1                     -- How long should we wait after the game winner is set to display the victory banner and End Screen?  Use -1 to keep the default (about 10 seconds)
