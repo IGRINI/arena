@@ -104,7 +104,7 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 				ability:StartCooldown(ability:GetCooldown(ability:GetLevel()))
 				target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab_b",{duration = ability:GetLevelSpecialValueFor("duration_b", ability:GetLevel())})
 				self:GetParent():AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab_atk_speed",{})
-				caster:SetModifierStackCount("modifier_phantom_assassin_back_stab_atk_speed",caster,2)
+				caster:SetModifierStackCount("modifier_phantom_assassin_back_stab_atk_speed",caster, caster:GetModifierStackCount("modifier_phantom_assassin_back_stab_atk_speed", self:GetAbility()) + 2)
 			end
 		end
 
@@ -179,7 +179,7 @@ function modifier_phantom_assassin_back_stab_b:CheckState()
 end
 
 function modifier_phantom_assassin_back_stab_b:DeclareFunctions()
-	local funcs = { MODIFIER_PROPERTY_OVERRIDE_ANIMATION, MODIFIER_EVENT_ON_ATTACK_LANDED }
+	local funcs = { MODIFIER_PROPERTY_OVERRIDE_ANIMATION }
 	return funcs
 end
 
