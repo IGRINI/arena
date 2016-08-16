@@ -4,7 +4,7 @@ end
 LinkLuaModifier("modifier_pa_wound","heroes/PhantomAssassin/phantom_assassin_wound",LUA_MODIFIER_MOTION_NONE)
 
 function phantom_assassin_wound:GetCastAnimation()
-	return phantom_assassin_attack_crit_loda
+	return ACT_DOTA_CAST_CHAOS_METEOR
 end
 
 function phantom_assassin_wound:OnSpellStart(event)
