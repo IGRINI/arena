@@ -8,8 +8,9 @@ function phantom_assassin_wound:GetCastAnimation()
 end
 
 function phantom_assassin_wound:OnSpellStart(event)
-	local target = event.target
-	self:GetCaster():AddNewModifier(target,self,"modifier_pa_wound",{duration = self:GetLevelSpecialValueFor("duration",self:GetLevel())})
+	local target = self:GetCursorTarget()
+	local caster = self:GetCaster()
+	target:AddNewModifier(caster,self,"modifier_pa_wound",{duration = self:GetLevelSpecialValueFor("duration",self:GetLevel())})
 end
 
 --------------------------------------------------------------------------------------------------------------------------------------
@@ -32,13 +33,13 @@ function modifier_pa_wound:DeclareFunctions()
 end
 
 function modifier_pa_wound:GetModifierTurnRate_Percentage(params)
-	return self:GetLevelSpecialValueFor("turn_slow",self:GetLevel())
+	return self:GetAbility():GetLevelSpecialValueFor("turn_slow",self:GetAbility():GetLevel())
 end
 
 function modifier_pa_wound:GetModifierMoveSpeedBonus_Percentage(params)
-	return self:GetLevelSpecialValueFor("slow",self:GetLevel())
+	return self:GetAbility():GetLevelSpecialValueFor("slow",self:GetAbility():GetLevel())
 end
 
 function modifier_pa_wound:GetModifierMiss_Percentage(params)
-	return self:GetLevelSpecialValueFor("miss_chance",self:GetLevel())
+	return self:GetAbility():GetLevelSpecialValueFor("miss_chance",self:GetAbility():GetLevel())
 end
