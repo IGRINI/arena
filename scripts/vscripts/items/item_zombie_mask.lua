@@ -23,7 +23,7 @@ if modifier_zombie_mask == nil then
 end
 
 function modifier_zombie_mask:GetAttributes()
-	return MODIFIER_ATTRIBUTE_IGNORE_MULTIPLE 
+	return MODIFIER_ATTRIBUTE_MULTIPLE 
 end
 
 function modifier_zombie_mask:IsHidden()
@@ -131,7 +131,7 @@ function modifier_zombie_mask_buff:DeclareFunctions()
 end
 
 function modifier_zombie_mask_buff:GetAttributes()
-	return MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE 
+	return MODIFIER_ATTRIBUTE_MULTIPLE 
 end
 
 function modifier_zombie_mask_buff:IsPurgable()
@@ -161,7 +161,7 @@ if modifier_zombie_mask_debuff == nil then
 end
 
 function modifier_zombie_mask_debuff:GetAttributes()
-	return MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE
+	return MODIFIER_ATTRIBUTE_MULTIPLE
 end
 
 function modifier_zombie_mask_debuff:DeclareFunctions()
