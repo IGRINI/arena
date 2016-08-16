@@ -102,8 +102,9 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 				  	damage = ability:GetLevelSpecialValueFor("damage_b",ability:GetLevel()),
 				 	damage_type = DAMAGE_TYPE_PURE})
 				ability:StartCooldown(ability:GetCooldown(ability:GetLevel()))
-				target:AddNewModifier(caster,self,"modifier_phantom_assassin_back_stab_b",{duration = ability:GetLevelSpecialValueFor("duration_b", ability:GetLevel())})
-				self:GetParent():AddNewModifier(caster,self,"modifier_phantom_assassin_back_stab_atk_speed",{})
+				target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab_b",{duration = ability:GetLevelSpecialValueFor("duration_b", ability:GetLevel())})
+				self:GetParent():AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab_atk_speed",{})
+				caster:SetModifierStackCount("modifier_phantom_assassin_back_stab_atk_speed",caster,2)
 			end
 		end
 
@@ -204,12 +205,13 @@ function modifier_phantom_assassin_back_stab_atk_speed:IsPurgable()
 	return true
 end
 
-function modifier_phantom_assassin_back_stab_atk_speed:OnCreated(kv)
-	self.stacks = self:GetAbility():GetSpecialValueFor("stacks")
+function modifier_phantom_assassin_back_stab_atk_speed:OnCreated( kv )
+	self.level = self:GetAbility():GetLevel()
+	self.speed = self:GetAbility():GetLevelSpecialValueFor("attack_speed", self.level)
 end
-
-function modifier_phantom_assassin_back_stab_atk_speed:OnRefresh(kv)
-	self.stacks = self:GetAbility():GetSpecialValueFor("stacks")
+function modifier_phantom_assassin_back_stab_atk_speed:OnRefresh( kv )
+	self.level = self:GetAbility():GetLevel()
+	self.speed = self:GetAbility():GetLevelSpecialValueFor("attack_speed", self.level)
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:DeclareFunctions()
@@ -218,12 +220,15 @@ function modifier_phantom_assassin_back_stab_atk_speed:DeclareFunctions()
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:GetModifierAttackSpeedBonus_Constant_Secondary()
-	return self:GetAbility():GetLevelSpecialValueFor("attack_speed", self:GetAbility():GetLevel())
+	if IsServer() then
+		return self.speed
+	end
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:OnAttackLanded()
-	self.stacks = self.stacks - 1
-	if self.stacks < 1 then
-		self:GetParent():RemoveModifier(self)
+	local stacks = self:GetStackCount()
+	self:SetStackCount(stacks - 1)
+	if stacks <= 1 then
+		self:GetParent():RemoveModifierByName("modifier_phantom_assassin_back_stab_atk_speed")
 	end
 end
