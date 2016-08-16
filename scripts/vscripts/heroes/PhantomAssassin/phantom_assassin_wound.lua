@@ -1,0 +1,44 @@
+if phantom_assassin_wound == nil then
+	phantom_assassin_wound = class({})
+end
+LinkLuaModifier("modifier_pa_wound","heroes/PhantomAssassin/phantom_assassin_wound",LUA_MODIFIER_MOTION_NONE)
+
+function phantom_assassin_wound:GetCastAnimation()
+	return phantom_assassin_attack_crit_loda
+end
+
+function phantom_assassin_wound:OnSpellStart(event)
+	local target = event.target
+	self:GetCaster():AddNewModifier(target,self,"modifier_pa_wound",{duration = self:GetLevelSpecialValueFor("duration",self:GetLevel())})
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+if modifier_pa_wound == nil then
+	modifier_pa_wound = class({})
+end
+
+function modifier_pa_wound:IsDebuff()
+	return true
+end
+
+function modifier_pa_wound:GetTexture()
+	return "phantom_assassin_wound"
+end
+
+function modifier_pa_wound:DeclareFunctions()
+	local funcs = { MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE, MODIFIER_PROPERTY_MISS_PERCENTAGE, MODIFIER_PROPERTY_TURN_RATE_PERCENTAGE }
+	return funcs
+end
+
+function modifier_pa_wound:GetModifierTurnRate_Percentage(params)
+	return self:GetLevelSpecialValueFor("turn_slow",self:GetLevel())
+end
+
+function modifier_pa_wound:GetModifierMoveSpeedBonus_Percentage(params)
+	return self:GetLevelSpecialValueFor("slow",self:GetLevel())
+end
+
+function modifier_pa_wound:GetModifierMiss_Percentage(params)
+	return self:GetLevelSpecialValueFor("miss_chance",self:GetLevel())
+end

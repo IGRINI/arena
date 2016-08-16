@@ -667,5 +667,48 @@
   			}
   		}
   	}
-}
 
+    //-----------------------------------------------------------------------
+
+    //PhantomAssassin
+      //Подрез
+      "phantom_assassin_wound"
+      {
+        "BaseClass"                     "ability_lua"
+        "ScriptFile"                    "heroes/PhantomAssassin/phantom_assassin_wound.lua"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+        "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+        "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "AbilityTextureName"            "phantom_assassin_wound"
+        "AbilityCastRange"              "260"
+        "AbilityManaCost"               "120 80 60 40 30 20 15"
+        "AbilityCooldown"               "16 14 12 8 6 5 4 3.2"
+        "MaxLevel"                      "7"
+        "RequiredLevel"          "2"
+        "LevelsBetweenUpgrades"  "4"
+        
+        "AbilitySpecial"
+        { 
+          "01"
+          {
+            "var_type"  "FIELD_FLOAT"
+            "duration"    "3 4 5 6 6.5 7 7.5"
+          }
+          "02"
+          {
+            "var_type"  "FIELD_INTEGER"
+            "slow"        "-30 -40 -45 -50 -60 -65 -70"
+          }
+          "03"
+          {
+            "var_type"  "FIELD_INTEGER"
+            "turn_slow" "-20 -35 -40 -45 -50 -55 -60"
+          }
+          "04"
+          {
+            "var_type"  "FIELD_INTEGER"
+            "miss_chance" "12 24 36 48 56 64 72"
+          }
+        }
+      }
+}

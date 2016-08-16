@@ -43,4 +43,12 @@
         "override_hero"             "npc_dota_hero_omniknight"            // Hero to override
         "Ability3"                  "ok_defence_aura"
     }
+    "npc_dota_hero_phantom_assassin"
+    {
+        "override_hero"             "npc_dota_hero_phantom_assassin"            // Hero to override
+        "Ability1"                  "phantom_assassin_wound"
+        "Ability2"                  ""
+        "Ability3"                  ""
+        "Ability4"                  ""
+    }
 }
