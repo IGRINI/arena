@@ -203,11 +203,11 @@ function modifier_phantom_assassin_back_stab_atk_speed:IsPurgable()
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:OnCreated(kv)
-	local stacks = self:GetAbility():GetSpecialValueFor("stacks")
+	self.stacks = self:GetAbility():GetSpecialValueFor("stacks")
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:OnRefresh(kv)
-	local stacks = self:GetAbility():GetSpecialValueFor("stacks")
+	self.stacks = self:GetAbility():GetSpecialValueFor("stacks")
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:DeclareFunctions()
@@ -220,8 +220,8 @@ function modifier_phantom_assassin_back_stab_atk_speed:GetModifierAttackSpeedBon
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:OnAttackLanded()
-	stacks - 1
-	if stacks < 1 then
+	self.stacks - 1
+	if self.stacks < 1 then
 		self:GetParent():RemoveModifier(self)
 	end
 end
