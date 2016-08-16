@@ -109,7 +109,7 @@ function modifier_zombie_mask:GetModifierBonusStats_Intellect(params)
 	return levelpower
 end
 function modifier_zombie_mask:GetModifierPreAttack_BonusDamage(params)
-	local levelpower = 15 + (self:GetParent():GetLevel() * 1.5)
+	local levelpower = 15 + (self:GetParent():GetLevel() * 1.2)
 	if self:GetParent():HasModifier("modifier_zombie_mask_buff") then
 		levelpower = levelpower * 2.3
 	elseif self:GetParent():HasModifier("modifier_zombie_mask_debuff") then
@@ -193,20 +193,20 @@ end
 function modifier_zombie_mask_debuff:GetModifierBonusStats_Strength(params)
 	local levelpower = 15 + (self:GetParent():GetLevel() * 1.5)
 	
-	return levelpower * -1
+	return levelpower * -0.7
 end
 function modifier_zombie_mask_debuff:GetModifierBonusStats_Agility(params)
 	local levelpower = 15 + (self:GetParent():GetLevel() * 1.5)
 	
-	return levelpower * -1
+	return levelpower * -0.7
 end
 function modifier_zombie_mask_debuff:GetModifierBonusStats_Intellect(params)
 	local levelpower = 15 + (self:GetParent():GetLevel() * 1.5)
 	
-	return levelpower * -1
+	return levelpower * -0.7
 end
 function modifier_zombie_mask_debuff:GetModifierPreAttack_BonusDamage(params)
 	local levelpower = 15 + (self:GetParent():GetLevel() * 1.5)
 	
-	return levelpower * -1
+	return levelpower * -0.58
 end
