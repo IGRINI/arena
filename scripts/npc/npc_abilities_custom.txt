@@ -373,11 +373,6 @@
   				"var_type"				"FIELD_FLOAT"
   				"scepterduration"		"25.0"
   			}
-  			"06"
-  			{
-  				"var_type"				"FIELD_INTEGER"
-  				"coldownscepter"		"5"
-  			}
   		}
   	}
   	"bh_crush"

@@ -73,6 +73,9 @@ end
 function modifier_crush_bush:IsStunDebuff()
 	return true
 end
+function modifier_crush_bush:GetTexture()
+	return "bh_crush"
+end
 function modifier_crush_bush:GetEffectName()
 	return "particles/generic_gameplay/generic_stunned.vpcf"
 end
