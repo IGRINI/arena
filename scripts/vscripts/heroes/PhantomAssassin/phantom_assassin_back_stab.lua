@@ -120,7 +120,7 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 				damage = self:GetAbility():GetLevelSpecialValueFor("damage",self:GetAbility():GetLevel()),
 				damage_type = DAMAGE_TYPE_PHYSICAL,}
 			if RollPercentage(chance) then
-				target:AddNewModifier(caster,self,"modifier_phantom_assassin_back_stab",{duration = self:GetAbility():GetLevelSpecialValueFor("duration", self:GetAbility():GetLevel())})
+				target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab",{duration = self:GetAbility():GetLevelSpecialValueFor("duration", self:GetAbility():GetLevel())})
 				ApplyDamage(damageTable)
 			else
 				chance = chance + self:GetAbility():GetLevelSpecialValueFor("bonus_chance",self:GetAbility():GetLevel())
@@ -139,7 +139,7 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 				damage = self:GetAbility():GetLevelSpecialValueFor("damage",self:GetAbility():GetLevel())/3,
 				damage_type = DAMAGE_TYPE_PHYSICAL}
 			if RollPercentage(chance) then
-				target:AddNewModifier(caster,self,"modifier_phantom_assassin_back_stab",{duration = self:GetAbility():GetLevelSpecialValueFor("duration", self:GetAbility():GetLevel())/3})
+				target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab",{duration = self:GetAbility():GetLevelSpecialValueFor("duration", self:GetAbility():GetLevel())/3})
 				ApplyDamage(damageTable)
 			else
 				chance = chance + self:GetAbility():GetLevelSpecialValueFor("bonus_chance",self:GetAbility():GetLevel())/2
