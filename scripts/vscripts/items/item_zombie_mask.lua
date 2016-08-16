@@ -127,8 +127,7 @@ if modifier_zombie_mask_buff == nil then
 end
 
 function modifier_zombie_mask_buff:DeclareFunctions()
-	local funcs = { MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE }
-	return funcs
+	return MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
 end
 
 function modifier_zombie_mask_buff:GetAttributes()
@@ -144,7 +143,7 @@ function modifier_zombie_mask_buff:IsHidden()
 end
 
 function modifier_zombie_mask_buff:GetTexture()
-	return	"item_zombie_mask"
+	return "item_zombie_mask"
 end
 
 function modifier_zombie_mask_buff:GetModifierMoveSpeedBonus_Percentage(params)
@@ -152,7 +151,9 @@ function modifier_zombie_mask_buff:GetModifierMoveSpeedBonus_Percentage(params)
 end
 
 function modifier_zombie_mask_buff:OnDestroy(event)
-	self:GetCaster():AddNewModifier(self:GetCaster(),self,"modifier_zombie_mask_debuff",{duration = self:GetAbility():GetCooldownTimeRemaining()*0.75})
+	if IsServer() then
+		self:GetCaster():AddNewModifier(self:GetCaster(),self,"modifier_zombie_mask_debuff",{duration = self:GetAbility():GetCooldownTimeRemaining()*0.75})
+	end
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
