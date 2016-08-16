@@ -126,7 +126,8 @@ if modifier_zombie_mask_buff == nil then
 end
 
 function modifier_zombie_mask_buff:DeclareFunctions()
-	return MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
+	local funcs = { MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE }
+	return funcs
 end
 
 function modifier_zombie_mask_buff:GetAttributes()
