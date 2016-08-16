@@ -18,7 +18,7 @@ function modifier_item_armlet_of_devian:DeclareFunctions()
 end
 
 function modifier_item_armlet_of_devian:GetModifierExtraHealthPercentage( params )
-	return 0.1
+	return 0.15
 end
 
 function modifier_item_armlet_of_devian:GetAttributes ()
@@ -45,13 +45,18 @@ end
 
 function modifier_item_unholy_armlet_of_devian:DeclareFunctions()
 	local funcs = {
-		MODIFIER_PROPERTY_EXTRA_HEALTH_PERCENTAGE
+		MODIFIER_PROPERTY_EXTRA_HEALTH_PERCENTAGE,
+		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT
 	}
 	return funcs
 end
 
 function modifier_item_unholy_armlet_of_devian:GetModifierExtraHealthPercentage( params )
-	return -0.1
+	return -0.25
+end
+
+function modifier_item_unholy_armlet_of_devian:GetModifierAttackSpeedBonus_Constant(params)
+	return 50
 end
 
 function modifier_item_unholy_armlet_of_devian:GetAttributes ()

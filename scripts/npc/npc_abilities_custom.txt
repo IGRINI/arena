@@ -770,7 +770,7 @@
           {
             "var_type"  "FIELD_INTEGER"
             "stacks"      "2"
-        }
+          }
         }
       }
 }

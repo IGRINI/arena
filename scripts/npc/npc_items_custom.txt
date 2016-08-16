@@ -844,7 +844,7 @@
       {
         "Passive"       "1"
         "IsHidden"      "1"
-        "ThinkInterval"  "2"
+        "ThinkInterval"  "0.5"
         "OnIntervalThink"
         {
           "RemoveModifier"

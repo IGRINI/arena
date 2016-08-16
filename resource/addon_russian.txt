@@ -5,6 +5,8 @@
 	{		
 		"addon_game_name"			"YOUR ADDON NAME"
 
+		//heroes
+
 		//Items
 			//LowStatsOrb
 			"DOTA_Tooltip_ability_item_lso"					"Сфера Малых Аттрибутов"
@@ -46,7 +48,7 @@
 			//ArmletOfAzrael
 			"DOTA_Tooltip_ability_item_armlet_of_azrael"  						"Наручи Азраила"  
 			"DOTA_Tooltip_ability_item_armlet_of_azrael_Description"  			"Активируемая: Unholy Intellect - на время действия уменьшает кулдауны способностей на 20%, а так же дает 100 интеллекта, но отнимает 100 маны и 25 здоровья в секунду. Вы не можете умереть от потери здоровья во время действия."
-			"DOTA_Tooltip_ability_item_armlet_of_azrael_Note0" 					"Изменение интеллекта действует и на текущий и на максимальный уровень маны. Изменение интеллекта происходит спустя 0.7 секунды. Включение и выключение Unholy Intellect не прерывает чтение заклинаний"
+			"DOTA_Tooltip_ability_item_armlet_of_azrael_Note0" 					"Изменение интеллекта действует и на текущий и на максимальный уровень маны. Изменение интеллекта происходит спустя 0.7 секунды. Включение и выключение Unholy Intellect не прерывает чтение заклинаний."
 			"DOTA_Tooltip_ability_item_armlet_of_azrael_Lore" 					"Азраил когда-то был великим магом, но даже он пал от руки Темного Охотника. От него осталось только несколько трофеев, в том числе эти рунные наручи."
 			"DOTA_Tooltip_ability_item_armlet_of_azrael_bonus_mana"				"+$mana"
 			"DOTA_Tooltip_ability_item_armlet_of_azrael_cd_red"					"УМЕНЬШЕНИЕ ПЕРЕЗАРЯДКИ(Пассивно):"
@@ -59,17 +61,71 @@
 
 			"DOTA_Tooltip_ability_item_armlet_of_azrael_active"  						"Наручи Азраила(Активны)"  
 			"DOTA_Tooltip_ability_item_armlet_of_azrael_active_Description"  			"Активируемая: Unholy Intellect - на время действия уменьшает кулдауны способностей на 10%, а так же дает 100 интеллекта, но отнимает 100 маны и 25 здоровья в секунду. Вы не можете умереть от потери здоровья во время действия."
-			"DOTA_Tooltip_ability_item_armlet_of_azrael_active_Note0" 					"Изменение интеллекта действует и на текущий и на максимальный уровень маны. Изменение интеллекта происходит спустя 0.7 секунды. Включение и выключение Unholy Intellect не прерывает чтение заклинаний"
+			"DOTA_Tooltip_ability_item_armlet_of_azrael_active_Note0" 					"Изменение интеллекта действует и на текущий и на максимальный уровень маны. Изменение интеллекта происходит спустя 0.7 секунды. Включение и выключение Unholy Intellect не прерывает чтение заклинаний."
 			"DOTA_Tooltip_ability_item_armlet_of_azrael_active_Lore" 					"Азраил когда-то был великим магом, но даже он пал от руки Темного Охотника. От него осталось только несколько трофеев, в том числе эти рунные наручи."
 			"DOTA_Tooltip_ability_item_armlet_of_azrael_active_bonus_mana"				"+$mana"
 			"DOTA_Tooltip_ability_item_armlet_of_azrael_active_cd_red"					"УМЕНЬШЕНИЕ ПЕРЕЗАРЯДКИ(Пассивно):"
 
 			//helmofint
 			"DOTA_Tooltip_ability_item_helm_of_int"  						"Боевой шлем Азраила"  
-			"DOTA_Tooltip_ability_item_helm_of_int_Description"  			"Шлем, уввеличивающий ману и её реген."
-			"DOTA_Tooltip_ability_item_helm_of_int_Note0" 					"Изменение интеллекта действует и на текущий и на максимальный уровень маны. Изменение интеллекта происходит спустя 0.7 секунды. Включение и выключение Unholy Intellect не прерывает чтение заклинаний"
-			"DOTA_Tooltip_ability_item_helm_of_int_Lore" 					"Азраил когда-то был великим магом, но даже он пал от руки Темного Охотника. От него осталось только несколько трофеев, в том числе эти рунные наручи."
+			"DOTA_Tooltip_ability_item_helm_of_int_Description"  			""
+			"DOTA_Tooltip_ability_item_helm_of_int_Note0" 					""
+			"DOTA_Tooltip_ability_item_helm_of_int_Lore" 					"В этом шлеме Азраил воевал на Полях Ашвы."
 			"DOTA_Tooltip_ability_item_helm_of_int_bonus_mana"				"+$mana"
 			"DOTA_Tooltip_ability_item_helm_of_int_bonus_mana_regen"		"%+$mana_regen"
+
+			//devotitcore
+			"DOTA_Tooltip_ability_item_devotit_core"  						"Ядро Девотита"  
+			"DOTA_Tooltip_ability_item_devotit_core_Description"  			""
+			"DOTA_Tooltip_ability_item_devotit_core_Note0" 					""
+			"DOTA_Tooltip_ability_item_devotit_core_Lore" 					"Девотит собирают в глубоких шахтах Великой Ашвы."
+			"DOTA_Tooltip_ability_item_devotit_core_cd_red"					"УМЕНЬШЕНИЕ ПЕРЕЗАРЯДКИ:"
+
+			//ArmletOfDevian
+			"DOTA_Tooltip_ability_item_armlet_of_devian"  						"Наручи Девиана"  
+			"DOTA_Tooltip_ability_item_armlet_of_devian_Description"  			"Активируемая: Unholy Agility - на время действия увеличивает ловкость на 100 и скорость атаки на 50, но максимальное количество здоровья уменьшается на 10%, а так же по 1 броне каждые 0.5 секунды. При включении забирает 5% текущего здоровья кастера. Броня будет возвращаться вам по еденице каждые 0.5 секунды."
+			"DOTA_Tooltip_ability_item_armlet_of_devian_Note0" 					"Включение и выключение Unholy Agility не прерывает чтение заклинаний. Вы не можете умереть от этих наручей."
+			"DOTA_Tooltip_ability_item_armlet_of_devian_Lore" 					"Девиан, сын Азраила и Асары, был отличным охотником и ловчим, но даже его великая ловкость не помогла ему уйти от учести."
+			"DOTA_Tooltip_ability_item_armlet_of_devian_bonus_damage"			"+$damage"
+			"DOTA_Tooltip_ability_item_armlet_of_devian_bonusattackspeed"		"+$attack"
+			"DOTA_Tooltip_ability_item_armlet_of_devian_bonus_hp_regen"			"+$hp_regen"
+			"DOTA_Tooltip_ability_item_armlet_of_devian_hppercent"				"%ДОП. ПРОЦЕНТ ХП:"
+
+			"DOTA_Tooltip_modifier_item_unholy_armlet_of_devian"				"Unholy Agility"
+			"DOTA_Tooltip_modifier_item_unholy_armlet_of_devian_Description"	"Получил бонусы от Unholy Agility, но потерял 10% здоровья и продолжает терять броню каждые пол секунды."
+
+			"DOTA_Tooltip_ability_item_armlet_of_devian_active"  						"Наручи Девиана(Активны)"  
+			"DOTA_Tooltip_ability_item_armlet_of_devian_active_Description"  			"Активируемая: Unholy Agility - на время действия увеличивает ловкость на 100 и скорость атаки на 50, но максимальное количество здоровья уменьшается на 10%, а так же по 1 броне каждые 0.5 секунды. При включении забирает 5% текущего здоровья кастера. Броня будет возвращаться вам по еденице каждые 0.5 секунды."
+			"DOTA_Tooltip_ability_item_armlet_of_devian_active_Note0" 					"Включение и выключение Unholy Agility не прерывает чтение заклинаний. Вы не можете умереть от этих наручей."
+			"DOTA_Tooltip_ability_item_armlet_of_devian_active_Lore" 					"Девиан, сын Азраила и Асары, был отличным охотником и ловчим, но даже его великая ловкость не помогла ему уйти от учести."
+			"DOTA_Tooltip_ability_item_armlet_of_devian_active_bonus_damage"			"+$damage"
+			"DOTA_Tooltip_ability_item_armlet_of_devian_active_bonusattackspeed"		"+$attack"
+			"DOTA_Tooltip_ability_item_armlet_of_devian_active_bonus_hp_regen"			"+$hp_regen"
+			"DOTA_Tooltip_ability_item_armlet_of_devian_active_hppercent"				"%ДОП. ПРОЦЕНТ ХП:"
+
+			//glovesofattack
+			"DOTA_Tooltip_ability_item_gloves_of_attack"  						"Перчатки атаки"  
+			"DOTA_Tooltip_ability_item_gloves_of_attack_Description"  			""
+			"DOTA_Tooltip_ability_item_gloves_of_attack_Note0" 					""
+			"DOTA_Tooltip_ability_item_gloves_of_attack_Lore" 					"Эти перчатки сделаны для того, чтобы не пораниться когтями."
+			"DOTA_Tooltip_ability_item_gloves_of_attack_damage"					"+$damage"
+			"DOTA_Tooltip_ability_item_gloves_of_attack_attspeed"				"+$attack"
+
+			//item_astral_boots
+			"DOTA_Tooltip_ability_item_astral_boots"  							"Астральные ботинки"  
+			"DOTA_Tooltip_ability_item_astral_boots_Description"  				"Активируемая: Astral Walking - переводит героя в другой мир, в котором его враги не могут ударить его, но начинает получать увеличеный урон от способностей и замедляется."
+			"DOTA_Tooltip_ability_item_astral_boots_Note0" 						"Получаемый от способностей урон увеличивается на 65%, а замедление снимает 20% от скорости."
+			"DOTA_Tooltip_ability_item_astral_boots_Lore" 						"В астрале очень трудно передвигаться."
+			"DOTA_Tooltip_ability_item_astral_boots_bonus_damage"				"+$damage"
+			"DOTA_Tooltip_ability_item_astral_boots_bonusallstats"				"+$all"
+			"DOTA_Tooltip_ability_item_astral_boots_bonusms"					"+$move_speed"
+
+			"DOTA_Tooltip_ability_item_astral_boots_active"  					"Астральные ботинки(Активны)"  
+			"DOTA_Tooltip_ability_item_astral_boots_active_Description"  		"Активируемая: Astral Walking - переводит героя в другой мир, в котором его враги не могут ударить его, но начинает получать увеличеный урон от способностей и замедляется."
+			"DOTA_Tooltip_ability_item_astral_boots_active_Note0" 				"Получаемый от способностей урон увеличивается на 65%, а замедление снимает 20% от скорости."
+			"DOTA_Tooltip_ability_item_astral_boots_active_Lore" 				"В астрале очень трудно передвигаться."
+			"DOTA_Tooltip_ability_item_astral_boots_active_bonus_damage"		"+$damage"
+			"DOTA_Tooltip_ability_item_astral_boots_active_bonusallstats"		"+$all"
+			"DOTA_Tooltip_ability_item_astral_boots_active_bonusms"				"+$move_speed"
 	}	
 }

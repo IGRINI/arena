@@ -89,7 +89,7 @@ function createactivemodifier(keys)
 end
 
 function hpdrain(keys)
-	local new_hp = keys.caster:GetHealth() - (100 + (keys.caster:GetMaxHealth() / 100 * 20))
+	local new_hp = keys.caster:GetHealth() - (100 + (keys.caster:GetMaxHealth() / 100 * 5))
 
 	if new_hp < 1 then
 		new_hp = 1
