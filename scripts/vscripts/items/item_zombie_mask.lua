@@ -7,8 +7,7 @@ LinkLuaModifier("modifier_zombie_mask_buff","items/item_zombie_mask",LUA_MODIFIE
 LinkLuaModifier("modifier_zombie_mask_debuff","items/item_zombie_mask",LUA_MODIFIER_MOTION_NONE)
 
 function item_zombie_mask:GetIntrinsicModifierName()
-	local modsne ={"modifier_zombie_mask","modifier_zombie_mask_buff","modifier_zombie_mask_debuff"}
-	return modsne
+	return "modifier_zombie_mask"
 end
 
 function item_zombie_mask:OnSpellStart(event)
