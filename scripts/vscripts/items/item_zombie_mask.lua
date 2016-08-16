@@ -182,6 +182,10 @@ function modifier_zombie_mask_debuff:IsHidden()
 	return false
 end
 
+function modifier_zombie_mask_debuff:IsDebuff()
+	return true
+end
+
 function modifier_zombie_mask_debuff:GetTexture()
 	return "item_zombie_mask"
 end
