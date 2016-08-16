@@ -817,6 +817,12 @@
         "EffectName"        "DOTA_Item.Armlet.Activate"
         "Target"            "CASTER"
       }
+
+      "RunScript"
+      {
+        "ScriptFile"      "items/item_armlet_of_devian.lua"
+        "Function"        "hpdrain"
+      }
     }
     
     "Modifiers"
@@ -838,7 +844,7 @@
       {
         "Passive"       "1"
         "IsHidden"      "1"
-        "ThinkInterval"  "0.5"
+        "ThinkInterval"  "2"
         "OnIntervalThink"
         {
           "RemoveModifier"
@@ -949,7 +955,7 @@
       "08"
       {
         "var_type"                        "FIELD_FLOAT"
-        "unholy_arm_drain_interval"       "1.0"
+        "unholy_arm_drain_interval"       "0.5"
       }
       "09"
       {
