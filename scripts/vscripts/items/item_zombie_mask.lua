@@ -151,7 +151,7 @@ end
 
 function modifier_zombie_mask_buff:OnDestroy(event)
 	if IsServer() then
-		self:GetCaster():AddNewModifier(self:GetCaster(),self,"modifier_zombie_mask_debuff",{duration = self:GetAbility():GetCooldownTimeRemaining()*0.75})
+		self:GetAbility():GetCaster():AddNewModifier(self:GetCaster(),self,"modifier_zombie_mask_debuff",{duration = (self:GetAbility():GetCooldownTimeRemaining()*0.75)})
 	end
 end
 
