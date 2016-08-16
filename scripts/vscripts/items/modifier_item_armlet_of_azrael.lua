@@ -14,6 +14,10 @@ function modifier_item_armlet_of_azrael:DeclareFunctions()
 	return funcs
 end
 
+function modifier_item_armlet_of_azrael:IsPurgable()
+	return false
+end
+
 function modifier_item_armlet_of_azrael:GetModifierSpellAmplify_Percentage( params )
 	return math.floor(2)
 end
@@ -33,6 +37,10 @@ if modifier_item_unholy_armlet_of_azrael == nil then
 end
 
 function modifier_item_unholy_armlet_of_azrael:IsHidden()
+	return false
+end
+
+function modifier_item_unholy_armlet_of_azrael:IsPurgable()
 	return false
 end
 

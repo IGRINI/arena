@@ -6,6 +6,10 @@ function modifier_item_armlet_of_devian:IsHidden()
 	return true
 end
 
+function modifier_item_armlet_of_devian:IsPurgable()
+	return false
+end
+
 function modifier_item_armlet_of_devian:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_EXTRA_HEALTH_PERCENTAGE
@@ -28,6 +32,10 @@ if modifier_item_unholy_armlet_of_devian == nil then
 end
 
 function modifier_item_unholy_armlet_of_devian:IsHidden()
+	return false
+end
+
+function modifier_item_unholy_armlet_of_devian:IsPurgable()
 	return false
 end
 
@@ -58,6 +66,10 @@ end
 
 function modifier_item_arm_armlet_of_devian:IsHidden()
 	return true
+end
+
+function modifier_item_arm_armlet_of_devian:IsPurgable()
+	return false
 end
 
 function modifier_item_arm_armlet_of_devian:DeclareFunctions()

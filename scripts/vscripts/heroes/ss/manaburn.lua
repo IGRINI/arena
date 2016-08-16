@@ -8,6 +8,9 @@ function ss_manaburn:CastFilterResultTarget( hTarget )
 	if hTarget:IsCreep() or hTarget:IsAncient() then
 		return UF_FAIL_CUSTOM
 	end
+	if hTarget:GetTeam() == self:GetCaster():GetTeam() then
+		return UF_FAIL_FRIENDLY
+	end
 	if self:GetCaster() == hTarget then
 		return UF_FAIL_CUSTOM
 	end

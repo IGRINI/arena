@@ -337,7 +337,7 @@
       "05"
       {
         "var_type"                    "FIELD_INTEGER"
-        "cd_red"                      "5"
+        "cd_red"                      "10"
       }
       "06"
       {
@@ -352,7 +352,7 @@
       "08"
       {
         "var_type"                    "FIELD_INTEGER"
-        "unholy_cd_red"               "10"
+        "unholy_cd_red"               "20"
       }
       "09"
       {
@@ -485,12 +485,12 @@
       "02"
       {
         "var_type"                        "FIELD_INTEGER"
-        "cd_red"                          "10"
+        "bonus_mana"                      "300"
       }
       "03"
       {
         "var_type"                        "FIELD_INTEGER"
-        "bonus_mana"                      "300"
+        "cd_red"                          "10"
       }
       "04"
       {
