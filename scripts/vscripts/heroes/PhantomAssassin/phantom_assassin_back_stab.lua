@@ -220,7 +220,7 @@ function modifier_phantom_assassin_back_stab_atk_speed:GetModifierAttackSpeedBon
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:OnAttackLanded()
-	self.stacks - 1
+	self.stacks = self.stacks - 1
 	if self.stacks < 1 then
 		self:GetParent():RemoveModifier(self)
 	end
