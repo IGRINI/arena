@@ -127,7 +127,8 @@ if modifier_zombie_mask_buff == nil then
 end
 
 function modifier_zombie_mask_buff:DeclareFunctions()
-	funcs = { MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE }
+	local funcs = { MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE }
+	return funcs
 end
 
 function modifier_zombie_mask_buff:GetAttributes()
@@ -165,11 +166,11 @@ function modifier_zombie_mask_debuff:GetAttributes()
 end
 
 function modifier_zombie_mask_debuff:DeclareFunctions()
-	funcs2 = {  MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
+	local funcs = {  MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
 				MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
 				MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
 				MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE }
-	return funcs2
+	return funcs
 end
 
 function modifier_zombie_mask_debuff:IsPurgable()
