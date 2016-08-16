@@ -23,7 +23,7 @@ if modifier_zombie_mask == nil then
 end
 
 function modifier_zombie_mask:GetAttributes()
-	return MODIFIER_ATTRIBUTE_MULTIPLE 
+	return MODIFIER_ATTRIBUTE_MULTIPLE + MODIFIER_ATTRIBUTE_PERMANENT
 end
 
 function modifier_zombie_mask:IsHidden()
