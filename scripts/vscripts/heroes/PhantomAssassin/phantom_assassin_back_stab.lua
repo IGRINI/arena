@@ -139,7 +139,7 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 				target:AddNewModifier(caster,self,"modifier_phantom_assassin_back_stab",{duration = self:GetAbility():GetLevelSpecialValueFor("duration", self:GetAbility():GetLevel())/3})
 				ApplyDamage(damageTable)
 			else
-				chance += self:GetAbility():GetLevelSpecialValueFor("bonus_chance",self:GetAbility():GetLevel())/2
+				chance = chance + self:GetAbility():GetLevelSpecialValueFor("bonus_chance",self:GetAbility():GetLevel())/2
 				if chance >= 50 then
 					chance = 50
 				end
@@ -220,8 +220,8 @@ function modifier_phantom_assassin_back_stab_atk_speed:GetModifierAttackSpeedBon
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:OnAttackLanded()
-	_G.modifier_phantom_assassin_back_stab_atk_speed_stack - 1
-	if modifier_phantom_assassin_back_stab_atk_speed_stack < 1 then
+	stacks - 1
+	if stacks < 1 then
 		self:GetParent():RemoveModifier(self)
 	end
 end
