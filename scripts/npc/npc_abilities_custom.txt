@@ -790,15 +790,15 @@
         "AbilityCastRange"              "420 550 660 720 750 820 830"
         "AbilityManaCost"               "60 85 120 150 170 210 260"
         "AbilityCooldown"               "12 13 14 15 16 17 20"
-        "AbilityCastPoint"              "1.2"
+        "AbilityCastPoint"              "0.9"
         "MaxLevel"                      "7"
         "RequiredLevel"                 "2"
         "LevelsBetweenUpgrades"         "4"
 
-        "precache"
-        {
-          "particle"                 ""
-        }
+        //"precache"
+        //{
+        //  "particle"                 ""
+        //}
         
         "AbilitySpecial"
         { 

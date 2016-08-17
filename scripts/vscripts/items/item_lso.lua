@@ -2,11 +2,6 @@ if item_lso == nil then
 	item_lso = class({})
 end
 
-function item_lso:GetBehavior() 
-    local behav = DOTA_ABILITY_BEHAVIOR_PASSIVE
-    return behav
-end
-
 LinkLuaModifier("modifier_lso","items/item_lso",LUA_MODIFIER_MOTION_NONE)
 
 function item_lso:GetIntrinsicModifierName()

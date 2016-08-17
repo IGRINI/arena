@@ -48,7 +48,7 @@
         "override_hero"             "npc_dota_hero_phantom_assassin"            // Hero to override
         "Ability1"                  "phantom_assassin_wound"
         "Ability2"                  "phantom_assassin_back_stab"
-        "Ability3"                  ""
+        "Ability3"                  "phantom_assassin_oppression"
         "Ability4"                  ""
     }
 }
