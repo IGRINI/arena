@@ -1,3 +1,5 @@
+require('libraries/timers')
+
 if phantom_assassin_oppression == nil then
 	phantom_assassin_oppression = class({})
 end
@@ -9,9 +11,9 @@ function phantom_assassin_oppression:GetCastAnimation()
 end
 
 function phantom_assassin_oppression:OnSpellStart(event)
-	local target = self:GetCursorTarget()
+	local self.target = self:GetCursorTarget()
 	local caster = self:GetCaster()
-	target:AddNewModifier(caster,self,"phantom_assassin_oppression_damage",{duration = self:GetSpecialValueFor("duration")})
+	self.target:AddNewModifier(caster,self,"phantom_assassin_oppression_damage",{duration = self:GetSpecialValueFor("duration")})
 end
 
 --------------------------------------------------------------------------------------------------------------------------------------
@@ -33,9 +35,9 @@ function phantom_assassin_oppression_damage:GetAttributes()
 end
 
 function phantom_assassin_oppression_damage:OnCreated()
-	local target = self:GetCursorTarget()
-	local caster = self:GetParent()
+	local target = self:GetParent()
 	local ability = self:GetAbility()
+	local caster = ability:GetCaster()
 	local kills = target:GetKills()
 	local deaths = target:GetDeaths()
 
@@ -43,7 +45,7 @@ function phantom_assassin_oppression_damage:OnCreated()
 		return nil
 	end
 
-	local damage = ((kills * ability:GetSpecialValueFor("dpk")) / deaths) / ability:GetSpecialValueFor("duration")
+	local damage = ((kills * ability:GetSpecialValueFor("dpk")) / deaths * ability:GetSpecialValueFor("dpd")) / ability:GetSpecialValueFor("duration")
 	local damage_table = { victim = target,	attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL }
 	local delay = ability:GetSpecialValueFor("delay")
 	local phantom_assassin_oppression_damage_timer = Timers:CreateTimer(nil, function()
@@ -53,20 +55,20 @@ function phantom_assassin_oppression_damage:OnCreated()
 end
 
 function phantom_assassin_oppression_damage:OnRefresh()
-	local target = self:GetCursorTarget()
-	local caster = self:GetParent()
+	local target = self:GetParent()
+	local caster = self:GetAbility():GetCaster()
 	local ability = self:GetAbility()
-	local kills = target:GetKills()
-	local deaths = target:GetDeaths()
+	local kills = self.target:GetKills()
+	local deaths = self.target:GetDeaths()
 
 	if kills == nil or deaths == nil then
 		return nil
 	end
 
-	local damage = ((kills * ability:GetSpecialValueFor("dpk")) / deaths) / ability:GetSpecialValueFor("duration")
+	local damage = ((kills * ability:GetSpecialValueFor("dpk")) / deaths * ability:GetSpecialValueFor("dpd")) / ability:GetSpecialValueFor("duration")
 	local damage_table = { victim = target,	attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL }
 	local delay = ability:GetSpecialValueFor("delay")
-	local phantom_assassin_oppression_damage_timer = Timers:CreateTimer(delay, function()
+	local phantom_assassin_oppression_damage_timer = Timers:CreateTimer(nil, function()
 	ApplyDamage(damage_table)
 	return delay	
 	end)
