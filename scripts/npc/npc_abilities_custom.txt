@@ -723,7 +723,7 @@
         "AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"
         "MaxLevel"                      "7"
         "RequiredLevel"          "3"
-        "LevelsBetweenUpgrades"  "4"
+        "LevelsBetweenUpgrades"  "3"
         "AbilityCooldown"               "10 8 6 5 4 3.5 3"
         
         "AbilitySpecial"
@@ -772,6 +772,50 @@
           {
             "var_type"  "FIELD_INTEGER"
             "stacks"      "2"
+          }
+        }
+      }
+
+      //Угнетение
+      "phantom_assassin_oppression"
+      {
+        "BaseClass"                     "ability_lua"
+        "ScriptFile"                    "heroes/PhantomAssassin/phantom_assassin_oppression.lua"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+        "AbilityDamage"                 "DAMAGE_TYPE_MAGICAL"
+        "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+        "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+        "AbilityTextureName"            "phantom_assassin_oppression"
+        "AbilityCastRange"              "420 550 660 720 750 820 830"
+        "AbilityManaCost"               "60 85 120 150 170 210 260"
+        "AbilityCooldown"               "12 13 14 15 16 17 20"
+        "AbilityCastPoint"              "1.2"
+        "MaxLevel"                      "7"
+        "RequiredLevel"                 "2"
+        "LevelsBetweenUpgrades"         "4"
+
+        "precache"
+        {
+          "particle"                 ""
+        }
+        
+        "AbilitySpecial"
+        { 
+          "01"
+          {
+            "var_type"  "FIELD_FLOAT"
+            "duration"    "6 5.5 5 4.5 4 3.5 3 2.5"
+          }
+          "02"
+          {
+            "var_type"  "FIELD_INTEGER"
+            "dpk"        "30 60 90 150 190 250 290"
+          }
+          "03"
+          {
+            "var_type"  "FIELD_FLOAT"
+            "delay"       "0.5"
           }
         }
       }
