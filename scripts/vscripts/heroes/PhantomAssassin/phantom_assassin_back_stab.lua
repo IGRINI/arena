@@ -100,13 +100,7 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 		result_angle = math.abs(result_angle)
 		
 		if ability:IsCooldownReady() and ( not self:GetParent():IsIllusion() ) then
-			if result_angle >= (180 - (ability:GetSpecialValueFor("backstab_angle") / 2)) and result_angle <= (180 + (ability:GetSpecialValueFor("backstab_angle") / 2)) then 
-				-- Play the sound on the victim.
-				--EmitSoundOn(params.sound, params.target)
-				-- Create the back particle effect.
-				local particle = ParticleManager:CreateParticle(params.particle, PATTACH_ABSORIGIN_FOLLOW, target) 
-				-- Set Control Point 1 for the backstab particle; this controls where it's positioned in the world. In this case, it should be positioned on the victim.
-				ParticleManager:SetParticleControlEnt(particle, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true) 
+			if result_angle >= (180 - (ability:GetSpecialValueFor("backstab_angle") / 2)) and result_angle <= (180 + (ability:GetSpecialValueFor("backstab_angle") / 2)) then
 				-- Apply extra backstab damage based on Riki's agility
 				ApplyDamage({
 					victim = target,
@@ -122,7 +116,7 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 
 
 		if params.attacker == self:GetParent() and ( not self:GetParent():IsIllusion() ) then
-			if not hTarget:IsMagicImmune() then
+			if not target:IsMagicImmune() then
 				local target = params.target
 				local caster = self:GetParent()
 				local chance = self:GetAbility():GetLevelSpecialValueFor("chance",self:GetAbility():GetLevel())
@@ -227,12 +221,10 @@ function modifier_phantom_assassin_back_stab_atk_speed:IsPurgable()
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:OnCreated( kv )
-	self.level = self:GetAbility():GetLevel()
-	self.speed = self:GetAbility():GetLevelSpecialValueFor("attack_speed", self.level)
+	self.speed = self:GetAbility():GetSpecialValueFor("attack_speed")
 end
 function modifier_phantom_assassin_back_stab_atk_speed:OnRefresh( kv )
-	self.level = self:GetAbility():GetLevel()
-	self.speed = self:GetAbility():GetLevelSpecialValueFor("attack_speed", self.level)
+	self.speed = self:GetAbility():GetSpecialValueFor("attack_speed")
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:DeclareFunctions()
@@ -244,6 +236,7 @@ function modifier_phantom_assassin_back_stab_atk_speed:GetModifierAttackSpeedBon
 	if IsServer() then
 		return self.speed
 	end
+	return self.speed
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:OnAttackLanded()
