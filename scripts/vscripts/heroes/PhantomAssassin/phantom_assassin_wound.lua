@@ -12,11 +12,12 @@ function phantom_assassin_wound:OnSpellStart(event)
 	local caster = self:GetCaster()
 	target:AddNewModifier(caster,self,"modifier_pa_wound",{duration = self:GetLevelSpecialValueFor("duration",self:GetLevel())})
 	local duration = self:GetLevelSpecialValueFor("duration",self:GetLevel())
-	local part = "particles/units/heroes/hero_queenonpain/queen_shadow_strike_body.vpcf"
-	local particle = ParticleManager:CreateParticle(part, PATTACH_ABSORIGIN_FOLLOW, target)
-	ParticleManager:SetParticleControl(particle, 0, target:GetAbsOrigin())
+	local part = "particles/units/heroes/hero_queenofpain/queen_shadow_strike_debuff_dagger_glow.vpcf"
+	local particle = ParticleManager:CreateParticle(part, PATTACH_POINT_FOLLOW, target)
 	ParticleManager:SetParticleControl(particle, 1, target:GetAbsOrigin())
-	ParticleManager:SetParticleControl(particle, 2, Vector(duration, duration, duration))
+	Timers:CreateTimer(duration, function() 
+    	ParticleManager:DestroyParticle(particle,false)
+	end)
 end
 
 --------------------------------------------------------------------------------------------------------------------------------------
@@ -48,8 +49,4 @@ end
 
 function modifier_pa_wound:GetModifierMiss_Percentage(params)
 	return self:GetAbility():GetLevelSpecialValueFor("miss_chance",self:GetAbility():GetLevel())
-end
- 
-function modifier_pa_wound:GetEffectAttachType()
-	return FOLLOW_ORIGIN
 end

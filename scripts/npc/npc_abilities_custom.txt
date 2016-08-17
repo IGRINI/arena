@@ -682,12 +682,10 @@
         "MaxLevel"                      "7"
         "RequiredLevel"          "0"
         "LevelsBetweenUpgrades"  "2"
-
         "precache"
         {
-          "particle"                 "particles/units/heroes/hero_queenonpain/queen_shadow_strike_body.vpcf"
+          "particle"  "particles/units/heroes/hero_queenofpain/queen_shadow_strike_debuff_dagger_glow.vpcf"
         }
-        
         "AbilitySpecial"
         { 
           "01"
