@@ -679,9 +679,10 @@
         "AbilityCastRange"              "320"
         "AbilityManaCost"               "120 80 60 40 30 20 15"
         "AbilityCooldown"               "16 15 13 10.3 9.6 9 8.6 8"
+        "AbilityCastPoint"              "0.85"
         "MaxLevel"                      "7"
-        "RequiredLevel"          "0"
-        "LevelsBetweenUpgrades"  "2"
+        "RequiredLevel"                 "0"
+        "LevelsBetweenUpgrades"         "2"
 
         "precache"
         {
