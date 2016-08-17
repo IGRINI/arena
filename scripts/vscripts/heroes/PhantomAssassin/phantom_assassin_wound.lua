@@ -4,7 +4,7 @@ end
 LinkLuaModifier("modifier_pa_wound","heroes/PhantomAssassin/phantom_assassin_wound",LUA_MODIFIER_MOTION_NONE)
 
 function phantom_assassin_wound:GetCastAnimation()
-	return ACT_DOTA_CAST_CHAOS_METEOR
+	return ACT_DOTA_CAST_ABILITY_2
 end
 
 function phantom_assassin_wound:OnSpellStart(event)
@@ -42,4 +42,12 @@ end
 
 function modifier_pa_wound:GetModifierMiss_Percentage(params)
 	return self:GetAbility():GetLevelSpecialValueFor("miss_chance",self:GetAbility():GetLevel())
+end
+
+function modifier_pa_wound:GetEffectName()
+	return "particles/units/heroes/hero_queenonpain/queen_shadow_strike_body.vpcf"
+end
+ 
+function modifier_pa_wound:GetEffectAttachType()
+	return FOLLOW_ORIGIN
 end

@@ -682,6 +682,11 @@
         "MaxLevel"                      "7"
         "RequiredLevel"          "2"
         "LevelsBetweenUpgrades"  "4"
+
+        "precache"
+        {
+          "particle"                 "particles/units/heroes/hero_queenonpain/queen_shadow_strike_body.vpcf"
+        }
         
         "AbilitySpecial"
         { 
@@ -721,6 +726,11 @@
         "RequiredLevel"          "0"
         "LevelsBetweenUpgrades"  "3"
         "AbilityCooldown"               "10 8 6 5 4 3.5 3"
+
+        "precache"
+        {
+            "particle"  "particles/generic_gameplay/generic_stunned.vpcf"
+        }
         
         "AbilitySpecial"
         { 

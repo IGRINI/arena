@@ -7,6 +7,10 @@ LinkLuaModifier("modifier_phantom_assassin_back_stab_b","heroes/PhantomAssassin/
 LinkLuaModifier("modifier_phantom_assassin_back_stab_passive","heroes/PhantomAssassin/phantom_assassin_back_stab",LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_phantom_assassin_back_stab_atk_speed","heroes/PhantomAssassin/phantom_assassin_back_stab",LUA_MODIFIER_MOTION_NONE)
 
+function phantom_assassin_back_stab:IsRefreshable()
+	return false
+end
+
 function phantom_assassin_back_stab:GetIntrinsicModifierName()
 	return "modifier_phantom_assassin_back_stab_passive"
 end
@@ -15,6 +19,14 @@ end
 
 if modifier_phantom_assassin_back_stab == nil then
 	modifier_phantom_assassin_back_stab = class({})
+end
+
+function modifier_phantom_assassin_back_stab:GetEffectName()
+	return "particles/generic_gameplay/generic_stunned.vpcf"
+end
+ 
+function modifier_phantom_assassin_back_stab:GetEffectAttachType()
+	return PATTACH_OVERHEAD_FOLLOW
 end
 
 function modifier_phantom_assassin_back_stab:IsDebuff()
@@ -87,7 +99,7 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 		local result_angle = attacker_angle - victim_angle
 		result_angle = math.abs(result_angle)
 		
-		if ability:IsCooldownReady() then
+		if ability:IsCooldownReady() and ( not self:GetParent():IsIllusion() ) then
 			if result_angle >= (180 - (ability:GetSpecialValueFor("backstab_angle") / 2)) and result_angle <= (180 + (ability:GetSpecialValueFor("backstab_angle") / 2)) then 
 				-- Play the sound on the victim.
 				--EmitSoundOn(params.sound, params.target)
@@ -110,26 +122,27 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 
 
 		if params.attacker == self:GetParent() and ( not self:GetParent():IsIllusion() ) then
-
-			local target = params.target
-			local caster = self:GetParent()
-			local chance = self:GetAbility():GetLevelSpecialValueFor("chance",self:GetAbility():GetLevel())
-			local damageTable = {
-				victim = params.target,
-				attacker = self:GetParent(),
-				damage = self:GetAbility():GetLevelSpecialValueFor("damage",self:GetAbility():GetLevel()),
-				damage_type = DAMAGE_TYPE_PHYSICAL,}
-			if RollPercentage(chance) then
-				target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab",{duration = self:GetAbility():GetLevelSpecialValueFor("duration", self:GetAbility():GetLevel())})
-				ApplyDamage(damageTable)
-			else
-				chance = chance + self:GetAbility():GetLevelSpecialValueFor("bonus_chance",self:GetAbility():GetLevel())
-				if chance >= 100 then
-					chance = 100
+			if not hTarget:IsMagicImmune() then
+				local target = params.target
+				local caster = self:GetParent()
+				local chance = self:GetAbility():GetLevelSpecialValueFor("chance",self:GetAbility():GetLevel())
+				local damageTable = {
+					victim = params.target,
+					attacker = self:GetParent(),
+					damage = self:GetAbility():GetLevelSpecialValueFor("damage",self:GetAbility():GetLevel()),
+					damage_type = DAMAGE_TYPE_PHYSICAL,}
+				if RollPercentage(chance) then
+					target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab",{duration = self:GetAbility():GetLevelSpecialValueFor("duration", self:GetAbility():GetLevel())})
+					ApplyDamage(damageTable)
+				else
+					chance = chance + self:GetAbility():GetLevelSpecialValueFor("bonus_chance",self:GetAbility():GetLevel())
+					if chance >= 100 then
+						chance = 100
+					end
 				end
 			end
 
-		elseif self:GetParent():IsIllusion() then
+		elseif self:GetParent():IsIllusion() and not hTarget:IsMagicImmune() then
 			local target = params.target
 			local caster = self:GetParent()
 			local chance = self:GetAbility():GetLevelSpecialValueFor("chance",self:GetAbility():GetLevel())/2
@@ -155,6 +168,14 @@ end
 
 if modifier_phantom_assassin_back_stab_b == nil then
 	modifier_phantom_assassin_back_stab_b = class({})
+end
+
+function modifier_phantom_assassin_back_stab_b:GetEffectName()
+	return "particles/generic_gameplay/generic_stunned.vpcf"
+end
+ 
+function modifier_phantom_assassin_back_stab_b:GetEffectAttachType()
+	return PATTACH_OVERHEAD_FOLLOW
 end
 
 function modifier_phantom_assassin_back_stab_b:IsDebuff()
@@ -226,9 +247,11 @@ function modifier_phantom_assassin_back_stab_atk_speed:GetModifierAttackSpeedBon
 end
 
 function modifier_phantom_assassin_back_stab_atk_speed:OnAttackLanded()
-	local stacks = self:GetStackCount()
-	self:SetStackCount(stacks - 1)
-	if stacks <= 1 then
-		self:GetParent():RemoveModifierByName("modifier_phantom_assassin_back_stab_atk_speed")
+	if IsServer() then
+		local stacks = self:GetStackCount()
+		self:SetStackCount(stacks - 1)
+		if stacks <= 1 then
+			self:GetParent():RemoveModifierByName("modifier_phantom_assassin_back_stab_atk_speed")
+		end
 	end
 end
