@@ -87,7 +87,7 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 		local result_angle = attacker_angle - victim_angle
 		result_angle = math.abs(result_angle)
 		
-		if ability:IsCooldownReady() then
+		if ability:IsCooldownReady() and ( not self:GetParent():IsIllusion() ) then
 			if result_angle >= (180 - (ability:GetSpecialValueFor("backstab_angle") / 2)) and result_angle <= (180 + (ability:GetSpecialValueFor("backstab_angle") / 2)) then 
 				-- Play the sound on the victim.
 				--EmitSoundOn(params.sound, params.target)

@@ -4,13 +4,16 @@ end
 LinkLuaModifier("modifier_pa_wound","heroes/PhantomAssassin/phantom_assassin_wound",LUA_MODIFIER_MOTION_NONE)
 
 function phantom_assassin_wound:GetCastAnimation()
-	return ACT_DOTA_CAST_CHAOS_METEOR
+	return ACT_DOTA_CAST_ABILITY_2
 end
 
 function phantom_assassin_wound:OnSpellStart(event)
 	local target = self:GetCursorTarget()
 	local caster = self:GetCaster()
 	target:AddNewModifier(caster,self,"modifier_pa_wound",{duration = self:GetLevelSpecialValueFor("duration",self:GetLevel())})
+
+	--local nTargetFX = ParticleManager:CreateParticle( "particles\dire_fx\bad_ancient_sauron.vpcf", PATTACH_ABSORIGIN_FOLLOW, target )
+	--ParticleManager:SetParticleControlEnt( target, 1, target, PATTACH_ABSORIGIN_FOLLOW, nil, target:GetOrigin(), false )
 end
 
 --------------------------------------------------------------------------------------------------------------------------------------
