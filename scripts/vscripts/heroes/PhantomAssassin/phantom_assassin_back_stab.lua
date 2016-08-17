@@ -83,8 +83,8 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 			return nil
 		end
 		-- The y value of the angles vector contains the angle we actually want: where units are directionally facing in the world.
-		local victim_angle = target:GetAnglesAsVector().y
-		local origin_difference = target:GetAbsOrigin() - params.attacker:GetAbsOrigin()
+		local victim_angle = params.target:GetAnglesAsVector().y
+		local origin_difference = params.target:GetAbsOrigin() - params.attacker:GetAbsOrigin()
 
 		-- Get the radian of the origin difference between the attacker and Riki. We use this to figure out at what angle the victim is at relative to Riki.
 		local origin_difference_radian = math.atan2(origin_difference.y, origin_difference.x)
