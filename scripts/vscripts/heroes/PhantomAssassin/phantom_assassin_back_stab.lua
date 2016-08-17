@@ -99,7 +99,7 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 		local result_angle = attacker_angle - victim_angle
 		result_angle = math.abs(result_angle)
 		
-		if ability:IsCooldownReady() and ( not self:GetParent():IsIllusion() ) then
+		if ability:IsCooldownReady() and ( not self:GetParent():IsIllusion() ) and not target:IsTower() and not target:IsMechanical then
 			if result_angle >= (180 - (ability:GetSpecialValueFor("backstab_angle") / 2)) and result_angle <= (180 + (ability:GetSpecialValueFor("backstab_angle") / 2)) then
 				-- Apply extra backstab damage based on Riki's agility
 				ApplyDamage({
@@ -109,8 +109,10 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 				 	damage_type = DAMAGE_TYPE_PURE})
 				ability:StartCooldown(ability:GetCooldown(ability:GetLevel()))
 				target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab_b",{duration = ability:GetLevelSpecialValueFor("duration_b", ability:GetLevel())})
-				self:GetParent():AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab_atk_speed",{})
-				caster:SetModifierStackCount("modifier_phantom_assassin_back_stab_atk_speed",caster, caster:GetModifierStackCount("modifier_phantom_assassin_back_stab_atk_speed", self:GetAbility()) + 2)
+				if target:IsHero() and target:IsRealHero() then
+					self:GetParent():AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab_atk_speed",{})
+					caster:SetModifierStackCount("modifier_phantom_assassin_back_stab_atk_speed",caster, caster:GetModifierStackCount("modifier_phantom_assassin_back_stab_atk_speed", self:GetAbility()) + 2)
+				end
 			end
 		end
 

@@ -37,14 +37,9 @@ function phantom_assassin_oppression_damage:OnCreated()
 	local caster = self:GetParent()
 	local ability = self:GetAbility()
 	local kills = target:GetKills()
+	local deaths = target:GetDeaths()
 
-	if kills == nil then
-		return nil
-	end
-
-	local deaths = target:Deaths()
-
-	if deaths == nil then
+	if kills == nil or deaths == nil then
 		return nil
 	end
 
@@ -62,21 +57,16 @@ function phantom_assassin_oppression_damage:OnRefresh()
 	local caster = self:GetParent()
 	local ability = self:GetAbility()
 	local kills = target:GetKills()
+	local deaths = target:GetDeaths()
 
-	if kills == nil then
-		return nil
-	end
-
-	local deaths = target:Deaths()
-
-	if deaths == nil then
+	if kills == nil or deaths == nil then
 		return nil
 	end
 
 	local damage = ((kills * ability:GetSpecialValueFor("dpk")) / deaths) / ability:GetSpecialValueFor("duration")
 	local damage_table = { victim = target,	attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL }
 	local delay = ability:GetSpecialValueFor("delay")
-	local phantom_assassin_oppression_damage_timer = Timers:CreateTimer(nil, function()
+	local phantom_assassin_oppression_damage_timer = Timers:CreateTimer(delay, function()
 	ApplyDamage(damage_table)
 	return delay	
 	end)
