@@ -1703,52 +1703,6 @@
     }
   }
 
-  "item_recipe_attribute_boost_agility"
-  {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
-    "ID"              "3005"            
-    "Model"             "models/props_gameplay/recipe.mdl"
-    "BaseClass"                     "item_datadriven"
-    
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"            "530"  
-    "ItemShopTags"          ""
-    
-    // Recipe
-    //-------------------------------------------------------------------------------------------------------------
-    "ItemRecipe"          "1"
-    "ItemResult"          "item_attribute_boost_agility"
-    "ItemRequirements"
-    {
-      "01"            "item_power_treads;item_blade_of_alacrity"
-    }
-  }
-
-  "item_recipe_attribute_boost_intellect"
-  {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
-    "ID"              "3006"            
-    "Model"             "models/props_gameplay/recipe.mdl"
-    "BaseClass"                     "item_datadriven"
-    
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"            "530"  
-    "ItemShopTags"          ""
-    
-    // Recipe
-    //-------------------------------------------------------------------------------------------------------------
-    "ItemRecipe"          "1"
-    "ItemResult"          "item_attribute_boost_intellect"
-    "ItemRequirements"
-    {
-      "01"            "item_power_treads;item_staff_of_wizardry"
-    }
-  }
-
   "item_attribute_boost_strength"
   {
     "ID"              "3007"
@@ -1756,8 +1710,8 @@
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
-    "AbilityTextureName"            "item_attribute_boost_strength"
-    "ItemQuality"                   ""    // consumable component rare epic artifact secretshop
+    "AbilityTextureName"            "attribute_boost_strength"
+    "ItemQuality"                   "epic"    // consumable component rare epic artifact secretshop
     
     "AbilitySpecial"
     {
@@ -1788,7 +1742,14 @@
       }
     }
 
-    
+    "OnSpellStart"
+    {
+      "RunScript"
+       {
+        "ScriptFile"    "items/item_attribute_boost.lua"
+        "Function"      "Swap_str"
+       }
+    }
 
     "Modifiers"
     {
@@ -1796,33 +1757,203 @@
       {
         "Passive" "1"
         "IsHidden"  "1"
+        "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
         "Properties"
         {
-          "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"  "%mps"
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"  "%mps"
           "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%as"
           "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%stat_strength"
           "MODIFIER_PROPERTY_HEALTH_BONUS"                "%hp"
-        }
-        "OnCreated"
-        {
+        }        
           "ThinkInterval"     "15"
           "OnIntervalThink"
           {
             "RunScript"
             {
-              "ScriptFile"    "items/item_attribute_boost_strength.lua"
-              "Function"      "Base"
+              "ScriptFile"    "items/item_attribute_boost.lua"
+              "Function"      "Base_str"
             }
           }
         }
-      }
       "modifier_attribute_boost_strength_stacks"
       {
         "Passive" "0"
         "IsHidden"  "1"
         "Properties"
         {
-          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%spm"
+          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%spt"
+        }
+      }
+    }
+  }
+
+  "item_attribute_boost_agility"
+  {
+    "ID"              "3008"
+    "ItemPurchasable" "0"
+    "ItemCost"        "2880"
+    "BaseClass"           "item_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "Model"                         "models/props_gameplay/red_box.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"            "attribute_boost_agility"
+    "ItemQuality"                   "epic"    // consumable component rare epic artifact secretshop
+    
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "stat_strength" "22"
+      }
+      "02"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "spt"           "0.25"
+      }
+      "03"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "msp"           "55"
+      }
+      "04"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "as"          "35"
+      }
+      "05"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "armor"          "0.28"
+      }
+    }
+
+    "OnSpellStart"
+    {
+      "RunScript"
+       {
+        "ScriptFile"    "items/item_attribute_boost.lua"
+        "Function"      "Swap_agi"
+       }
+    }
+
+    "Modifiers"
+    {
+      "modifier_attribute_boost_agility"
+      {
+        "Passive" "1"
+        "IsHidden"  "1"
+        "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"  "%mps"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%as"
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"        "%stat_strength"
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"         "%armor"
+        }        
+          "ThinkInterval"     "15"
+          "OnIntervalThink"
+          {
+            "RunScript"
+            {
+              "ScriptFile"    "items/item_attribute_boost.lua"
+              "Function"      "Base_agi"
+            }
+          }
+        }
+      "modifier_attribute_boost_agility_stacks"
+      {
+        "Passive" "0"
+        "IsHidden"  "1"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"        "%spt"
+        }
+      }
+    }
+  }
+
+  "item_attribute_boost_intellect"
+  {
+    "ID"              "3009"
+    "ItemPurchasable" "0"
+    "ItemCost"        "2880"
+    "BaseClass"           "item_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "Model"                         "models/props_gameplay/red_box.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"            "attribute_boost_intellect"
+    "ItemQuality"                   "epic"    // consumable component rare epic artifact secretshop
+    
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "stat_strength" "22"
+      }
+      "02"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "spt"           "0.25"
+      }
+      "03"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "msp"           "55"
+      }
+      "04"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "as"          "35"
+      }
+      "05"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "mana"          "30"
+      }
+    }
+
+    "OnSpellStart"
+    {
+      "RunScript"
+       {
+        "ScriptFile"    "items/item_attribute_boost.lua"
+        "Function"      "Swap_int"
+       }
+    }
+
+    "Modifiers"
+    {
+      "modifier_attribute_boost_intellect"
+      {
+        "Passive" "1"
+        "IsHidden"  "1"
+        "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"        "%mps"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"    "%as"
+          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"         "%stat_strength"
+          "MODIFIER_PROPERTY_MANA_BONUS"                    "%mana"
+        }        
+          "ThinkInterval"     "15"
+          "OnIntervalThink"
+          {
+            "RunScript"
+            {
+              "ScriptFile"    "items/item_attribute_boost.lua"
+              "Function"      "Base_int"
+            }
+          }
+        }
+      "modifier_attribute_boost_intellect_stacks"
+      {
+        "Passive" "0"
+        "IsHidden"  "1"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"        "%spt"
         }
       }
     }
