@@ -1958,4 +1958,64 @@
       }
     }
   }
+
+  "item_recipe_asara_ring"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"              "3010"            
+    "Model"             "models/props_gameplay/recipe.mdl"
+    "BaseClass"                     "item_datadriven"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            ""  
+    "ItemShopTags"          ""
+    
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_asara_ring"
+    "ItemRequirements"
+    {
+      "01"            "item_ring_of_regen;item_ring_of_protection"
+    }
+  }
+
+  "item_asara_ring"
+  {
+    "ID"              "3011"
+    "ScriptFile"      "items/item_asara_ring.lua"
+    "BaseClass"           "item_lua"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "Model"                         "models/props_gameplay/red_box.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"            "asara_ring"
+    "ItemQuality"                   "rare"    // consumable component rare epic artifact secretshop
+    "AbilityCastRange"              "1020"
+
+    "precache"
+    {
+      "particle" "particles/units/unit_greevil/loot_greevil_ambient_rare_sparks.vpcf"
+    }
+    
+    "AbilitySpecial"
+    {
+      "01"
+      { 
+        "var_type"  "FIELD_FLOAT"
+        "hpr"            "3.35"
+      }
+      "02"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "armor"         "3.4"
+      }
+      "03"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "radius"        "1020"
+      }
+    }
+  }
 }
