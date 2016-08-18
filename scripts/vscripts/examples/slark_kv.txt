@@ -1,0 +1,150 @@
+"slark_counter_hit"
+	{
+		"BaseClass"						"ability_datadriven"
+		"ID"							"5904"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"	
+		"AbilityTextureName"			"slark_counter_hit"
+		"MaxLevel"						"7"
+		"AbilityCooldown"				"30 25 20 15 10 7 5"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		
+		"AbilitySpecial"
+			{
+			"01"			
+			{
+				"var_type"			"FIELD_INTEGER"
+				"counter_chance"	"5 10 15 20 25 30 35"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"counter_agi"		"1 1 1 2 2 2 3"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"dmg_prc"			"10 20 35 50 60 70 80"
+			}
+			"04"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"counter_chance_item"	"7 15 20 25 30 35 42"
+			}
+			"05"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"dmg_prc_item"			"20 35 50 60 70 80 100"
+			}
+			"06"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"agi_1"					"1"
+			}			
+			"07"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"agi_2"					"2"
+			}
+			"08"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"agi_3"					"3"
+			}
+		}
+				
+		"Modifiers"
+		{
+			"modifier_slark_counter_base"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+				"OnTakeDamage"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"abilities/slark_counter_hit.lua"
+						"Function"		"Base"
+					}
+				}
+			}
+			"modifier_slark_counter_agi_1"
+			{
+				"Passive"		"0"
+				"IsHidden"		"0"
+				"TextureName"	"slark_counter_agi"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"		"%agi_1"
+				}
+			}
+			"modifier_slark_counter_agi_2"
+			{
+				"Passive"		"0"
+				"IsHidden"		"0"
+				"TextureName"	"slark_counter_agi"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"		"%agi_2"
+				}
+			}
+			"modifier_slark_counter_agi_3"
+			{
+				"Passive"		"0"
+				"IsHidden"		"0"
+				"TextureName"	"slark_counter_agi"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"		"%agi_3"
+				}
+			}
+			"modifier_slark_counter_chance"
+			{
+				"Passive"	"0"
+				"IsHidden"	"1"
+				"OnTakeDamage"
+				{	
+					"Random"
+					{
+						"Chance"		"%counter_chance"
+						"OnSuccess"
+						{
+							"RunScript"
+							{
+								"ScriptFile"	"abilities/slark_counter_hit.lua"
+								"Function"		"modifier_slark_counter_hit_on_take_hit"
+								"Cooldown"		"%cooldown"
+								"dmgpRc"		"%dmg_prc"
+								"agiperstack"	"%counter_agi"
+							}	
+						}
+					}
+				}
+			}
+			"modifier_slark_counter_chance_item"
+			{
+				"Passive"	"0"
+				"IsHidden"	"1"
+				"OnTakeDamage"
+				{	
+					"Random"
+					{
+						"Chance"		"%counter_chance_item"
+						"OnSuccess"
+						{
+							"RunScript"
+							{
+								"ScriptFile"	"abilities/slark_counter_hit.lua"
+								"Function"		"modifier_slark_counter_hit_on_take_hit_item"
+								"Cooldown"		"%cooldown"
+								"dmgpRc_item"		"%dmg_prc_item"
+								"agiperstack"	"%counter_agi"
+							}	
+						}
+					}
+				}
+			}				
+		}
+	}
