@@ -46,6 +46,8 @@ USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom
 MAX_LEVEL = 100                         -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
+RESPAWN_MODIFER = 0.3                   --Модификатор респавна
+
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {
 	0,-- 1

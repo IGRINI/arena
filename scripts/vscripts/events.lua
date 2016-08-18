@@ -240,6 +240,16 @@ function GameMode:OnEntityKilled( keys )
   local damagebits = keys.damagebits -- This might always be 0 and therefore useless
 
   -- Put code here to handle when an entity gets killed
+  local killedTeam = killedUnit:GetTeam()
+  local heroTeam = killerEntity:GetTeam()
+  if not killedUnit or not IsValidEntity(killedUnit) then return end
+  if IsValidEntity(killedUnit) and not killedUnit:IsAlive() and killedUnit:IsRealHero() then
+    local timeLeft = killedUnit:GetRespawnTime()
+
+    if killedUnit:IsReincarnating() == false then
+      killedUnit:SetTimeUntilRespawn(timeLeft*RESPAWN_MODIFER)
+    end
+  end
 end
 
 
