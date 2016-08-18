@@ -82,78 +82,80 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 		if self:GetParent():PassivesDisabled() then
 			return nil
 		end
-		-- The y value of the angles vector contains the angle we actually want: where units are directionally facing in the world.
-		local victim_angle = params.target:GetAnglesAsVector().y
-		local origin_difference = params.target:GetAbsOrigin() - params.attacker:GetAbsOrigin()
+		if params.attacker == self:GetParent() then
+			-- The y value of the angles vector contains the angle we actually want: where units are directionally facing in the world.
+			local victim_angle = params.target:GetAnglesAsVector().y
+			local origin_difference = params.target:GetAbsOrigin() - params.attacker:GetAbsOrigin()
 
-		-- Get the radian of the origin difference between the attacker and Riki. We use this to figure out at what angle the victim is at relative to Riki.
-		local origin_difference_radian = math.atan2(origin_difference.y, origin_difference.x)
-		
-		-- Convert the radian to degrees.
-		origin_difference_radian = origin_difference_radian * 180
-		local attacker_angle = origin_difference_radian / math.pi
-		-- Makes angle "0 to 360 degrees" as opposed to "-180 to 180 degrees" aka standard dota angles.
-		attacker_angle = attacker_angle + 180.0
-		
-		-- Finally, get the angle at which the victim is facing Riki.
-		local result_angle = attacker_angle - victim_angle
-		result_angle = math.abs(result_angle)
-		
-		if ability:IsCooldownReady() and ( not self:GetParent():IsIllusion() ) then
-			if result_angle >= (180 - (ability:GetSpecialValueFor("backstab_angle") / 2)) and result_angle <= (180 + (ability:GetSpecialValueFor("backstab_angle") / 2)) then
-				-- Apply extra backstab damage based on Riki's agility
-				ApplyDamage({
-					victim = target,
-				 	attacker = params.attacker,
-				  	damage = ability:GetLevelSpecialValueFor("damage_b",ability:GetLevel()),
-				 	damage_type = DAMAGE_TYPE_PURE})
-				ability:StartCooldown(ability:GetCooldown(ability:GetLevel()))
-				target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab_b",{duration = ability:GetLevelSpecialValueFor("duration_b", ability:GetLevel())})
-				if target:IsHero() and target:IsRealHero() then
-					self:GetParent():AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab_atk_speed",{})
-					caster:SetModifierStackCount("modifier_phantom_assassin_back_stab_atk_speed",caster, caster:GetModifierStackCount("modifier_phantom_assassin_back_stab_atk_speed", self:GetAbility()) + 2)
-				end
-			end
-		end
-
-
-		if params.attacker == self:GetParent() and ( not self:GetParent():IsIllusion() ) then
-			if not target:IsMagicImmune() then
-				local target = params.target
-				local caster = self:GetParent()
-				local chance = self:GetAbility():GetLevelSpecialValueFor("chance",self:GetAbility():GetLevel())
-				local damageTable = {
-					victim = params.target,
-					attacker = self:GetParent(),
-					damage = self:GetAbility():GetLevelSpecialValueFor("damage",self:GetAbility():GetLevel()),
-					damage_type = DAMAGE_TYPE_PHYSICAL,}
-				if RollPercentage(chance) then
-					target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab",{duration = self:GetAbility():GetLevelSpecialValueFor("duration", self:GetAbility():GetLevel())})
-					ApplyDamage(damageTable)
-				else
-					chance = chance + self:GetAbility():GetLevelSpecialValueFor("bonus_chance",self:GetAbility():GetLevel())
-					if chance >= 100 then
-						chance = 100
+			-- Get the radian of the origin difference between the attacker and Riki. We use this to figure out at what angle the victim is at relative to Riki.
+			local origin_difference_radian = math.atan2(origin_difference.y, origin_difference.x)
+			
+			-- Convert the radian to degrees.
+			origin_difference_radian = origin_difference_radian * 180
+			local attacker_angle = origin_difference_radian / math.pi
+			-- Makes angle "0 to 360 degrees" as opposed to "-180 to 180 degrees" aka standard dota angles.
+			attacker_angle = attacker_angle + 180.0
+			
+			-- Finally, get the angle at which the victim is facing Riki.
+			local result_angle = attacker_angle - victim_angle
+			result_angle = math.abs(result_angle)
+			
+			if ability:IsCooldownReady() and ( not self:GetParent():IsIllusion() ) then
+				if result_angle >= (180 - (ability:GetSpecialValueFor("backstab_angle") / 2)) and result_angle <= (180 + (ability:GetSpecialValueFor("backstab_angle") / 2)) then
+					-- Apply extra backstab damage based on Riki's agility
+					ApplyDamage({
+						victim = target,
+					 	attacker = params.attacker,
+					  	damage = ability:GetLevelSpecialValueFor("damage_b",ability:GetLevel()),
+					 	damage_type = DAMAGE_TYPE_PURE})
+					ability:StartCooldown(ability:GetCooldown(ability:GetLevel()))
+					target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab_b",{duration = ability:GetLevelSpecialValueFor("duration_b", ability:GetLevel())})
+					if target:IsHero() and target:IsRealHero() then
+						self:GetParent():AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab_atk_speed",{})
+						caster:SetModifierStackCount("modifier_phantom_assassin_back_stab_atk_speed",caster, caster:GetModifierStackCount("modifier_phantom_assassin_back_stab_atk_speed", self:GetAbility()) + 2)
 					end
 				end
 			end
 
-		elseif self:GetParent():IsIllusion() and not hTarget:IsMagicImmune() then
-			local target = params.target
-			local caster = self:GetParent()
-			local chance = self:GetAbility():GetLevelSpecialValueFor("chance",self:GetAbility():GetLevel())/2
-			local damageTable = {
-				victim = params.target,
-				attacker = self:GetParent(),
-				damage = self:GetAbility():GetLevelSpecialValueFor("damage",self:GetAbility():GetLevel())/3,
-				damage_type = DAMAGE_TYPE_PHYSICAL}
-			if RollPercentage(chance) then
-				target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab",{duration = self:GetAbility():GetLevelSpecialValueFor("duration", self:GetAbility():GetLevel())/3})
-				ApplyDamage(damageTable)
-			else
-				chance = chance + self:GetAbility():GetLevelSpecialValueFor("bonus_chance",self:GetAbility():GetLevel())/2
-				if chance >= 50 then
-					chance = 50
+
+			if params.attacker == self:GetParent() and ( not self:GetParent():IsIllusion() ) then
+				if not target:IsMagicImmune() then
+					local target = params.target
+					local caster = self:GetParent()
+					local chance = self:GetAbility():GetLevelSpecialValueFor("chance",self:GetAbility():GetLevel())
+					local damageTable = {
+						victim = params.target,
+						attacker = self:GetParent(),
+						damage = self:GetAbility():GetLevelSpecialValueFor("damage",self:GetAbility():GetLevel()),
+						damage_type = DAMAGE_TYPE_PHYSICAL,}
+					if RollPercentage(chance) then
+						target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab",{duration = self:GetAbility():GetLevelSpecialValueFor("duration", self:GetAbility():GetLevel())})
+						ApplyDamage(damageTable)
+					else
+						chance = chance + self:GetAbility():GetLevelSpecialValueFor("bonus_chance",self:GetAbility():GetLevel())
+						if chance >= 100 then
+							chance = 100
+						end
+					end
+				end
+
+			elseif self:GetParent():IsIllusion() and not hTarget:IsMagicImmune() then
+				local target = params.target
+				local caster = self:GetParent()
+				local chance = self:GetAbility():GetLevelSpecialValueFor("chance",self:GetAbility():GetLevel())/2
+				local damageTable = {
+					victim = params.target,
+					attacker = self:GetParent(),
+					damage = self:GetAbility():GetLevelSpecialValueFor("damage",self:GetAbility():GetLevel())/3,
+					damage_type = DAMAGE_TYPE_PHYSICAL}
+				if RollPercentage(chance) then
+					target:AddNewModifier(caster,ability,"modifier_phantom_assassin_back_stab",{duration = self:GetAbility():GetLevelSpecialValueFor("duration", self:GetAbility():GetLevel())/3})
+					ApplyDamage(damageTable)
+				else
+					chance = chance + self:GetAbility():GetLevelSpecialValueFor("bonus_chance",self:GetAbility():GetLevel())/2
+					if chance >= 50 then
+						chance = 50
+					end
 				end
 			end
 		end
