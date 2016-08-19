@@ -71,9 +71,9 @@ function modifier_asara_ring_aura:DeclareFunctions()
 end
 
 function modifier_asara_ring_aura:GetModifierConstantHealthRegen(params)
-	return self:GetAbility():GetSpecialValueFor("hpr")
+	return 3.35
 end
 
 function modifier_asara_ring_aura:GetModifierPhysicalArmorBonus(params)
-	return self:GetAbility():GetSpecialValueFor("armor")
+	return 3.4
 end

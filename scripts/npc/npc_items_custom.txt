@@ -2018,4 +2018,111 @@
       }
     }
   }
+
+  "item_recipe_drums_of_vengefence_refresh"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"              "3012"            
+    "Model"             "models/props_gameplay/recipe.mdl"
+    "BaseClass"                     "item_datadriven"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              ""  
+    "ItemShopTags"          ""
+    
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_drums_of_vengefence"
+    "ItemRequirements"
+    {
+      "01"            "item_drums_of_vengefence;item_recipe_drums_of_vengefence"
+    }
+  }
+
+  "item_recipe_drums_of_vengefence"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"              "3012"            
+    "Model"             "models/props_gameplay/recipe.mdl"
+    "BaseClass"                     "item_datadriven"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            "1075"  
+    "ItemShopTags"          ""
+    
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_drums_of_vengefence"
+    "ItemRequirements"
+    {
+      "01"            "item_asara_ring;item_bracer;item_wind_lace"
+    }
+  }
+
+  "item_drums_of_vengefence"
+  {
+    "ID"                  "3013"
+    "BaseClass"           "item_lua"
+    "ScriptFile"          "items/item_drums_of_vengefence.lua"
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "Model"                         "models/props_gameplay/red_box.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"            "drums_of_vengefence"
+    "ItemQuality"                   "rare"    // consumable component rare epic artifact secretshop
+    "AbilityCastRange"              "1020"
+    "AbilityCooldown"               "28"
+    "ItemStackable"                 "0"
+    "ItemInitialCharges"            "7"
+
+    "precache"
+    {
+      "particle" "particles/units/heroes/hero_huskar/loot_greevil_ambient_rare_sparks.vpcf"
+      "particle" "particles/units/unit_greevil/loot_greevil_death_cloud.vpcf"
+    }
+    
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "stats"         "3"
+      }
+      "02"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "str"           "6"
+      }
+      "03"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "int"           "9"
+      }
+      "04"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "as"            "5"
+      }
+      "05"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "ts"            "30"
+      }
+      "06"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "es"            "-25"
+      }
+      "07"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "radius"       "1020"
+      }
+    }
+  }
 }
