@@ -2070,7 +2070,7 @@
     "ID"                  "3013"
     "BaseClass"           "item_lua"
     "ScriptFile"          "items/item_drums_of_vengefence.lua"
-    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
     "AbilityTextureName"            "drums_of_vengefence"
@@ -2122,6 +2122,11 @@
       {
         "var_type"  "FIELD_INTEGER"
         "radius"       "1020"
+      }
+      "08"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "hpr"       "3.55"
       }
     }
   }
