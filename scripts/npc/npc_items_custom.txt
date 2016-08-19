@@ -2084,6 +2084,7 @@
     {
       "particle" "particles/units/heroes/hero_huskar/loot_greevil_ambient_rare_sparks.vpcf"
       "particle" "particles/units/unit_greevil/loot_greevil_death_cloud.vpcf"
+      "particle" "particles/units/unit_greevil/huskar_berserker_blood_hero_effect.vpcf"
     }
     
     "AbilitySpecial"

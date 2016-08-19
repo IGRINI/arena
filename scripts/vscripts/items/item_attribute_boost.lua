@@ -66,18 +66,15 @@ end
 
 function Swap_agi(keys)
 	local newItem = "item_attribute_boost_intellect"
-    local item = swap_to_item(keys, newItem)
-    item:SetPurchaseTime(0)
+    swap_to_item(keys, newItem)
 end
 
 function Swap_int(keys)
 	local newItem = "item_attribute_boost_strength"
-    local item = swap_to_item(keys, newItem)
-    item:SetPurchaseTime(0)
+    swap_to_item(keys, newItem)
 end
 
 function Swap_str(keys)
 	local newItem = "item_attribute_boost_agility"
-    local item = swap_to_item(keys, newItem)
-    item:SetPurchaseTime(0)
+    swap_to_item(keys, newItem)
 end
