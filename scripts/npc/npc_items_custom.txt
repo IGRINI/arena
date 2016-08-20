@@ -2178,7 +2178,7 @@
       "02"
       {
         "var_type"  "FIELD_FLOAT"
-        "duration"      "4.3"
+        "duration"      "2.8"
       }
       "03"
       {
@@ -2224,6 +2224,11 @@
       {
         "var_type"  "FIELD_INTEGER"
         "agi"   "20"
+      }
+      "12"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "shadow_walk"   "30"
       }
     }
   }
