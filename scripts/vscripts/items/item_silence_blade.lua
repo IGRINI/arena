@@ -12,44 +12,18 @@ function item_silence_blade:GetIntrinsicModifierName()
 	return "modifier_silence_blade_passive"
 end
 
-function item_silence_blade:DeclareFunctions()
-	local funcs = { MODIFIER_EVENT_ON_ABILITY_EXECUTED, MODIFIER_EVENT_ON_ATTACK_LANDED, MODIFIER_EVENT_ON_ATTACK_ALLIED }
-	return funcs 
-end
-
 function item_silence_blade:OnSpellStart()
-	self.caster = self:GetCaster()
-	self.caster:EmitSound("DOTA_Item.InvisibilitySword.Activate")
+	local caster = self:GetCaster()
+	local target = caster:GetAttackTarget()
+
+	caster:EmitSound("DOTA_Item.InvisibilitySword.Activate")
 
     Timers:CreateTimer({
         endTime = 0.1,
         callback = function()
-            self.caster:AddNewModifier(self.caster, self, "modifier_silence_blade_shadow_walk", {duration = 17.2})
+            caster:AddNewModifier(caster, self, "modifier_silence_blade_shadow_walk", {duration = 17.2})
         end
     })
-end
-
-function item_silence_blade:OnAttackAllied()
-	if self.caster:HasModifier("modifier_silence_blade_shadow_walk") then
-		self.target:AddNewModifier(self.caster,self,"modifier_silence_blade_bonus",{duration = 2.8})
-	end
-end
-
-function item_silence_blade:OnAbilityExecuted()
-	if self.caster:HasModifier("modifier_silence_blade_shadow_walk") then
-		self.caster:RemoveModifierByName("modifier_silence_blade_shadow_walk")
-	end
-end
-
-function item_silence_blade:OnAttackLanded()
-	if self.caster:HasModifier("modifier_silence_blade_shadow_walk") then 
-		self.caster:RemoveModifierByName("modifier_silence_blade_shadow_walk")
-		self.target = self.caster:GetAttackTarget()
-		local damage_table = { victim = self.target, attacker = params.attacker, damage = 220, damage_type = DAMAGE_TYPE_PHYSICAL }
-		ApplyDamage(damage_table)
-	else
-		return nil
-	end
 end
 
 ------------------------------------------------------------------------------------------------------------
@@ -97,8 +71,30 @@ if modifier_silence_blade_bonus == nil then
 	modifier_silence_blade_bonus = class({})
 end
 
+function modifier_silence_blade_bonus:DeclareFunctions()
+	local funcs = { MODIFIER_EVENT_ON_TAKEDAMAGE }
+	return funcs
+end
+
 function modifier_silence_blade_bonus:GetTexture()
 	return "item_silence_blade"
+end
+
+function modifier_silence_blade_bonus:OnTakeDamage(event)
+	local damage = event.damage
+	local attacker = self:GetParent()
+	local ability = self:GetAbility()
+	local caster = ability:GetCaster()
+
+	caster.soul_damage = caster.soul_damage or 0
+	caster.soul_damage = caster.soul_damage + damage
+end
+
+function modifier_silence_blade_bonus:OnDestroy()
+	local ability = self:GetAbility()
+	local caster = ability:GetCaster()
+
+	ApplyDamage({ victim = self:GetParent(), attacker = caster, damage = caster.soul_damage, damage_type = DAMAGE_TYPE_MAGICAL }) 
 end
 
 function modifier_silence_blade_bonus:IsDebuff()
@@ -110,7 +106,7 @@ function modifier_silence_blade_bonus:IsPurgable()
 end
 
 function modifier_silence_blade_bonus:GetEffectName()
-	return "particles/generic_gameplay/generic_silenced.vpcf"
+	return "particles/econ/items/silencer/silencer_ti6/silencer_last_word_ti6_silence.vpcf"
 end
  
 function modifier_silence_blade_bonus:GetEffectAttachType()
@@ -133,8 +129,13 @@ function modifier_silence_blade_shadow_walk:GetTexture()
 end
 
 function modifier_silence_blade_shadow_walk:DeclareFunctions()
-	local funcs = { MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE, MODIFIER_PROPERTY_INVISIBILITY_LEVEL }
+	local funcs = { MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE, MODIFIER_PROPERTY_INVISIBILITY_LEVEL, MODIFIER_EVENT_ON_ABILITY_EXECUTED, MODIFIER_EVENT_ON_ATTACK_LANDED, MODIFIER_EVENT_ON_ATTACK_ALLIED  }
 	return funcs
+end
+
+function modifier_silence_blade_shadow_walk:CheckState()
+	local states = { [MODIFIER_STATE_INVISIBLE] = true }
+	return states 
 end
 
 function modifier_silence_blade_shadow_walk:GetModifierMoveSpeedBonus_Percentage()
@@ -142,5 +143,25 @@ function modifier_silence_blade_shadow_walk:GetModifierMoveSpeedBonus_Percentage
 end
 
 function modifier_silence_blade_shadow_walk:GetModifierInvisibilityLevel()
-	return 1
+	return 100
+end
+
+function modifier_silence_blade_shadow_walk:OnAttackLanded(event)
+	local caster = self:GetParent()
+	local target = caster:GetAttackTarget()
+
+	caster:RemoveModifierByName("modifier_silence_blade_shadow_walk")
+
+	target:AddNewModifier(caster,self:GetAbility(),"modifier_silence_blade_bonus",{duration = 2.8})
+	caster:RemoveModifierByName("modifier_silence_blade_shadow_walk")
+
+	local damage_table = { victim = target, attacker = caster, damage = 220, damage_type = DAMAGE_TYPE_PHYSICAL }
+	ApplyDamage(damage_table)
+end
+
+function modifier_silence_blade_shadow_walk:OnAbilityExecuted()
+	local caster = self:GetParent()
+	local target = caster:GetAttackTarget()
+
+	caster:RemoveModifierByName("modifier_silence_blade_shadow_walk")
 end

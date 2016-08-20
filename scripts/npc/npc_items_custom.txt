@@ -2167,6 +2167,11 @@
     "AbilityManaCost"               "275"
     "AbilityCooldown"               "25"
     "ItemQuality"                   "artifact"    // consumable component rare epic artifact secretshop
+
+    "precache"
+    {
+      "particle"  "particles/econ/items/silencer/silencer_ti6/silencer_last_word_ti6_silence.vpcf"
+    }
     
     "AbilitySpecial"
     {
