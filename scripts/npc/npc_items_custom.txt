@@ -2082,9 +2082,9 @@
 
     "precache"
     {
-      "particle" "particles/units/heroes/hero_huskar/loot_greevil_ambient_rare_sparks.vpcf"
+      "particle" "particles/units/unit_greevil/loot_greevil_ambient_rare_sparks.vpcf"
       "particle" "particles/units/unit_greevil/loot_greevil_death_cloud.vpcf"
-      "particle" "particles/units/unit_greevil/huskar_berserker_blood_hero_effect.vpcf"
+      "particle" "particles/econ/courier/courier_onibi/courier_onibi_blue_ambient_b.vpcf"
     }
     
     "AbilitySpecial"
@@ -2128,6 +2128,102 @@
       {
         "var_type"  "FIELD_FLOAT"
         "hpr"       "3.55"
+      }
+    }
+  }
+
+  "item_recipe_silence_blade"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                "3014"            
+    "Model"             "models/props_gameplay/recipe.mdl"
+    "BaseClass"                     "item_datadriven"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"              "1660"  
+    "ItemShopTags"          ""
+    
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_silence_blade"
+    "ItemRequirements"
+    {
+      "01"            "item_invis_sword;item_oblivion_staff;item_yasha"
+    }
+  }
+
+  "item_silence_blade"
+  {
+    "ID"                  "3015"
+    "BaseClass"           "item_lua"
+    "ScriptFile"          "items/item_silence_blade.lua"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "Model"                         "models/props_gameplay/red_box.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"            "silence_blade"
+    "AbilityManaCost"               "275"
+    "AbilityCooldown"               "25"
+    "ItemQuality"                   "artifact"    // consumable component rare epic artifact secretshop
+    
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "duration_self" "17.2"
+      }
+      "02"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "duration"      "4.3"
+      }
+      "03"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "damage_burn"   "40"
+      }
+      "04"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "fade_time"   "0.1"
+      }
+      "05"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "damage"      "60"
+      }
+      "06"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "atk"         "60"
+      }
+      "07"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "damage_hit"   "220"
+      }
+      "08"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "int"         "30"
+      }
+      "09"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "mana_regen"   "200"
+      }
+      "10"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "move_prc"   "6"
+      }
+      "11"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "agi"   "20"
       }
     }
   }
