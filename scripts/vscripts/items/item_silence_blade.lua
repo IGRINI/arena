@@ -94,7 +94,7 @@ function modifier_silence_blade_bonus:OnDestroy()
 	local ability = self:GetAbility()
 	local caster = ability:GetCaster()
 
-	ApplyDamage({ victim = self:GetParent(), attacker = caster, damage = caster.soul_damage * 0.4, damage_type = DAMAGE_TYPE_MAGICAL }) 
+	ApplyDamage({ victim = self:GetParent(), attacker = self:GetAbility():GetCaster(), damage = caster.soul_damage * 0.4, damage_type = DAMAGE_TYPE_MAGICAL }) 
 end
 
 function modifier_silence_blade_bonus:IsDebuff()
