@@ -16,7 +16,7 @@ function Base(keys)
 	deaths = 1
 	end
 
-	local damage = (((kills * ability:GetSpecialValueFor("dpk")) / (deaths * ability:GetSpecialValueFor("dpd"))) / ability:GetSpecialValueFor("duration"))
+	local damage = (kills * dpk / (deaths * dpd) / duration)
 	local damage_table = { victim = target,attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL }
 	ApplyDamage(damage_table)
 end

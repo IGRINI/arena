@@ -2166,6 +2166,7 @@
     "AbilityTextureName"            "silence_blade"
     "AbilityManaCost"               "275"
     "AbilityCooldown"               "25"
+    "AbilitySharedCooldown"         "item_orchid;item_bloodthorn;item_silence_blade"
     "ItemQuality"                   "artifact"    // consumable component rare epic artifact secretshop
 
     "precache"
