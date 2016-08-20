@@ -69,11 +69,11 @@ if modifier_drums_of_vengefence_aura == nil then
 end
 
 function modifier_drums_of_vengefence_aura:GetEffectAttachType()
-    return PATTACH_ABSORIGIN_FOLLOW
+    return PATTACH_OVERHEAD_FOLLOW
 end
 
 function modifier_drums_of_vengefence_aura:GetEffectName()
-    return "particles/units/unit_greevil/huskar_berserker_blood_hero_effect.vpcf"
+    return "particles/econ/courier/courier_onibi/courier_onibi_blue_ambient_b.vpcf"
 end
 
 function modifier_drums_of_vengefence_aura:GetTexture()
@@ -236,10 +236,6 @@ end
 function modifier_drums_of_vengefence_passive_aura_emmiter:GetModifierAura()
     return "modifier_drums_of_vengefence_passive_aura"
 end
-
-function modifier_drums_of_vengefence_passive_aura_emmiter:GetEffectAttachType()
-    return PATTACH_ABSORIGIN_FOLLOW
-end
    
 function modifier_drums_of_vengefence_passive_aura_emmiter:GetAuraSearchTeam()
     return DOTA_UNIT_TARGET_TEAM_FRIENDLY
@@ -264,7 +260,7 @@ function modifier_drums_of_vengefence_passive_aura:GetTexture()
 end
 
 function modifier_drums_of_vengefence_passive_aura:GetEffectName()
-    return "particles/units/unit_greevil/loot_greevil_ambient_rare_sparks.vpcfx"
+    return "particles/units/unit_greevil/loot_greevil_ambient_rare_sparks.vpcf"
 end
 
 function modifier_drums_of_vengefence_passive_aura:GetEffectAttachType()
