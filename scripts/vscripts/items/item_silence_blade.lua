@@ -33,7 +33,14 @@ function item_silence_blade:OnAbilityExecuted()
 end
 
 function item_silence_blade:OnAttackLanded()
-	-- body
+	if self:GetCaster():HasModifier("modifier_silence_blade_bonus") then 
+		self:GetCaster():RemoveModifierByName("modifier_silence_blade_bonus")
+		local target = self:GetParent():GetAttackTarget()
+		local damage_table = { victim = target, attacker = params.attacker, damage = 220, damage_type = DAMAGE_TYPE_PHYSICAL }
+		ApplyDamage(damage_table)
+	else
+		return nil
+	end
 end
 
 ------------------------------------------------------------------------------------------------------------
@@ -69,4 +76,35 @@ end
 
 function modifier_silence_blade_passive:GetModifierBonusStats_Agility()
 	return 20
+end
+
+--------------------------------------------------------------------------------------------------------
+
+if modifier_silence_blade_bonus == nil then
+	modifier_silence_blade_bonus = class({})
+end
+
+function modifier_silence_blade_bonus:GetTexture()
+	return "item_silence_blade"
+end
+
+function modifier_silence_blade_bonus:IsDebuff()
+	return true
+end
+
+function modifier_silence_blade_bonus:IsPurgable()
+	return true
+end
+
+function modifier_silence_blade_bonus:GetEffectName()
+	return "particles/generic_gameplay/generic_silenced.vpcf"
+end
+ 
+function modifier_silence_blade_bonus:GetEffectAttachType()
+	return PATTACH_OVERHEAD_FOLLOW
+end
+
+function modifier_silence_blade_bonus:CheckState()
+	local states = { [MODIFIER_STATE_SILENCED] = true, [MODIFIER_STATE_PASSIVES_DISABLED] = true }
+	return states
 end
