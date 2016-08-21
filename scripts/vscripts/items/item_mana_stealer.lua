@@ -36,6 +36,10 @@ function modifier_mana_stealer_passive:DeclareFunctions()
 	return funcs
 end
 
+function modifier_mana_stealer_passive:GetAttributes(  )
+	return MODIFIER_ATTRIBUTE_MULTIPLE
+end
+
 function modifier_mana_stealer_passive:IsHidden(  )
 	return true
 end

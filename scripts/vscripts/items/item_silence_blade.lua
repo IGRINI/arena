@@ -32,6 +32,10 @@ if modifier_silence_blade_passive == nil then
 	modifier_silence_blade_passive = class({})
 end
 
+function modifier_silence_blade_passive:GetAttributes(  )
+	return MODIFIER_ATTRIBUTE_MULTIPLE
+end
+
 function modifier_silence_blade_passive:DeclareFunctions()
 	local funcs = { MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE, MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE, MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT, MODIFIER_PROPERTY_MANA_REGEN_PERCENTAGE, MODIFIER_PROPERTY_STATS_INTELLECT_BONUS, MODIFIER_PROPERTY_STATS_AGILITY_BONUS }
 	return funcs
