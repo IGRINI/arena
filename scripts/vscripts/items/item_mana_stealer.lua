@@ -13,10 +13,15 @@ function item_mana_stealer:OnSpellStart()
 	if self:GetCurrentCharges() <= 0 then
 		return nil
 	else
-		self:SetCurrentCharges(self:GetCurrentCharges() - 1)
+		
 		local target = self:GetCursorTarget()
-		target:AddNewModifier(self:GetCaster(), self, "modifier_mana_stealer_purge", {duration = 4.5})
-		target:Purge(true,false,false,false,false)
+		if target == nil then
+			return nil
+		else
+			self:SetCurrentCharges(self:GetCurrentCharges() - 1)
+			target:AddNewModifier(self:GetCaster(), self, "modifier_mana_stealer_purge", {duration = 4.5})
+			target:Purge(true,false,false,false,false)
+		end
 	end
 end
 
@@ -46,25 +51,34 @@ end
 function modifier_mana_stealer_passive:OnAttackLanded()
 	local caster = self:GetParent() 
 	local target = caster:GetAttackTarget()
-
-	target:SetMana(target:GetMana() - 50)
-	ApplyDamage({victim = target, attacker = caster, damage = 50, damage_type = DAMAGE_TYPE_PHYSICAL})
-end
-
-function modifier_mana_stealer_passive:OnAbilityExecuted(event)
-	local target = self:GetCursorTarget()
-
 	if target == nil then
 		return nil
 	else
-		local mana = nil
-		if target:HasModifier("modifier_mana_stealer_purge") then
-			mana = event.ability:GetManaCost(event.ability:GetLevel()) * 0.26
-		else 
-			mana = event.ability:GetManaCost(event.ability:GetLevel()) * 0.18
+		target:SetMana(target:GetMana() - 50)
+
+		if target:GetMana() <= 120 then
+			ApplyDamage({victim = target, attacker = caster, damage = 50, damage_type = DAMAGE_TYPE_PHYSICAL})
 		end
-		target:SetMana(target:GetMana() - mana)
-		self:GetParent():SetMana(self:GetParent():GetMana() + mana)
+	end
+end
+
+function modifier_mana_stealer_passive:OnAbilityExecuted(event)
+	if IsServer() then
+		local target = self:GetAbility():GetCursorTarget()
+
+		if target == nil then
+			return nil
+		elseif target:GetMana() >= target:GetMana() * 0.12
+			local mana = nil
+			if target:HasModifier("modifier_mana_stealer_purge") then
+				mana = event.ability:GetManaCost(event.ability:GetLevel()) * 0.26
+			else 
+				mana = event.ability:GetManaCost(event.ability:GetLevel()) * 0.18
+			end
+			target:SetMana(target:GetMana() - mana)
+			self:GetParent():SetMana(self:GetParent():GetMana() + mana)
+			print(mana)
+		end
 	end
 end
 
