@@ -1116,7 +1116,7 @@
         "Passive"       "1"
         "IsHidden"      "1"
         "IsDebuff"      "0"
-    
+        "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
         "Properties"
         {
             "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"      "%damage"
