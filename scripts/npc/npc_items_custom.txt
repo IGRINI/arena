@@ -2522,4 +2522,87 @@
       }
     }
   }
+
+  "item_recipe_light_pike"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                "3022"            
+    "Model"             "models/props_gameplay/recipe.mdl"
+    "BaseClass"                     "item_datadriven"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            "115"  
+    "ItemShopTags"        ""
+    
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_light_pike"
+    "ItemRequirements"
+    {
+      "01"            "item_iron_talon;item_javelin;item_quarterstaff"
+    }
+  }
+
+  "item_light_pike"
+  {
+    "ID"                  "3023"
+    "ScriptFile"          "items/item_light_pike"
+    "BaseClass"           "item_lua"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_TEAM_NONE"
+    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_TREE"
+    "Model"                         "models/props_gameplay/red_box.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"            "light_pike"
+    "AbilityCooldown"               "12"
+    "AbilityCastRange"              "360"
+    "ItemQuality"                   "rare"    // consumable component rare epic artifact secretshop
+    
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "damage_b"          "125"
+      }
+      "02"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "disarmor"          "-2"
+      }
+      "03"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "d_duration"       "0.1"
+      }
+      "04"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "damage"          "30"
+      }
+      "05"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "atk"          "35"
+      }
+      "06"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "hp_burn"          "50"
+      }
+      "07"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "chance"          "25"
+      }
+      "08"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "armor"          "2"
+      }
+    }
+  }
 }
