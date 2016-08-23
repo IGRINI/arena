@@ -13,7 +13,7 @@ function item_light_pike:OnSpellStart()
 	if self:IsCooldownReady() and IsServer() then
 		local target = self:GetCursorTarget()
 
-		if target:IsTree() then
+		if target:IsStanding() then
 			self:StartCooldown(self:GetCooldown(self:GetLevel()) / 4)
 			target:CutDown(self:GetCaster():GetTeamNumber())
 		end
@@ -86,7 +86,7 @@ function modifier_light_pike_passive:OnAttackLanded(event)
 			duration = 0.1
 		end
 
-		local damage_b = self:GetAbility():GetSpecialValueFor("d_duration")
+		local damage_b = self:GetAbility():GetSpecialValueFor("damage_b")
 		if not damage_b == nil then
 			damage_b = damage_b
 		else
@@ -94,7 +94,7 @@ function modifier_light_pike_passive:OnAttackLanded(event)
 		end
 
 
-		if RollPercentage(chance) then
+		if RollPercentage(chance) and event.attacker == self:GetParent() then
 			local caster = self:GetParent()
 			local target = caster:GetAttackTarget()
 
