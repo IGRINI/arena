@@ -2318,4 +2318,208 @@
         }
     }
   }
+
+  "item_recipe_god_afflatus"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                "3018"            
+    "Model"             "models/props_gameplay/recipe.mdl"
+    "BaseClass"                     "item_datadriven"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            ""  
+    "ItemShopTags"        ""
+    
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_god_afflatus"
+    "ItemRequirements"
+    {
+      "01"            "item_attribute_boost_strength;item_gainer;item_dark_orb"
+      "02"            "item_attribute_boost_agility;item_gainer;item_dark_orb"
+      "03"            "item_attribute_boost_intellect;item_gainer;item_dark_orb"
+    }
+  }
+
+  "item_god_afflatus"
+  {
+    "ID"                  "3019"
+    "BaseClass"           "item_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "Model"                         "models/props_gameplay/red_box.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"            "god_afflatus"
+    "ItemQuality"                   "artifact"    // consumable component rare epic artifact secretshop
+    
+    "AbilitySpecial"
+    {
+        "01"
+        {
+          "var_type"  "FIELD_INTEGER"
+          "stats"         "75"
+        }
+        "02"
+        {
+          "var_type"  "FIELD_INTEGER"
+          "hp"            "700"
+        }
+        "03"
+        {
+          "var_type"  "FIELD_INTEGER"
+          "mana"          "700"
+        }
+        "04"
+        {
+          "var_type"  "FIELD_FLOAT"
+          "armor"          "7"
+        }
+        "05"
+        {
+          "var_type"  "FIELD_FLOAT"
+          "spt"           "0.75"
+        }
+        "06"
+        {
+          "var_type"  "FIELD_INTEGER"
+          "msp"           "65"
+        }
+        "07"
+        {
+          "var_type"  "FIELD_INTEGER"
+          "as"          "45"
+        }
+        "08"
+        {
+          "var_type"  "FIELD_INTEGER"
+          "xp"          "50"
+        }
+    }
+    "Modifiers"
+    {
+      "modifier_god_afflatus_tick"
+      {
+        "Passive" "1"
+        "IsHidden"  "1"
+        "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%stats"
+          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%stats"
+          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"       "%stats"
+          "MODIFIER_PROPERTY_MANA_BONUS"                  "%mana"
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"        "%armor"
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"    "%mps"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%as"
+          "MODIFIER_PROPERTY_HEALTH_BONUS"                "%hp"
+        }        
+        "ThinkInterval"     "15"
+        "OnIntervalThink"
+        {
+          "RunScript"
+           {
+            "ScriptFile"    "items/item_god_afflatus.lua"
+            "Function"      "Base"
+           }
+
+           "GrantXPGold"
+           {
+            "Target"        "CASTER"
+            "XPAmount"      "50"
+            "SplitEvenly"   "0"
+            "GoldAmount"    "0"
+            "ReliableGold"  "0"
+            }
+          }
+        }
+      "modifier_attribute_boost_stats_stacks"
+      {
+        "Passive" "0"
+        "IsHidden"  "1"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%spt"
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%spt"
+          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"       "%spt"
+        }
+      }
+    }
+  }
+
+  "item_recipe_dark_orb"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                "3020"            
+    "Model"             "models/props_gameplay/recipe.mdl"
+    "BaseClass"                     "item_datadriven"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            "1500"  
+    "ItemShopTags"        ""
+    
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_dark_orb"
+    "ItemRequirements"
+    {
+      "01"            "item_ultimate_orb;item_ultimate_orb"
+    }
+  }
+
+  "item_dark_orb"
+  {
+    "ID"                  "3021"
+    "BaseClass"           "item_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "Model"                         "models/props_gameplay/red_box.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"            "dark_orb"
+    "ItemQuality"                   "rare"    // consumable component rare epic artifact secretshop
+    
+    "AbilitySpecial"
+    {
+        "01"
+        {
+          "var_type"  "FIELD_INTEGER"
+          "stats"         "50"
+        }
+        "02"
+        {
+          "var_type"  "FIELD_INTEGER"
+          "hp"            "666"
+        }
+        "03"
+        {
+          "var_type"  "FIELD_INTEGER"
+          "mana"          "666"
+        }
+        "04"
+        {
+          "var_type"  "FIELD_FLOAT"
+          "armor"          "6.66"
+        }
+    }
+    "Modifiers"
+    {
+      "modifier_dark_orb"
+      {
+        "Passive" "1"
+        "IsHidden"  "1"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"   "%stats"
+          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "%stats"
+          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%stats"
+          "MODIFIER_PROPERTY_HEALTH_BONUS"          "%hp"
+          "MODIFIER_PROPERTY_MANA_BONUS"            "%mana"
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "%armor"
+        }
+      }
+    }
+  }
 }
