@@ -2553,11 +2553,11 @@
     "BaseClass"           "item_lua"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_TEAM_NONE"
-    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_TREE"
+    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_CREEP"
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
     "AbilityTextureName"            "light_pike"
-    "AbilityCooldown"               "12"
+    "AbilityCooldown"               "10"
     "AbilityCastRange"              "360"
     "ItemQuality"                   "rare"    // consumable component rare epic artifact secretshop
     
