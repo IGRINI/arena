@@ -1728,7 +1728,7 @@
       "03"
       {
         "var_type"  "FIELD_INTEGER"
-        "msp"           "55"
+        "movespeed"           "55"
       }
       "04"
       {
@@ -1760,7 +1760,7 @@
         "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
         "Properties"
         {
-          "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"  "%mps"
+          MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"       "%movespeed"
           "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%as"
           "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%stat_strength"
           "MODIFIER_PROPERTY_HEALTH_BONUS"                "%hp"
@@ -1814,7 +1814,7 @@
       "03"
       {
         "var_type"  "FIELD_INTEGER"
-        "msp"           "55"
+        "movespeed"           "55"
       }
       "04"
       {
@@ -1846,10 +1846,10 @@
         "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
         "Properties"
         {
-          "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"  "%mps"
+          MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"       "%movespeed"
           "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%as"
-          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"        "%stat_strength"
-          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"         "%armor"
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%stat_strength"
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"        "%armor"
         }        
           "ThinkInterval"     "15"
           "OnIntervalThink"
@@ -1900,7 +1900,7 @@
       "03"
       {
         "var_type"  "FIELD_INTEGER"
-        "msp"           "55"
+        "movespeed"     "55"
       }
       "04"
       {
@@ -1932,7 +1932,7 @@
         "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
         "Properties"
         {
-          "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"        "%mps"
+          MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"         "%movespeed"
           "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"    "%as"
           "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"         "%stat_strength"
           "MODIFIER_PROPERTY_MANA_BONUS"                    "%mana"
@@ -2384,7 +2384,7 @@
         "06"
         {
           "var_type"  "FIELD_INTEGER"
-          "msp"           "65"
+          "movespeed"           "40"
         }
         "07"
         {
@@ -2411,7 +2411,7 @@
           "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"       "%stats"
           "MODIFIER_PROPERTY_MANA_BONUS"                  "%mana"
           "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"        "%armor"
-          "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"    "%mps"
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"      "%movespeed"
           "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%as"
           "MODIFIER_PROPERTY_HEALTH_BONUS"                "%hp"
         }        
@@ -2602,6 +2602,104 @@
       {
         "var_type"  "FIELD_INTEGER"
         "armor"          "2"
+      }
+    }
+  }
+
+  "item_recipe_black_crest"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                "3024"            
+    "Model"             "models/props_gameplay/recipe.mdl"
+    "BaseClass"                     "item_datadriven"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            ""  
+    "ItemShopTags"        ""
+    
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_black_crest"
+    "ItemRequirements"
+    {
+      "01"            "item_solar_crest;item_shivas_guard;item_dark_orb"
+    }
+  }
+
+  "item_black_crest"
+  {
+    "ID"                  "3025"
+    "BaseClass"           "item_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "Model"                         "models/props_gameplay/red_box.vmdl" 
+    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"            "black_crest"
+    "ItemQuality"                   "artifact"    // consumable component rare epic artifact secretshop
+    
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "disarmor"      "30"
+      }
+      "02"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "armor"         "30"
+      }
+      "03"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "bonusarmor"    "30"
+      }
+      "04"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "miss"          "30"
+      }
+      "05"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "evasion"       "30"
+      }
+      "06"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "miss"          "30"
+      }
+      "07"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "manaregen"    "100"
+      }
+      "08"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "int"          "80"
+      }
+      "09"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "stats"        "50"
+      }
+      "10"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "hp_mp"        "666"
+      }
+      "11"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "miss_aura"    "10"
+      }
+      "12"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "evasion_aura" "10"
       }
     }
   }
