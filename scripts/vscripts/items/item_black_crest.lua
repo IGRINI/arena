@@ -19,6 +19,7 @@ function item_black_crest:OnSpellStart(  )
 	local caster = self:GetCaster()
 	if target:GetTeamNumber() ~= caster:GetTeamNumber() then
 		target:AddNewModifier(caster,self,"modifier_black_crest_freeze",{duration = 1})
+		target:AddNewModifier(caster,self,"modifier_black_crest_disarmor",{duration = 5})
 	elseif target:GetTeamNumber() == caster:GetTeamNumber() then
 		target:AddNewModifier(caster,self,"modifier_black_crest_armor",{duration = 5})
 	end
@@ -179,18 +180,6 @@ end
 function modifier_black_crest_freeze:CheckState()
 	local states = { [MODIFIER_STATE_HEXED] = true, [MODIFIER_STATE_STUNNED] = true }
 	return states
-end
-
-function modifier_black_crest_freeze:OnCreated(  )
-	local target = self:GetParent()
-	local caster = self:GetAbility():GetCaster()
-	target:AddNewModifier(caster,self:GetAbility(),"modifier_black_crest_disarmor",{duration = 5})
-end
-
-function modifier_black_crest_freeze:OnRefresh(  )
-	local target = self:GetParent()
-	local caster = self:GetAbility():GetCaster()
-	target:AddNewModifier(caster,self:GetAbility(),"modifier_black_crest_disarmor",{duration = 5})
 end
 
 -----------------------------------------------------------------------------------------------------
