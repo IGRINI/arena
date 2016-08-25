@@ -2,6 +2,7 @@ if item_black_crest == nil then
 	item_black_crest = class({})
 end
 
+LinkLuaModifier("modifier_black_crest_passive","items/item_black_crest.lua",LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_black_crest_aura_emmiter_t","items/item_black_crest.lua",LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_black_crest_aura_emmiter","items/item_black_crest.lua",LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_black_crest_aura_team","items/item_black_crest.lua",LUA_MODIFIER_MOTION_NONE)
@@ -11,26 +12,38 @@ LinkLuaModifier("modifier_black_crest_armor","items/item_black_crest.lua",LUA_MO
 LinkLuaModifier("modifier_black_crest_disarmor","items/item_black_crest.lua",LUA_MODIFIER_MOTION_NONE)
 
 function item_black_crest:GetIntrinsicModifierName()
-	return "modifier_black_crest_aura_emmiter"
+	local mods = { "modifier_black_crest_aura_emmiter" + "modifier_black_crest_aura_emmiter_t" + "modifier_black_crest_passive" }
+	return mods
 end
 
 function item_black_crest:OnSpellStart(  )
 	local target = self:GetCursorTarget()
 	local caster = self:GetCaster()
+	local duration = 5
 	if target:GetTeamNumber() ~= caster:GetTeamNumber() then
 		target:AddNewModifier(caster,self,"modifier_black_crest_freeze",{duration = 1})
 		target:AddNewModifier(caster,self,"modifier_black_crest_disarmor",{duration = 5})
 	elseif target:GetTeamNumber() == caster:GetTeamNumber() then
-		target:AddNewModifier(caster,self,"modifier_black_crest_armor",{duration = 5})
+		if target == caster then
+			duration = 0
+			self:StartCooldown(0)
+		end
+		target:AddNewModifier(caster,self,"modifier_black_crest_armor",{duration = duration})
 	end
 end
 
-function item_black_crest:DeclareFunctions(  )
+---------------------------------------------------------------------------------------------------------
+
+if item_black_crest_passive == nil then
+	item_black_crest_passive = class({})
+end
+
+function item_black_crest_passive:DeclareFunctions(  )
 	local funcs = { MODIFIER_PROPERTY_EVASION_CONSTANT, MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS, MODIFIER_PROPERTY_HEALTH_BONUS, MODIFIER_PROPERTY_MANA_BONUS, MODIFIER_PROPERTY_STATS_STRENGHT_BONUS, MODIFIER_PROPERTY_STATS_AGILITY_BONUS, MODIFIER_PROPERTY_MANA_REGEN_PERCENTAGE }
 	return funcs
 end
 
-function item_black_crest:OnCreated(  )
+function item_black_crest_passive:OnCreated(  )
 	self.mp_hp = 666
 	self.int = 80
 	self.stats = 50
@@ -47,7 +60,7 @@ function item_black_crest:OnCreated(  )
 	end
 end
 
-function item_black_crest:OnRefresh(  )
+function item_black_crest_passive:OnRefresh(  )
 	self.mp_hp = 666
 	self.int = 80
 	self.stats = 50
@@ -61,35 +74,35 @@ function item_black_crest:OnRefresh(  )
 	end
 end
 
-function item_black_crest:GetModifierManaBonus(  )
+function item_black_crest_passive:GetModifierManaBonus(  )
 	return self.mp_hp
 end
 
-function item_black_crest:GetModifierHealthBonus(  )
+function item_black_crest_passive:GetModifierHealthBonus(  )
 	return self.mp_hp
 end
 
-function item_black_crest:GetModifierBonusStats_Intellect(  )
+function item_black_crest_passive:GetModifierBonusStats_Intellect(  )
 	return self.int
 end
 
-function item_black_crest:GetModifierBonusStats_Strength(  )
+function item_black_crest_passive:GetModifierBonusStats_Strength(  )
 	return self.stats
 end
 
-function item_black_crest:GetModifierBonusStats_Agility(  )
+function item_black_crest_passive:GetModifierBonusStats_Agility(  )
 	return self.stats
 end
 
-function item_black_crest:GetModifierPercentageManaRegen(  )
+function item_black_crest_passive:GetModifierPercentageManaRegen(  )
 	return self.regen
 end
 
-function item_black_crest:GetModifierPhysicalArmorBonus(  )
+function item_black_crest_passive:GetModifierPhysicalArmorBonus(  )
 	return self.armor
 end
 
-function item_black_crest:GetModifierEvasion_Constant(  )
+function item_black_crest_passive:GetModifierEvasion_Constant(  )
 	return self.evasion
 end
 
