@@ -1760,7 +1760,7 @@
         "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
         "Properties"
         {
-          MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"       "%movespeed"
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"      "%movespeed"
           "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%as"
           "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%stat_strength"
           "MODIFIER_PROPERTY_HEALTH_BONUS"                "%hp"
@@ -1846,7 +1846,7 @@
         "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
         "Properties"
         {
-          MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"       "%movespeed"
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"      "%movespeed"
           "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%as"
           "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%stat_strength"
           "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"        "%armor"
@@ -1932,7 +1932,7 @@
         "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
         "Properties"
         {
-          MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"         "%movespeed"
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"        "%movespeed"
           "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"    "%as"
           "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"         "%stat_strength"
           "MODIFIER_PROPERTY_MANA_BONUS"                    "%mana"
@@ -2632,11 +2632,17 @@
   "item_black_crest"
   {
     "ID"                  "3025"
-    "BaseClass"           "item_datadriven"
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "ScriptFile"          "items/item_black_crest"
+    "BaseClass"           "item_lua"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
     "AbilityTextureName"            "black_crest"
+    "AbilityCooldown"               "6"
+    "AbilityManaCost"               "120"
+    "AbilityCastRange"              "520"
     "ItemQuality"                   "artifact"    // consumable component rare epic artifact secretshop
     
     "AbilitySpecial"
@@ -2644,7 +2650,7 @@
       "01"
       {
         "var_type"  "FIELD_INTEGER"
-        "disarmor"      "30"
+        "disarmor"      "-30"
       }
       "02"
       {
@@ -2694,12 +2700,7 @@
       "11"
       {
         "var_type"  "FIELD_INTEGER"
-        "miss_aura"    "10"
-      }
-      "12"
-      {
-        "var_type"  "FIELD_INTEGER"
-        "evasion_aura" "10"
+        "special_aura"    "5"
       }
     }
   }
