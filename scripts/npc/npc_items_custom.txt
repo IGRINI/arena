@@ -2645,6 +2645,13 @@
     "AbilityCastRange"              "520"
     "ItemQuality"                   "artifact"    // consumable component rare epic artifact secretshop
     
+    "precache"
+    {
+      "particle"     "particles/items2_fx/medallion_of_courage_b.vpcf"
+      "particle"     "particles/econ/events/league_teleport_2014/teleport_end_ground_drop_league.vpcf"
+      "particle"     "particles/items2_fx/medallion_of_courage_friend.vpcf"
+    }
+
     "AbilitySpecial"
     {
       "01"

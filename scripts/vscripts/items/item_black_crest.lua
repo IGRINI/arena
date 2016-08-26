@@ -14,7 +14,7 @@ LinkLuaModifier("modifier_black_crest_armor","items/item_black_crest.lua",LUA_MO
 LinkLuaModifier("modifier_black_crest_disarmor","items/item_black_crest.lua",LUA_MODIFIER_MOTION_NONE)
 
 function item_black_crest:GetIntrinsicModifierName()
-	return "modifier_black_crest_aura_emmiter"
+	return "item_black_crest_passive"
 end
 
 function item_black_crest:OnSpellStart(  )
@@ -24,20 +24,13 @@ function item_black_crest:OnSpellStart(  )
 	if target:GetTeamNumber() ~= caster:GetTeamNumber() then
 		target:AddNewModifier(caster,self,"modifier_black_crest_freeze",{duration = 1})
 		target:AddNewModifier(caster,self,"modifier_black_crest_disarmor",{duration = 5})
-		self.action = 1
 	elseif target:GetTeamNumber() == caster:GetTeamNumber() then
 		if target == caster then
 			caster:SetMana(caster:GetMana()+self:GetManaCost(self:GetLevel()))
 			duration = 0
 			self:EndCooldown()
-			self.action = 0
 		end
 		target:AddNewModifier(caster,self,"modifier_black_crest_armor",{duration = duration})
-		self.action = 1
-	end
-
-	if self:IsCooldownReady() then
-		action = 0
 	end
 end
 
@@ -68,18 +61,25 @@ function item_black_crest_passive:OnCreated(  )
 	self.int = 80
 	self.stats = 50
 	self.regen = 100
-	--self.armor = 30
-	--self.evasion = 30
---[[	Timers:CreateTimer(0,function()
-		if not self:GetAbility():IsCooldownReady() then
-			self.armor = 0
-			self.evasion = 0
-		elseif self:GetAbility():IsCooldownReady() then
-			self.armor = 30
-			self.evasion = 30
+
+
+	self:GetParent():AddNewModifier(self:GetParent(),self:GetAbility(),"modifier_black_crest_aura_emmiter",{duration = -1})
+	self:GetParent():AddNewModifier(self:GetParent(),self:GetAbility(),"modifier_black_crest_aura_emmiter_t",{duration = -1})
+
+	Timers:CreateTimer(0,function()
+		if self:GetAbility():IsCooldownReady() then
+			self:GetParent():AddNewModifier(self:GetParent(),self:GetAbility(),"modifier_black_crest_armor",{duration = -1})
+		else
+			self:GetParent():RemoveModifierByName("modifier_black_crest_armor")
 		end
-		return 0.1
-	end)]]
+		return 0.2
+	end)
+end
+
+function item_black_crest_passive:OnDestroy(  )
+	self:GetParent():RemoveModifierByName("modifier_black_crest_aura_emmiter")
+	self:GetParent():RemoveModifierByName("modifier_black_crest_aura_emmiter_t")
+	self:GetParent():RemoveModifierByName("modifier_black_crest_armor")
 end
 
 function item_black_crest_passive:GetModifierManaBonus(  )
@@ -104,26 +104,6 @@ end
 
 function item_black_crest_passive:GetModifierPercentageManaRegen(  )
 	return self.regen
-end
-
-function item_black_crest_passive:GetModifierPhysicalArmorBonus(  )
-	local armor = 30
-	if self.action == 1 then
-		armor = 0
-	elseif self.action == 0 then
-		armor = 30
-	end
-	return armor
-end
-
-function item_black_crest_passive:GetModifierEvasion_Constant(  )
-	local evasion = 30
-	if self.action == 1 then
-		evasion = 0
-	elseif self.action == 0 then
-		evasion = 30
-	end
-	return evasion
 end
 
 ---------------------------------------------------------------------------------------------------------
@@ -171,16 +151,6 @@ if modifier_black_crest_aura_emmiter == nil then
 	modifier_black_crest_aura_emmiter = class({})
 end
 
-function modifier_black_crest_aura_emmiter:OnCreated(  )
-	self:GetParent():AddNewModifier(self:GetParent(),self,"item_black_crest_passive",{duration = -1})
-	self:GetParent():AddNewModifier(self:GetParent(),self,"modifier_black_crest_aura_emmiter_t",{duration = -1})
-end
-
-function modifier_black_crest_aura_emmiter:OnDestroy(  )
-	self:GetParent():RemoveModifierByName("item_black_crest_passive")
-	self:GetParent():RemoveModifierByName("modifier_black_crest_aura_emmiter_t")
-end
-
 function modifier_black_crest_aura_emmiter:IsAura()
 	return true
 end
@@ -220,6 +190,14 @@ if modifier_black_crest_freeze == nil then
 	modifier_black_crest_freeze = class({})
 end
 
+function modifier_black_crest_freeze:GetEffectAttachType(  )
+	return PATTACH_ABSORIGIN
+end
+
+function modifier_black_crest_freeze:GetEffectName(  )
+	return "particles/econ/events/league_teleport_2014/teleport_end_ground_drop_league.vpcf"
+end
+
 function modifier_black_crest_freeze:CheckState()
 	local states = { [MODIFIER_STATE_HEXED] = true, [MODIFIER_STATE_STUNNED] = true }
 	return states
@@ -236,12 +214,16 @@ if modifier_black_crest_aura_team == nil then
 end
 
 function modifier_black_crest_aura_team:DeclareFunctions(  )
-	local funcs = { MODIFIER_PROPERTY_EVASION_CONSTANT }
+	local funcs = { MODIFIER_PROPERTY_EVASION_CONSTANT,MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT }
 	return funcs
 end
 
 function modifier_black_crest_aura_team:GetModifierEvasion_Constant(  )
 	return 5
+end
+
+function modifier_black_crest_aura_team:GetModifierAttackSpeedBonus_Constant(  )
+	return 75
 end
 
 function modifier_black_crest_aura_team:GetTexture(  )
@@ -269,10 +251,22 @@ function modifier_black_crest_aura_enemy:GetModifierMiss_Percentage(  )
 	return 5
 end
 
+function modifier_black_crest_aura_enemy:GetModifierAttackSpeedBonus_Constant(  )
+	return -75
+end
+
 -----------------------------------------------------------------------------------------------------
 
 if modifier_black_crest_disarmor == nil then
 	modifier_black_crest_disarmor = class({})
+end
+
+function modifier_black_crest_disarmor:GetEffectAttachType(  )
+	return PATTACH_OVERHEAD_FOLLOW
+end
+
+function modifier_black_crest_disarmor:GetEffectName(  )
+	return "particles/items2_fx/medallion_of_courage_b.vpcf"
 end
 
 function modifier_black_crest_disarmor:DeclareFunctions(  )
@@ -309,6 +303,14 @@ end
 function modifier_black_crest_armor:DeclareFunctions(  )
 	local funcs = { MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,MODIFIER_PROPERTY_EVASION_CONSTANT }
 	return funcs
+end
+
+function modifier_black_crest_armor:GetEffectName(  )
+	return "particles/items2_fx/medallion_of_courage_friend.vpcf"
+end
+
+function modifier_black_crest_armor:GetEffectAttachType(  )
+	return PATTACH_OVERHEAD_FOLLOW
 end
 
 function modifier_black_crest_armor:GetModifierPhysicalArmorBonus(  )
