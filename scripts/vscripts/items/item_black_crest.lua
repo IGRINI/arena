@@ -24,13 +24,20 @@ function item_black_crest:OnSpellStart(  )
 	if target:GetTeamNumber() ~= caster:GetTeamNumber() then
 		target:AddNewModifier(caster,self,"modifier_black_crest_freeze",{duration = 1})
 		target:AddNewModifier(caster,self,"modifier_black_crest_disarmor",{duration = 5})
+		self.action = 1
 	elseif target:GetTeamNumber() == caster:GetTeamNumber() then
 		if target == caster then
 			caster:SetMana(caster:GetMana()+self:GetManaCost(self:GetLevel()))
 			duration = 0
 			self:EndCooldown()
+			self.action = 0
 		end
 		target:AddNewModifier(caster,self,"modifier_black_crest_armor",{duration = duration})
+		self.action = 1
+	end
+
+	if self:IsCooldownReady() then
+		action = 0
 	end
 end
 
@@ -61,9 +68,9 @@ function item_black_crest_passive:OnCreated(  )
 	self.int = 80
 	self.stats = 50
 	self.regen = 100
-	self.armor = 30
-	self.evasion = 30
-	Timers:CreateTimer(0,function()
+	--self.armor = 30
+	--self.evasion = 30
+--[[	Timers:CreateTimer(0,function()
 		if not self:GetAbility():IsCooldownReady() then
 			self.armor = 0
 			self.evasion = 0
@@ -72,7 +79,7 @@ function item_black_crest_passive:OnCreated(  )
 			self.evasion = 30
 		end
 		return 0.1
-	end)
+	end)]]
 end
 
 function item_black_crest_passive:GetModifierManaBonus(  )
@@ -100,11 +107,23 @@ function item_black_crest_passive:GetModifierPercentageManaRegen(  )
 end
 
 function item_black_crest_passive:GetModifierPhysicalArmorBonus(  )
-	return self.armor
+	local armor = 30
+	if self.action == 1 then
+		armor = 0
+	elseif self.action == 0 then
+		armor = 30
+	end
+	return armor
 end
 
 function item_black_crest_passive:GetModifierEvasion_Constant(  )
-	return self.evasion
+	local evasion = 30
+	if self.action == 1 then
+		evasion = 0
+	elseif self.action == 0 then
+		evasion = 30
+	end
+	return evasion
 end
 
 ---------------------------------------------------------------------------------------------------------
