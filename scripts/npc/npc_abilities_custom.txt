@@ -674,7 +674,6 @@
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
         "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
         "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
-        "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
         "AbilityTextureName"            "phantom_assassin_wound"
         "AbilityCastRange"              "320"
         "AbilityManaCost"               "120 80 60 40 30 20 15"
@@ -682,7 +681,7 @@
         "AbilityCastPoint"              "0.85"
         "MaxLevel"                      "7"
         "RequiredLevel"                 "0"
-        "LevelsBetweenUpgrades"         "2"
+        "LevelsBetweenUpgrades"         "3"
         "precache"
         {
           "particle"  "particles/units/heroes/hero_queenofpain/queen_shadow_strike_debuff_dagger_glow.vpcf"
@@ -722,8 +721,8 @@
         "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
         "AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"
         "MaxLevel"                      "7"
-        "RequiredLevel"          "3"
-        "LevelsBetweenUpgrades"  "3"
+        "RequiredLevel"                 "3"
+        "LevelsBetweenUpgrades"         "4"
         "AbilityCooldown"               "10 8 6 5 4 3.5 3"
         
         "AbilitySpecial"
@@ -782,7 +781,7 @@
         "BaseClass"                     "ability_lua"
         "ScriptFile"                    "heroes/PhantomAssassin/phantom_assassin_oppression.lua"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
-        "AbilityDamage"                 "DAMAGE_TYPE_MAGICAL"
+        "AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"
         "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
         "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
         "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
@@ -792,8 +791,8 @@
         "AbilityCooldown"               "12 13 14 15 16 17 20"
         "AbilityCastPoint"              "0.9"
         "MaxLevel"                      "7"
-        "RequiredLevel"                 "2"
-        "LevelsBetweenUpgrades"         "4"
+        "RequiredLevel"                 "4"
+        "LevelsBetweenUpgrades"         "5"
         
         "AbilitySpecial"
         { 
@@ -805,17 +804,12 @@
           "02"
           {
             "var_type"  "FIELD_INTEGER"
-            "dpk"        "30 60 90 150 190 250 290"
+            "dpa"        "20 25 40 60 80 120 130"
           }
           "03"
           {
             "var_type"  "FIELD_FLOAT"
             "delay"       "0.5"
-          }
-          "04"
-          {
-            "var_type"  "FIELD_FLOAT"
-            "dpd"         "0.1 0.12 0.14 0.16 0.18 0.2 0.22"
           }
         }
 
