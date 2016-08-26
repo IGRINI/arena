@@ -782,7 +782,7 @@
         "ScriptFile"                    "heroes/PhantomAssassin/phantom_assassin_oppression.lua"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
         "AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"
-        "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+        "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
         "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
         "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
         "AbilityTextureName"            "phantom_assassin_oppression"
@@ -812,13 +812,54 @@
             "delay"       "0.5"
           }
         }
+      }
 
-        "OnSpellStart"
-        {
-          "ApplyModifier"
+      //Раздвоение
+      "phantom_assassin_bifurcation"
+      {
+        "BaseClass"                     "ability_lua"
+        "ScriptFile"                    "heroes/PhantomAssassin/phantom_assassin_bifurcation.lua"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+        "AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
+        "AbilityTextureName"            "phantom_assassin_bifurcation"
+        "AbilityManaCost"               "200 350 500 600"
+        "AbilityCooldown"               "70 60 50 40"
+        "AbilityCastPoint"              "1"
+        "MaxLevel"                      "4"
+        "RequiredLevel"                 "6"
+        "LevelsBetweenUpgrades"         "6"
+        
+        "AbilitySpecial"
+        { 
+          "01"
           {
-            "ModifierName" "modifier_phantom_assassin_oppression"
-            "Target"       "TARGET"
+            "var_type"                "FIELD_FLOAT"
+            "duration"                "15 20 25 30"
+          }
+          "02"
+          {
+            "var_type"                 "FIELD_INTEGER"
+            "damage_incom_tip"        "200 170 160 150"
+          }
+          "03"
+          {
+            "var_type"               "FIELD_INTEGER"
+            "damage_outcome_tip"      "50 60 70 80"
+          }
+          "04"
+          {
+            "var_type"                 "FIELD_INTEGER"
+            "damage_incom"            "300 270 260 250"
+          }
+          "05"
+          {
+            "var_type"                 "FIELD_INTEGER"
+            "damage_outcome"          "-50 -40 -30 -20"
+          }
+          "06"
+          {
+            "var_type"               "FIELD_INTEGER"
+            "illusion_ms"             "20 25 30 35"
           }
         }
       }

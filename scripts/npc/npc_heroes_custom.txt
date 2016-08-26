@@ -49,6 +49,6 @@
         "Ability1"                  "phantom_assassin_wound"
         "Ability2"                  "phantom_assassin_back_stab"
         "Ability3"                  "phantom_assassin_oppression"
-        "Ability4"                  ""
+        "Ability4"                  "phantom_assassin_bifurcation"
     }
 }
