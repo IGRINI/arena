@@ -1,8 +1,10 @@
+require('libraries/timers')
+
 if item_black_crest == nil then
 	item_black_crest = class({})
 end
 
-LinkLuaModifier("modifier_black_crest_passive","items/item_black_crest.lua",LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("item_black_crest_passive","items/item_black_crest.lua",LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_black_crest_aura_emmiter_t","items/item_black_crest.lua",LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_black_crest_aura_emmiter","items/item_black_crest.lua",LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_black_crest_aura_team","items/item_black_crest.lua",LUA_MODIFIER_MOTION_NONE)
@@ -12,8 +14,7 @@ LinkLuaModifier("modifier_black_crest_armor","items/item_black_crest.lua",LUA_MO
 LinkLuaModifier("modifier_black_crest_disarmor","items/item_black_crest.lua",LUA_MODIFIER_MOTION_NONE)
 
 function item_black_crest:GetIntrinsicModifierName()
-	local mods = { "modifier_black_crest_aura_emmiter" + "modifier_black_crest_aura_emmiter_t" + "modifier_black_crest_passive" }
-	return mods
+	return "modifier_black_crest_aura_emmiter"
 end
 
 function item_black_crest:OnSpellStart(  )
@@ -25,8 +26,9 @@ function item_black_crest:OnSpellStart(  )
 		target:AddNewModifier(caster,self,"modifier_black_crest_disarmor",{duration = 5})
 	elseif target:GetTeamNumber() == caster:GetTeamNumber() then
 		if target == caster then
+			caster:SetMana(caster:GetMana()+self:GetManaCost(self:GetLevel()))
 			duration = 0
-			self:StartCooldown(0)
+			self:EndCooldown()
 		end
 		target:AddNewModifier(caster,self,"modifier_black_crest_armor",{duration = duration})
 	end
@@ -39,7 +41,14 @@ if item_black_crest_passive == nil then
 end
 
 function item_black_crest_passive:DeclareFunctions(  )
-	local funcs = { MODIFIER_PROPERTY_EVASION_CONSTANT, MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS, MODIFIER_PROPERTY_HEALTH_BONUS, MODIFIER_PROPERTY_MANA_BONUS, MODIFIER_PROPERTY_STATS_STRENGHT_BONUS, MODIFIER_PROPERTY_STATS_AGILITY_BONUS, MODIFIER_PROPERTY_MANA_REGEN_PERCENTAGE }
+	local funcs = { MODIFIER_PROPERTY_EVASION_CONSTANT,
+					MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS, 
+					MODIFIER_PROPERTY_HEALTH_BONUS, 
+					MODIFIER_PROPERTY_MANA_BONUS, 
+					MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
+					MODIFIER_PROPERTY_STATS_STRENGTH_BONUS, 
+					MODIFIER_PROPERTY_STATS_AGILITY_BONUS, 
+					MODIFIER_PROPERTY_MANA_REGEN_PERCENTAGE }
 	return funcs
 end
 
@@ -50,14 +59,16 @@ function item_black_crest_passive:OnCreated(  )
 	self.regen = 100
 	self.armor = 30
 	self.evasion = 30
-
-	if not self:GetAbility():IsCooldownReady() then
-		self.armor = 0
-		self.evasion = 0
-	elseif self:GetAbility():IsCooldownReady() then
-		self.armor = 30
-		self.evasion = 30
-	end
+	Timers:CreateTimer(0,function()
+		if not self:GetAbility():IsCooldownReady() then
+			self.armor = 0
+			self.evasion = 0
+		elseif self:GetAbility():IsCooldownReady() then
+			self.armor = 30
+			self.evasion = 30
+		end
+		return 0.1
+	end)
 end
 
 function item_black_crest_passive:OnRefresh(  )
@@ -66,12 +77,17 @@ function item_black_crest_passive:OnRefresh(  )
 	self.stats = 50
 	self.regen = 100
 	self.armor = 30
-
-	if not self:GetAbility():IsCooldownReady() then
-		self.armor = 0
-	elseif self:GetAbility():IsCooldownReady() then
-		self.armor = 30
-	end
+	self.evasion = 30
+	Timers:CreateTimer(0,function()
+		if not self:GetAbility():IsCooldownReady() then
+			self.armor = 0
+			self.evasion = 0
+		elseif self:GetAbility():IsCooldownReady() then
+			self.armor = 30
+			self.evasion = 30
+		end
+		return 0.1
+	end)
 end
 
 function item_black_crest_passive:GetModifierManaBonus(  )
@@ -133,7 +149,7 @@ function modifier_black_crest_aura_emmiter_t:GetModifierAura()
 end
    
 function modifier_black_crest_aura_emmiter_t:GetAuraSearchTeam()
-    return DOTA_UNIT_TARGET_TEAM_ENEMY
+    return DOTA_UNIT_TARGET_TEAM_FRIENDLY
 end
 
 function modifier_black_crest_aura_emmiter_t:GetAuraSearchType()
@@ -142,13 +158,28 @@ function modifier_black_crest_aura_emmiter_t:GetAuraSearchType()
 end
 
 function modifier_black_crest_aura_emmiter_t:GetAuraDuration()
-    return 0.1
+    return 0.5
 end
 
 ---------------------------------------------------------------------------------------------------------
 
 if modifier_black_crest_aura_emmiter == nil then
 	modifier_black_crest_aura_emmiter = class({})
+end
+
+function modifier_black_crest_aura_emmiter:OnCreated(  )
+	self:GetParent():AddNewModifier(self:GetParent(),self,"item_black_crest_passive",{duration = -1})
+	self:GetParent():AddNewModifier(self:GetParent(),self,"modifier_black_crest_aura_emmiter_t",{duration = -1})
+end
+
+function modifier_black_crest_aura_emmiter:OnRefresh(  )
+	self:GetParent():AddNewModifier(self:GetParent(),self,"item_black_crest_passive",{duration = -1})
+	self:GetParent():AddNewModifier(self:GetParent(),self,"modifier_black_crest_aura_emmiter_t",{duration = -1})
+end
+
+function modifier_black_crest_aura_emmiter:OnDestroy(  )
+	self:GetParent():RemoveModifierByName("item_black_crest_passive")
+	self:GetParent():RemoveModifierByName("modifier_black_crest_aura_emmiter_t")
 end
 
 function modifier_black_crest_aura_emmiter:IsAura()
@@ -171,7 +202,7 @@ function modifier_black_crest_aura_emmiter:GetModifierAura()
     return "modifier_black_crest_aura_enemy"
 end
    
-function modifier_black_crest_aura_emmiter_t:GetAuraSearchTeam()
+function modifier_black_crest_aura_emmiter:GetAuraSearchTeam()
 	return DOTA_UNIT_TARGET_TEAM_ENEMY
 end
 
@@ -181,7 +212,7 @@ function modifier_black_crest_aura_emmiter:GetAuraSearchType()
 end
 
 function modifier_black_crest_aura_emmiter:GetAuraDuration()
-    return 0.1
+    return 0.5
 end
 
 ----------------------------------------------------------------------------------------------------------
@@ -207,7 +238,7 @@ function modifier_black_crest_aura_team:DeclareFunctions(  )
 end
 
 function modifier_black_crest_aura_team:GetModifierEvasion_Constant(  )
-	return self:GetAbility():GetSpecialValueFor("special_aura")
+	return 5
 end
 
 if modifier_black_crest_aura_enemy == nil then
@@ -220,7 +251,7 @@ function modifier_black_crest_aura_enemy:DeclareFunctions(  )
 end
 
 function modifier_black_crest_aura_enemy:GetModifierMiss_Percentage(  )
-	return self:GetAbility():GetSpecialValueFor("special_aura")
+	return 5
 end
 
 -----------------------------------------------------------------------------------------------------
@@ -235,11 +266,11 @@ function modifier_black_crest_disarmor:DeclareFunctions(  )
 end
 
 function modifier_black_crest_disarmor:GetModifierPhysicalArmorBonus(  )
-	return self:GetAbility():GetSpecialValueFor("disarmor")
+	return -30
 end
 
 function modifier_black_crest_disarmor:GetModifierMiss_Percentage(  )
-	return self:GetAbility():GetSpecialValueFor("miss")
+	return 30
 end
 
 --------------------------------------------------------------------------------------------------------
@@ -254,9 +285,9 @@ function modifier_black_crest_armor:DeclareFunctions(  )
 end
 
 function modifier_black_crest_armor:GetModifierPhysicalArmorBonus(  )
-	return self:GetAbility():GetSpecialValueFor("armor")
+	return 30
 end
 
 function modifier_black_crest_armor:GetModifierEvasion_Constant(  )
-	return self:GetAbility():GetSpecialValueFor("miss")
+	return 30
 end
