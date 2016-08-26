@@ -40,6 +40,10 @@ if item_black_crest_passive == nil then
 	item_black_crest_passive = class({})
 end
 
+function item_black_crest_passive:IsHidden(  )
+	return true
+end
+
 function item_black_crest_passive:DeclareFunctions(  )
 	local funcs = { MODIFIER_PROPERTY_EVASION_CONSTANT,
 					MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS, 
@@ -53,25 +57,6 @@ function item_black_crest_passive:DeclareFunctions(  )
 end
 
 function item_black_crest_passive:OnCreated(  )
-	self.mp_hp = 666
-	self.int = 80
-	self.stats = 50
-	self.regen = 100
-	self.armor = 30
-	self.evasion = 30
-	Timers:CreateTimer(0,function()
-		if not self:GetAbility():IsCooldownReady() then
-			self.armor = 0
-			self.evasion = 0
-		elseif self:GetAbility():IsCooldownReady() then
-			self.armor = 30
-			self.evasion = 30
-		end
-		return 0.1
-	end)
-end
-
-function item_black_crest_passive:OnRefresh(  )
 	self.mp_hp = 666
 	self.int = 80
 	self.stats = 50
@@ -172,11 +157,6 @@ function modifier_black_crest_aura_emmiter:OnCreated(  )
 	self:GetParent():AddNewModifier(self:GetParent(),self,"modifier_black_crest_aura_emmiter_t",{duration = -1})
 end
 
-function modifier_black_crest_aura_emmiter:OnRefresh(  )
-	self:GetParent():AddNewModifier(self:GetParent(),self,"item_black_crest_passive",{duration = -1})
-	self:GetParent():AddNewModifier(self:GetParent(),self,"modifier_black_crest_aura_emmiter_t",{duration = -1})
-end
-
 function modifier_black_crest_aura_emmiter:OnDestroy(  )
 	self:GetParent():RemoveModifierByName("item_black_crest_passive")
 	self:GetParent():RemoveModifierByName("modifier_black_crest_aura_emmiter_t")
@@ -226,6 +206,10 @@ function modifier_black_crest_freeze:CheckState()
 	return states
 end
 
+function modifier_black_crest_freeze:GetTexture(  )
+	return "item_black_crest"
+end
+
 -----------------------------------------------------------------------------------------------------
 
 if modifier_black_crest_aura_team == nil then
@@ -241,6 +225,10 @@ function modifier_black_crest_aura_team:GetModifierEvasion_Constant(  )
 	return 5
 end
 
+function modifier_black_crest_aura_team:GetTexture(  )
+	return "item_black_crest"
+end
+
 if modifier_black_crest_aura_enemy == nil then
 	modifier_black_crest_aura_enemy = class({})
 end
@@ -248,6 +236,14 @@ end
 function modifier_black_crest_aura_enemy:DeclareFunctions(  )
 	local funcs = { MODIFIER_PROPERTY_MISS_PERCENTAGE }
 	return funcs
+end
+
+function modifier_black_crest_aura_enemy:GetTexture(  )
+	return "item_black_crest"
+end
+
+function modifier_black_crest_aura_enemy:IsDebuff(  )
+	return true
 end
 
 function modifier_black_crest_aura_enemy:GetModifierMiss_Percentage(  )
@@ -263,6 +259,18 @@ end
 function modifier_black_crest_disarmor:DeclareFunctions(  )
 	local funcs = { MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,MODIFIER_PROPERTY_MISS_PERCENTAGE }
 	return funcs
+end
+
+function modifier_black_crest_disarmor:IsDebuff(  )
+	return true
+end
+
+function modifier_black_crest_disarmor:IsPurgable(  )
+	return true
+end
+
+function modifier_black_crest_disarmor:GetTexture(  )
+	return "item_black_crest"
 end
 
 function modifier_black_crest_disarmor:GetModifierPhysicalArmorBonus(  )
@@ -290,4 +298,12 @@ end
 
 function modifier_black_crest_armor:GetModifierEvasion_Constant(  )
 	return 30
+end
+
+function modifier_black_crest_armor:IsPurgable(  )
+	return true
+end
+
+function modifier_black_crest_armor:GetTexture(  )
+	return "item_black_crest"
 end
