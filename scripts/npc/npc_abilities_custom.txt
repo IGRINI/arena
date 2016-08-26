@@ -861,6 +861,11 @@
             "var_type"               "FIELD_INTEGER"
             "illusion_ms"             "20 25 30 35"
           }
+          "07"
+          {
+            "var_type"               "FIELD_INTEGER"
+            "cap"                         "820"
+          }
         }
       }
 }

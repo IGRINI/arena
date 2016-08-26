@@ -66,7 +66,7 @@ function modifier_pa_bifurcation:AllowIllusionDuplicate(  )
 end
 
 function modifier_pa_bifurcation:DeclareFunctions(  )
-	local funcs = { MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE_UNIQUE,MODIFIER_PROPERTY_MOVESPEED_LIMIT }
+	local funcs = { MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE_UNIQUE,MODIFIER_PROPERTY_MOVESPEED_MAX }
 	return funcs
 end
 
@@ -74,6 +74,6 @@ function modifier_pa_bifurcation:GetModifierMoveSpeedBonus_Percentage_Unique(  )
 	return self:GetAbility():GetLevelSpecialValueFor("illusion_ms",self:GetAbility():GetLevel())
 end
 
-function modifier_pa_bifurcation:GetModifierMoveSpeed_Limit(  )
+function modifier_pa_bifurcation:GetModifierMoveSpeed_Max(  )
 	return 820
 end
