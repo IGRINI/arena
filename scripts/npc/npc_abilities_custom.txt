@@ -779,7 +779,8 @@
       //Угнетение
       "phantom_assassin_oppression"
       {
-        "BaseClass"                     "ability_datadriven"
+        "BaseClass"                     "ability_lua"
+        "ScriptFile"                    "heroes/PhantomAssassin/phantom_assassin_oppression.lua"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
         "AbilityDamage"                 "DAMAGE_TYPE_MAGICAL"
         "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
@@ -814,7 +815,7 @@
           "04"
           {
             "var_type"  "FIELD_FLOAT"
-            "dpd"         "2 1.9 1.8 1.7 1.6 1.5 1.25"
+            "dpd"         "0.1 0.12 0.14 0.16 0.18 0.2 0.22"
           }
         }
 
@@ -824,30 +825,6 @@
           {
             "ModifierName" "modifier_phantom_assassin_oppression"
             "Target"       "TARGET"
-          }
-        }
-
-        "Modifiers"
-        {
-          "modifier_phantom_assassin_oppression"
-          {
-            "Duration"          "%duration"
-            "IsDebuff"          "1"
-            "IsHidden"          "0"
-            "Passive"           "0"
-            "ThinkInterval"     "%delay"
-            "OnIntervalThink"
-            {
-              "RunScript"
-              {
-                "ScriptFile"       "heroes/PhantomAssassin/phantom_assassin_oppression.lua"
-                "Function"         "Damage"
-                "dpk"              "%dpk"    
-                "delay"            "%delay"        
-                "dpd"              "%dpd"
-                "duration"         "%duration" 
-              }
-            }
           }
         }
       }
