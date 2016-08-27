@@ -868,4 +868,93 @@
           }
         }
       }
+
+      //neutral
+        //small volve
+        "npc_unit_small_volve_skill"
+        {
+          "BaseClass"                     "ability_datadriven"
+          "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+          "AbilityTextureName"            "small_volve_skill"
+          "MaxLevel"                      "1"
+          
+          "AbilitySpecial"
+          { 
+            "01"
+            {
+              "var_type"  "FIELD_INTEGER"
+              "atk"           "-26"
+            }
+            "02"
+            {
+              "var_type"  "FIELD_INTEGER"
+              "atk_tip"           "26"
+            }
+            "03"
+            {
+              "var_type"  "FIELD_FLOAT"
+              "duration"      "3.2"
+            }
+          }
+          "Modifiers"
+          {
+            "modifier_npc_unit_small_volve_skill"
+            {
+              "Passive" "1"
+              "IsHidden"  "1"
+              "OnAttackLanded"
+              {
+                "ApplyModifier"
+                {
+                  "Target"  "TARGET"
+                  "ModifierName"  "modifier_npc_unit_small_volve_skill_atk"
+                }
+              }
+            }
+            "modifier_npc_unit_small_volve_skill_atk"
+            {
+              "Passive" "0"
+              "IsDebuff""1"
+              "Duration"  "%duration"
+              "TextureName" "small_volve_skill"
+              "Properties"
+              {
+                "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%atk"
+              }
+            }
+          }
+        }
+        //angry eidelon
+        "npc_unit_angry_eidelon_skill"
+        {
+          "BaseClass"                     "ability_lua"
+          "ScriptFile"                    "neutrals/angry_eidelon_skill.lua"
+          "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+          "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_ALL"
+          "AbilityUnitTargetFlag"         "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+          "AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"
+          "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
+          "AbilityTextureName"            "angry_eidelon_skill"
+          "AbilityManaCost"               "10"
+          "MaxLevel"                      "1"
+
+          "precache"
+          {
+            "particle"  "particles/econ/courier/courier_greevil_purple/courier_greevil_purple_ambient_1.vpcf"
+          }
+          
+          "AbilitySpecial"
+          { 
+            "01"
+            {
+              "var_type"  "FIELD_FLOAT"
+              "mps"           "10"
+            }
+            "02"
+            {
+              "var_type"  "FIELD_INTEGER"
+              "max_targets"    "3"
+            }
+          }
+        }
 }
