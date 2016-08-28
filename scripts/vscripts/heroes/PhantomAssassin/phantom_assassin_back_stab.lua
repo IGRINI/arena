@@ -139,7 +139,7 @@ function modifier_phantom_assassin_back_stab_passive:OnAttackLanded( params )
 					end
 				end
 
-			elseif self:GetParent():IsIllusion() and not hTarget:IsMagicImmune() then
+			elseif self:GetParent():IsIllusion() and not target:IsMagicImmune() then
 				local target = params.target
 				local caster = self:GetParent()
 				local chance = self:GetAbility():GetLevelSpecialValueFor("chance",self:GetAbility():GetLevel())/2

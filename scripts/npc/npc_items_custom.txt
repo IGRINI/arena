@@ -2239,86 +2239,6 @@
     }
   }
 
-  "item_recipe_mana_stealer"
-  {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
-    "ID"                "3016"            
-    "Model"             "models/props_gameplay/recipe.mdl"
-    "BaseClass"                     "item_datadriven"
-    
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"            "320"  
-    "ItemShopTags"        ""
-    
-    // Recipe
-    //-------------------------------------------------------------------------------------------------------------
-    "ItemRecipe"          "1"
-    "ItemResult"          "item_mana_stealer"
-    "ItemRequirements"
-    {
-      "01"            "item_diffusal_blade_2;item_soul_booster"
-    }
-  }
-
-  "item_mana_stealer"
-  {
-    "ID"                  "3017"
-    "BaseClass"           "item_lua"
-    "ScriptFile"          "items/item_mana_stealer.lua"
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
-    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
-    "Model"                         "models/props_gameplay/red_box.vmdl" 
-    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
-    "AbilityTextureName"            "mana_stealer"
-    "AbilityCastRange"              "640"
-    "AbilityCooldown"               "3"
-    "ItemStackable"                 "0"
-    "ItemInitialCharges"            "8"
-    "ItemQuality"                   "artifact"    // consumable component rare epic artifact secretshop
-    
-    "AbilitySpecial"
-    {
-        "01"
-        {
-          "var_type"  "FIELD_INTEGER"
-          "steal_prc"     "18"
-        }
-        "02"
-        {
-          "var_type"  "FIELD_FLOAT"
-          "slow_duration" "4.5"
-        }
-        "03"
-        {
-          "var_type"  "FIELD_INTEGER"
-          "int"           "30"
-        }
-        "04"
-        {
-          "var_type"  "FIELD_INTEGER"
-          "agi"           "35"
-        }
-        "05"
-        {
-          "var_type"  "FIELD_INTEGER"
-          "mana_burn"     "50"
-        }
-        "06"
-        {
-          "var_type"  "FIELD_INTEGER"
-          "slow"          "-32"
-        }
-        "07"
-        {
-          "var_type"  "FIELD_INTEGER"
-          "steal_prc_bonus"     "26"
-        }
-    }
-  }
-
   "item_recipe_god_afflatus"
   {
     // General
@@ -2645,6 +2565,13 @@
     "AbilityCastRange"              "520"
     "ItemQuality"                   "artifact"    // consumable component rare epic artifact secretshop
     
+    "precache"
+    {
+      "particle"     "particles/items2_fx/medallion_of_courage_b.vpcf"
+      "particle"     "particles/econ/events/league_teleport_2014/teleport_end_ground_drop_league.vpcf"
+      "particle"     "particles/items2_fx/medallion_of_courage_friend.vpcf"
+    }
+
     "AbilitySpecial"
     {
       "01"

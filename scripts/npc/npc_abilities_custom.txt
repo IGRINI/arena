@@ -674,7 +674,6 @@
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
         "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
         "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
-        "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
         "AbilityTextureName"            "phantom_assassin_wound"
         "AbilityCastRange"              "320"
         "AbilityManaCost"               "120 80 60 40 30 20 15"
@@ -682,7 +681,7 @@
         "AbilityCastPoint"              "0.85"
         "MaxLevel"                      "7"
         "RequiredLevel"                 "0"
-        "LevelsBetweenUpgrades"         "2"
+        "LevelsBetweenUpgrades"         "3"
         "precache"
         {
           "particle"  "particles/units/heroes/hero_queenofpain/queen_shadow_strike_debuff_dagger_glow.vpcf"
@@ -722,8 +721,8 @@
         "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
         "AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"
         "MaxLevel"                      "7"
-        "RequiredLevel"          "3"
-        "LevelsBetweenUpgrades"  "3"
+        "RequiredLevel"                 "3"
+        "LevelsBetweenUpgrades"         "4"
         "AbilityCooldown"               "10 8 6 5 4 3.5 3"
         
         "AbilitySpecial"
@@ -779,10 +778,11 @@
       //Угнетение
       "phantom_assassin_oppression"
       {
-        "BaseClass"                     "ability_datadriven"
+        "BaseClass"                     "ability_lua"
+        "ScriptFile"                    "heroes/PhantomAssassin/phantom_assassin_oppression.lua"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
-        "AbilityDamage"                 "DAMAGE_TYPE_MAGICAL"
-        "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+        "AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"
+        "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
         "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
         "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
         "AbilityTextureName"            "phantom_assassin_oppression"
@@ -791,8 +791,8 @@
         "AbilityCooldown"               "12 13 14 15 16 17 20"
         "AbilityCastPoint"              "0.9"
         "MaxLevel"                      "7"
-        "RequiredLevel"                 "2"
-        "LevelsBetweenUpgrades"         "4"
+        "RequiredLevel"                 "4"
+        "LevelsBetweenUpgrades"         "5"
         
         "AbilitySpecial"
         { 
@@ -804,51 +804,157 @@
           "02"
           {
             "var_type"  "FIELD_INTEGER"
-            "dpk"        "30 60 90 150 190 250 290"
+            "dpa"        "20 25 40 60 80 120 130"
           }
           "03"
           {
             "var_type"  "FIELD_FLOAT"
             "delay"       "0.5"
           }
+        }
+      }
+
+      //Раздвоение
+      "phantom_assassin_bifurcation"
+      {
+        "BaseClass"                     "ability_lua"
+        "ScriptFile"                    "heroes/PhantomAssassin/phantom_assassin_bifurcation.lua"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+        "AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
+        "AbilityTextureName"            "phantom_assassin_bifurcation"
+        "AbilityManaCost"               "200 350 500 600"
+        "AbilityCooldown"               "70 60 50 40"
+        "AbilityCastPoint"              "1"
+        "MaxLevel"                      "4"
+        "RequiredLevel"                 "6"
+        "LevelsBetweenUpgrades"         "6"
+        
+        "AbilitySpecial"
+        { 
+          "01"
+          {
+            "var_type"                "FIELD_FLOAT"
+            "duration"                "15 20 25 30"
+          }
+          "02"
+          {
+            "var_type"                 "FIELD_INTEGER"
+            "damage_incom_tip"        "200 170 160 150"
+          }
+          "03"
+          {
+            "var_type"               "FIELD_INTEGER"
+            "damage_outcome_tip"      "50 60 70 80"
+          }
           "04"
           {
-            "var_type"  "FIELD_FLOAT"
-            "dpd"         "2 1.9 1.8 1.7 1.6 1.5 1.25"
+            "var_type"                 "FIELD_INTEGER"
+            "damage_incom"            "300 270 260 250"
+          }
+          "05"
+          {
+            "var_type"                 "FIELD_INTEGER"
+            "damage_outcome"          "-50 -40 -30 -20"
+          }
+          "06"
+          {
+            "var_type"               "FIELD_INTEGER"
+            "illusion_ms"             "20 25 30 35"
+          }
+          "07"
+          {
+            "var_type"               "FIELD_INTEGER"
+            "cap"                         "820"
           }
         }
+      }
 
-        "OnSpellStart"
+      //neutral
+        //small volve
+        "npc_unit_small_volve_skill"
         {
-          "ApplyModifier"
-          {
-            "ModifierName" "modifier_phantom_assassin_oppression"
-            "Target"       "TARGET"
-          }
-        }
-
-        "Modifiers"
-        {
-          "modifier_phantom_assassin_oppression"
-          {
-            "Duration"          "%duration"
-            "IsDebuff"          "1"
-            "IsHidden"          "0"
-            "Passive"           "0"
-            "ThinkInterval"     "%delay"
-            "OnIntervalThink"
+          "BaseClass"                     "ability_datadriven"
+          "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+          "AbilityTextureName"            "small_volve_skill"
+          "MaxLevel"                      "1"
+          
+          "AbilitySpecial"
+          { 
+            "01"
             {
-              "RunScript"
+              "var_type"  "FIELD_INTEGER"
+              "atk"           "-26"
+            }
+            "02"
+            {
+              "var_type"  "FIELD_INTEGER"
+              "atk_tip"           "26"
+            }
+            "03"
+            {
+              "var_type"  "FIELD_FLOAT"
+              "duration"      "3.2"
+            }
+          }
+          "Modifiers"
+          {
+            "modifier_npc_unit_small_volve_skill"
+            {
+              "Passive" "1"
+              "IsHidden"  "1"
+              "OnAttackLanded"
               {
-                "ScriptFile"       "heroes/PhantomAssassin/phantom_assassin_oppression.lua"
-                "Function"         "Damage"
-                "dpk"              "%dpk"    
-                "delay"            "%delay"        
-                "dpd"              "%dpd"
-                "duration"         "%duration" 
+                "ApplyModifier"
+                {
+                  "Target"  "TARGET"
+                  "ModifierName"  "modifier_npc_unit_small_volve_skill_atk"
+                }
+              }
+            }
+            "modifier_npc_unit_small_volve_skill_atk"
+            {
+              "Passive" "0"
+              "IsDebuff""1"
+              "Duration"  "%duration"
+              "TextureName" "small_volve_skill"
+              "Properties"
+              {
+                "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%atk"
               }
             }
           }
         }
-      }
+        //angry eidelon
+        "npc_unit_angry_eidelon_skill"
+        {
+          "BaseClass"                     "ability_lua"
+          "ScriptFile"                    "neutrals/angry_eidelon_skill.lua"
+          "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+          "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_ALL"
+          "AbilityUnitTargetFlag"         "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+          "AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"
+          "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
+          "AbilityTextureName"            "angry_eidelon_skill"
+          "AbilityManaCost"               "10"
+          "MaxLevel"                      "1"
+
+          "precache"
+          {
+            "particle"  "particles/econ/courier/courier_greevil_purple/courier_greevil_purple_ambient_1.vpcf"
+          }
+          
+          "AbilitySpecial"
+          { 
+            "01"
+            {
+              "var_type"  "FIELD_FLOAT"
+              "mps"           "10"
+            }
+            "02"
+            {
+              "var_type"  "FIELD_INTEGER"
+              "max_targets"    "3"
+            }
+          }
+        }
 }
