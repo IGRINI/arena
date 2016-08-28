@@ -5,14 +5,16 @@ function swap_to_item(keys, ItemName)
 	for i=0, 5, 1 do
 		local current_item = keys.caster:GetItemInSlot(i)
 		if current_item == nil then
-			local item = keys.caster:AddItem(CreateItem("item_dummy_armlet", keys.caster, keys.caster))
+			local item = CreateItem("item_dummy_armlet", keys.caster, keys.caster)
 			item:SetPurchaseTime(0)
+			keys.caster:AddItem(item)
 		end
 	end
 	
 	keys.caster:RemoveItem(keys.ability)
-	local newitem = keys.caster:AddItem(CreateItem(ItemName, keys.caster, keys.caster))
+	local newitem = CreateItem(ItemName, keys.caster, keys.caster)
 	newitem:SetPurchaseTime(0)
+	keys.caster:AddItem(newitem)
 	
 	for i=0, 5, 1 do
 		local current_item = keys.caster:GetItemInSlot(i)
@@ -33,14 +35,18 @@ end
 
 function on_spell_start(keys)
 	while keys.caster:HasAnyAvailableInventorySpace() do
-		keys.caster:AddItem(CreateItem("item_dummy_armlet", keys.caster, keys.caster))
+		local item = CreateItem("item_dummy_armlet", keys.caster, keys.caster)
+		item:SetPurchaseTime(0)
+		keys.caster:AddItem(item)
 	end
 	for i=0, 5, 1 do
 		local current_item = keys.caster:GetItemInSlot(i)
 		if current_item ~= nil then
 			if current_item:GetName() == "item_armlet_of_devian_active" then
 				keys.caster:RemoveItem(current_item)
-				keys.caster:AddItem(CreateItem("item_armlet_of_devian", keys.caster, keys.caster))
+				local itemgg = CreateItem("item_armlet_of_devian", keys.caster, keys.caster)
+				itemgg:SetPurchaseTime(0)
+				keys.caster:AddItem(itemgg)
 			end
 		end
 	end
